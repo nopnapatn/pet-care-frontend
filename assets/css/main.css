@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Spicy Soup";
+  src: url("~/assets/css/fonts/spicy-soup.otf") format("opentype");
+}
+
+@layer comonents {
+  .auth-layout {
+    @apply flex bg-primary-beige justify-center items-center pb-40 max-sm:px-4 lg:px-40 min-h-screen;
+  }
+}
+@layer utilities {
+  .font-main {
+    @apply font-primary;
+  }
+  .display-large {
+    @apply text-8xl font-primary;
+  }
+  .display-medium {
+    @apply text-6xl font-primary;
+  }
+  .display-small {
+    @apply text-5xl font-primary;
+  }
+  .headline-large {
+    @apply text-4xl font-primary;
+  }
+  .headline-medium {
+    @apply text-2xl font-primary;
+  }
+  .headline-small {
+    @apply text-xl font-primary;
+  }
+  .subtitle-large {
+    @apply text-base font-primary;
+  }
+  .subtitle-small {
+    @apply text-sm font-primary;
+  }
+}
