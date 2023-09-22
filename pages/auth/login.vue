@@ -90,7 +90,7 @@ const formData = ref({
 async function onSubmit() {
   const config = useRuntimeConfig();
   console.log(formData);
-  const { data: response, error } = await useMyFetch<any>("login", {
+  const { data: response, error } = await useMyFetch<any>("auth/login", {
     method: "POST",
     body: {
       email: formData.value.email,
