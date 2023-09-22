@@ -67,8 +67,11 @@
 
             <div class="text-sm font-medium text-primary-black">
               Not registered yet?
-              <a class="text-primary-green-200 hover:underline"
-                >Create account</a
+              <NuxtLink
+                to="/auth/register"
+                class="text-primary-green-200 hover:underline"
+              >
+                Create Account</NuxtLink
               >
             </div>
           </form>

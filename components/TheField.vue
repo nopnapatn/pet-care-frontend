@@ -9,10 +9,17 @@
       class="bg-gray-50 border border-gray-300 text-primary-black text-sm rounded-lg focus:ring-primary-green-100 focus:border-primary-green-100 block w-full p-2.5"
       :placeholder="placeholder"
       :required="required"
+      :v-model="model"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["label", "type", "placeholder", "required"]);
+const props = defineProps([
+  "label",
+  "type",
+  "placeholder",
+  "required",
+  "model",
+]);
 </script>
