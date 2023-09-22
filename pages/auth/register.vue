@@ -20,46 +20,38 @@
           <h2 class="headline-large text-primary-orange-100">Register</h2>
           <form class="mt-8 space-y-6" @submit.prevent="onSubmit()">
             <TheField
-              label="Email"
               id="email"
-              type="text"
-              placeholder="email@example.com"
-              required="true"
               v-model="formData.email"
+              label="Email"
+              placeholder="email@example.com"
+              autocomplete="on"
             ></TheField>
             <TheField
-              label="First Name"
               id="firstName"
-              type="text"
-              placeholder="John"
-              required="true"
               v-model="formData.firstName"
+              label="First Name"
+              placeholder="John"
+              autocomplete="on"
             ></TheField>
             <TheField
-              label="Last Name"
               id="lastName"
-              type="text"
-              placeholder="Doe"
-              required="true"
               v-model="formData.lastName"
+              label="Last Name"
+              placeholder="Doe"
+              autocomplete="on"
             ></TheField>
             <TheField
-              label="Password"
               id="password"
-              type="text"
-              placeholder="********"
-              required="true"
               v-model="formData.password"
+              label="Password"
+              placeholder="********"
             ></TheField>
             <TheField
-              label="Confirm Password"
               id="confirmPassword"
-              type="text"
-              placeholder="********"
-              required="true"
               v-model="formData.confirmPassword"
+              label="Confirm Password"
+              placeholder="********"
             ></TheField>
-
             <div class="flex items-start">
               <div class="flex items-center h-5">
                 <input
@@ -68,7 +60,6 @@
                   name="remember"
                   type="checkbox"
                   class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:focus:ring-primary-green-100 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                  required
                 />
               </div>
               <div class="ml-3 text-sm">

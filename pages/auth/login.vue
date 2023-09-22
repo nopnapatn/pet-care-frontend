@@ -18,18 +18,19 @@
       <div class="lg:col-span-4">
         <div class="w-full p-8 lg:p-16 sm:p-8">
           <h2 class="headline-large text-primary-orange-100">Login</h2>
-          <form class="mt-8 space-y-6">
+          <form class="mt-8 space-y-6" @submit.prevent="onSubmit()">
             <TheField
+              id="email"
+              v-model="formData.email"
               label="Email"
-              type="text"
               placeholder="email@example.com"
-              required="true"
+              autocomplete="on"
             ></TheField>
             <TheField
+              id="password"
+              v-model="formData.password"
               label="Password"
-              type="text"
               placeholder="********"
-              required="true"
             ></TheField>
 
             <div class="flex items-start">
@@ -40,7 +41,6 @@
                   name="remember"
                   type="checkbox"
                   class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:focus:ring-primary-green-100 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                  required
                 />
               </div>
               <div class="ml-3 text-sm">
@@ -81,4 +81,30 @@
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const formData = ref({
+  email: "",
+  password: "",
+});
+
+async function onSubmit() {
+  const config = useRuntimeConfig();
+  console.log(formData);
+  const { data: response, error } = await useMyFetch<any>("login", {
+    method: "POST",
+    body: {
+      email: formData.value.email,
+      password: formData.value.password,
+    },
+  });
+
+  if (response.value !== null) {
+    console.log(response.value);
+    localStorage.setItem("token", response.value.token);
+    localStorage.setItem("user", JSON.stringify(response.value.user));
+    await navigateTo("/");
+  } else {
+    console.log(error);
+  }
+}
+</script>
