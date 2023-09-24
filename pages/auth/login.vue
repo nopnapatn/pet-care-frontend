@@ -26,12 +26,22 @@
               placeholder="email@example.com"
               autocomplete="on"
             ></TheField>
+            <div v-if="loginError.email" class="text-sm text-red-500">
+              {{ loginError.email }}
+            </div>
             <TheField
               id="password"
               v-model="formData.password"
               label="Password"
               placeholder="********"
             ></TheField>
+            <div v-if="loginError.password" class="text-sm text-red-500">
+              {{ loginError.password }}
+            </div>
+
+            <div v-if="statusMessage" class="text-sm text-red-500">
+              {{ statusMessage }}
+            </div>
 
             <div class="flex items-start">
               <div class="flex items-center h-5">
@@ -87,6 +97,13 @@ const formData = ref({
   password: "",
 });
 
+const loginError = ref({
+  email: "",
+  password: "",
+});
+
+const statusMessage = ref("");
+
 async function onSubmit() {
   const config = useRuntimeConfig();
   console.log(formData);
@@ -98,13 +115,43 @@ async function onSubmit() {
     },
   });
 
-  if (response.value !== null) {
+  if (error && error.value) {
+    // console.log(error);
+    // console.log(error.value);
+    const { data } = error.value!;
+
+    if (data.errors && data.errors.email) {
+      loginError.value.email = data.errors.email.join(' '); // Concatenate array elements into a single string
+    } else {
+      loginError.value.email = "";
+    }
+
+    if (data.errors && data.errors.password) {
+      loginError.value.password = data.errors.password.join(' '); // Concatenate array elements into a single string
+    } else {
+      loginError.value.password = "";
+    }
+
+    console.log(error.value);
+
+    if (JSON.stringify(error.value).includes("401")) {
+      statusMessage.value = "Wrong email or password, please try again.";
+    }
+
+  } else {
     console.log(response.value);
     localStorage.setItem("token", response.value.token);
     localStorage.setItem("user", JSON.stringify(response.value.user));
     await navigateTo("/");
-  } else {
-    console.log(error);
   }
+
+  // if (response.value !== null) {
+  //   console.log(response.value);
+  //   localStorage.setItem("token", response.value.token);
+  //   localStorage.setItem("user", JSON.stringify(response.value.user));
+  //   await navigateTo("/");
+  // } else {
+  //   loginError.value = "User does not exist. Please check your credentials.";
+  // }
 }
 </script>

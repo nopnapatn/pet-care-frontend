@@ -20,8 +20,12 @@
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.0",
+    "@formkit/nuxt": "^1.1.0",
+    "@formkit/vue": "^1.2.0-071f6ff",
     "class-variance-authority": "^0.7.0",
     "flowbite": "^1.8.1",
+    "ts-form-validation": "^2.2.0",
+    "vee-validate": "^4.11.6",
     "vue-uuid": "^3.0.0"
   }
 }

@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     },
   },
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss", "@formkit/auto-animate/nuxt"],
+  modules: ["@nuxtjs/tailwindcss", "@formkit/auto-animate/nuxt", "@formkit/nuxt"],
 
   css: ["~/assets/css/main.css"],
   postcss: {
