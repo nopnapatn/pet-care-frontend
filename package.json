@@ -12,6 +12,7 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/color-mode": "^3.3.0",
     "@nuxtjs/tailwindcss": "^6.8.0",
+    "@pinia-plugin-persistedstate/nuxt": "^1.1.2",
     "autoprefixer": "^10.4.15",
     "daisyui": "^3.7.4",
     "nuxt": "^3.7.1",
@@ -22,8 +23,10 @@
     "@formkit/auto-animate": "^0.8.0",
     "@formkit/nuxt": "^1.1.0",
     "@formkit/vue": "^1.2.0-071f6ff",
+    "@pinia/nuxt": "^0.4.11",
     "class-variance-authority": "^0.7.0",
     "flowbite": "^1.8.1",
+    "pinia": "^2.1.6",
     "ts-form-validation": "^2.2.0",
     "vee-validate": "^4.11.6",
     "vue-uuid": "^3.0.0"

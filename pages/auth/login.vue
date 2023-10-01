@@ -26,8 +26,8 @@
               placeholder="email@example.com"
               autocomplete="on"
             ></TheField>
-            <div v-if="loginError.email" class="text-sm text-red-500">
-              {{ loginError.email }}
+            <div v-if="errorMessage.email" class="text-sm text-red-500">
+              {{ errorMessage.email }}
             </div>
             <TheField
               id="password"
@@ -35,8 +35,8 @@
               label="Password"
               placeholder="********"
             ></TheField>
-            <div v-if="loginError.password" class="text-sm text-red-500">
-              {{ loginError.password }}
+            <div v-if="errorMessage.password" class="text-sm text-red-500">
+              {{ errorMessage.password }}
             </div>
 
             <div v-if="statusMessage" class="text-sm text-red-500">
@@ -92,12 +92,15 @@
 </template>
 
 <script setup lang="ts">
-const formData = ref({
+import { useAuthStore } from "~/stores/useAuthStore";
+const auth = useAuthStore();
+
+const formData = reactive({
   email: "",
   password: "",
 });
 
-const loginError = ref({
+const errorMessage = reactive({
   email: "",
   password: "",
 });
@@ -105,45 +108,71 @@ const loginError = ref({
 const statusMessage = ref("");
 
 async function onSubmit() {
-  const config = useRuntimeConfig();
-  console.log(formData);
+  errorMessage.email = "";
+  errorMessage.password = "";
+
+  if (!formData.email) {
+    errorMessage.email = "Email is required.";
+  }
+  if (!formData.password) {
+    errorMessage.password = "Password is required.";
+  }
+
+  if (errorMessage.email || errorMessage.password) {
+    return;
+  }
+
   const { data: response, error } = await useMyFetch<any>("auth/login", {
     method: "POST",
-    body: {
-      email: formData.value.email,
-      password: formData.value.password,
-    },
+    body: formData,
   });
 
-  if (error && error.value) {
-    // console.log(error);
-    // console.log(error.value);
-    const { data } = error.value!;
-
-    if (data.errors && data.errors.email) {
-      loginError.value.email = data.errors.email.join(' '); // Concatenate array elements into a single string
-    } else {
-      loginError.value.email = "";
-    }
-
-    if (data.errors && data.errors.password) {
-      loginError.value.password = data.errors.password.join(' '); // Concatenate array elements into a single string
-    } else {
-      loginError.value.password = "";
-    }
-
-    console.log(error.value);
-
-    if (JSON.stringify(error.value).includes("401")) {
-      statusMessage.value = "Wrong email or password, please try again.";
-    }
-
-  } else {
-    console.log(response.value);
-    localStorage.setItem("token", response.value.token);
-    localStorage.setItem("user", JSON.stringify(response.value.user));
-    await navigateTo("/");
+  if (error.value) {
+    console.log(error.value.data["message"]);
+    errorMessage.password = error.value.data["message"];
+    return;
   }
+  if (response.value !== null) {
+    const { access_token, token_type } = response.value;
+    auth.setNewToken(access_token);
+    const { data: user, error } = await useMyFetch<any>("auth/me", {
+      method: "POST",
+    });
+    if (user.value !== null) {
+      const { name, email } = user.value;
+      auth.setUser(name, email);
+      await navigateTo("/test");
+    }
+  }
+
+  // if (error && error.value) {
+  //   console.log(error);
+  //   console.log(error.value);
+  //   const { data } = error.value!;
+
+  //   if (data.errors && data.errors.email) {
+  //     errorMessage.email = data.errors.email.join(" "); // Concatenate array elements into a single string
+  //   } else {
+  //     errorMessage.email = "";
+  //   }
+
+  //   if (data.errors && data.errors.password) {
+  //     errorMessage.password = data.errors.password.join(" "); // Concatenate array elements into a single string
+  //   } else {
+  //     errorMessage.password = "";
+  //   }
+
+  //   console.log(error.value);
+
+  //   if (JSON.stringify(error.value).includes("401")) {
+  //     statusMessage.value = "Wrong email or password, please try again.";
+  //   }
+  // } else {
+  //   console.log(response.value);
+  //   localStorage.setItem("token", response.value.token);
+  //   localStorage.setItem("user", JSON.stringify(response.value.user));
+  //   await navigateTo("/test");
+  // }
 
   // if (response.value !== null) {
   //   console.log(response.value);
@@ -151,7 +180,7 @@ async function onSubmit() {
   //   localStorage.setItem("user", JSON.stringify(response.value.user));
   //   await navigateTo("/");
   // } else {
-  //   loginError.value = "User does not exist. Please check your credentials.";
+  //   errorMessage.value = "User does not exist. Please check your credentials.";
   // }
 }
 </script>
