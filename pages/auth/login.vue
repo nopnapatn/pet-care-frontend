@@ -18,19 +18,30 @@
       <div class="lg:col-span-4">
         <div class="w-full p-8 lg:p-16 sm:p-8">
           <h2 class="headline-large text-primary-orange-100">Login</h2>
-          <form class="mt-8 space-y-6">
+          <form class="mt-8 space-y-6" @submit.prevent="onSubmit()">
             <TheField
+              id="email"
+              v-model="formData.email"
               label="Email"
-              type="text"
               placeholder="email@example.com"
-              required="true"
+              autocomplete="on"
             ></TheField>
+            <div v-if="errorMessage.email" class="text-sm text-red-500">
+              {{ errorMessage.email }}
+            </div>
             <TheField
+              id="password"
+              v-model="formData.password"
               label="Password"
-              type="text"
               placeholder="********"
-              required="true"
             ></TheField>
+            <div v-if="errorMessage.password" class="text-sm text-red-500">
+              {{ errorMessage.password }}
+            </div>
+
+            <div v-if="statusMessage" class="text-sm text-red-500">
+              {{ statusMessage }}
+            </div>
 
             <div class="flex items-start">
               <div class="flex items-center h-5">
@@ -40,7 +51,6 @@
                   name="remember"
                   type="checkbox"
                   class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:focus:ring-primary-green-100 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                  required
                 />
               </div>
               <div class="ml-3 text-sm">
@@ -67,8 +77,11 @@
 
             <div class="text-sm font-medium text-primary-black">
               Not registered yet?
-              <a class="text-primary-green-200 hover:underline"
-                >Create account</a
+              <NuxtLink
+                to="/auth/register"
+                class="text-primary-green-200 hover:underline"
+              >
+                Create Account</NuxtLink
               >
             </div>
           </form>
@@ -78,4 +91,96 @@
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useAuthStore } from "~/stores/useAuthStore";
+const auth = useAuthStore();
+
+const formData = reactive({
+  email: "",
+  password: "",
+});
+
+const errorMessage = reactive({
+  email: "",
+  password: "",
+});
+
+const statusMessage = ref("");
+
+async function onSubmit() {
+  errorMessage.email = "";
+  errorMessage.password = "";
+
+  if (!formData.email) {
+    errorMessage.email = "Email is required.";
+  }
+  if (!formData.password) {
+    errorMessage.password = "Password is required.";
+  }
+
+  if (errorMessage.email || errorMessage.password) {
+    return;
+  }
+
+  const { data: response, error } = await useMyFetch<any>("auth/login", {
+    method: "POST",
+    body: formData,
+  });
+
+  if (error.value) {
+    console.log(error.value.data["message"]);
+    errorMessage.password = error.value.data["message"];
+    return;
+  }
+  if (response.value !== null) {
+    const { access_token, token_type } = response.value;
+    auth.setNewToken(access_token);
+    const { data: user, error } = await useMyFetch<any>("auth/me", {
+      method: "POST",
+    });
+    if (user.value !== null) {
+      const { name, email } = user.value;
+      auth.setUser(name, email);
+      await navigateTo("/test");
+    }
+  }
+
+  // if (error && error.value) {
+  //   console.log(error);
+  //   console.log(error.value);
+  //   const { data } = error.value!;
+
+  //   if (data.errors && data.errors.email) {
+  //     errorMessage.email = data.errors.email.join(" "); // Concatenate array elements into a single string
+  //   } else {
+  //     errorMessage.email = "";
+  //   }
+
+  //   if (data.errors && data.errors.password) {
+  //     errorMessage.password = data.errors.password.join(" "); // Concatenate array elements into a single string
+  //   } else {
+  //     errorMessage.password = "";
+  //   }
+
+  //   console.log(error.value);
+
+  //   if (JSON.stringify(error.value).includes("401")) {
+  //     statusMessage.value = "Wrong email or password, please try again.";
+  //   }
+  // } else {
+  //   console.log(response.value);
+  //   localStorage.setItem("token", response.value.token);
+  //   localStorage.setItem("user", JSON.stringify(response.value.user));
+  //   await navigateTo("/test");
+  // }
+
+  // if (response.value !== null) {
+  //   console.log(response.value);
+  //   localStorage.setItem("token", response.value.token);
+  //   localStorage.setItem("user", JSON.stringify(response.value.user));
+  //   await navigateTo("/");
+  // } else {
+  //   errorMessage.value = "User does not exist. Please check your credentials.";
+  // }
+}
+</script>

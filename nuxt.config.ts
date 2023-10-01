@@ -1,10 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
   runtimeConfig: {
-    public: {},
+    public: {
+      apiBaseURL: "http://localhost/api/",
+    },
   },
-  modules: ["@nuxtjs/tailwindcss", "@formkit/auto-animate/nuxt"],
+  devtools: { enabled: true },
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@formkit/auto-animate/nuxt",
+    "@formkit/nuxt",
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+  ],
 
   css: ["~/assets/css/main.css"],
   postcss: {
