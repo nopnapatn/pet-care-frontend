@@ -65,7 +65,7 @@
           >
             <li>
               <NuxtLink
-                to="#"
+                to="/room"
                 class="text-primary-orange-100 hover:text-primary-green-100"
                 aria-current="page"
                 >Hotel Room
