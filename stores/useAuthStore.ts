@@ -5,7 +5,8 @@ export const useAuthStore = defineStore("auth", {
     return {
       token: "",
       user: {
-        name: "",
+        firstName: "",
+        lastName: "",
         email: "",
       },
     };
@@ -17,13 +18,15 @@ export const useAuthStore = defineStore("auth", {
     setNewToken(token: string) {
       this.token = token;
     },
-    setUser(name: string, email: string) {
-      this.user.name = name;
+    setUser(firstName: string, lastName: string, email: string) {
+      this.user.firstName = firstName;
+      this.user.lastName = lastName;
       this.user.email = email;
     },
     clear() {
       this.token = "";
-      this.user.name = "";
+      this.user.firstName = "";
+      this.user.lastName = "";
       this.user.email = "";
     },
   },

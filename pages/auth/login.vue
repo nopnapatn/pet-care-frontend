@@ -139,8 +139,12 @@ async function onSubmit() {
       method: "POST",
     });
     if (user.value !== null) {
-      const { name, email } = user.value;
-      auth.setUser(name, email);
+      console.log(user.value);
+      let firstName = user.value["first_name"];
+      let lastName = user.value["last_name"];
+      let email = user.value["email"];
+      auth.setUser(firstName, lastName, email);
+      console.log("Auth user:", auth.user);
       await navigateTo("/test");
     }
   }

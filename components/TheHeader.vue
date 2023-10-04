@@ -6,18 +6,31 @@
       >
         <TheLogo />
         <div class="flex md:order-2 items-center">
-          <NuxtLink
-            to="/auth/login"
-            class="text-sm font-semibold text-primary-orange-100 hover:text-primary-green-100"
-          >
-            Login</NuxtLink
-          >
-          <NuxtLink
-            to="/auth/register"
-            class="mx-6 headline-small text-primary-orange-100 hover:text-primary-green-100"
-          >
-            Register</NuxtLink
-          >
+          <div v-if="auth.isLogin" class="flex items-center gap-4">
+            <h1>{{ auth.user.firstName }}</h1>
+            <h1>{{ auth.user.lastName }}</h1>
+            <NuxtLink
+              to="/"
+              @click.prevent="handleLogout"
+              class="text-sm font-semibold text-primary-orange-100 hover:text-primary-green-100"
+            >
+              Logout
+            </NuxtLink>
+          </div>
+          <div v-else>
+            <NuxtLink
+              to="/auth/login"
+              class="text-sm font-semibold text-primary-orange-100 hover:text-primary-green-100"
+            >
+              Login
+            </NuxtLink>
+            <NuxtLink
+              to="/auth/register"
+              class="mx-6 headline-small text-primary-orange-100 hover:text-primary-green-100"
+            >
+              Register
+            </NuxtLink>
+          </div>
           <button
             data-collapse-toggle="navbar-cta"
             type="button"
@@ -52,7 +65,7 @@
           >
             <li>
               <NuxtLink
-                to="#"
+                to="/room"
                 class="text-primary-orange-100 hover:text-primary-green-100"
                 aria-current="page"
                 >Hotel Room
@@ -80,3 +93,11 @@
     </nav>
   </header>
 </template>
+
+<script setup lang="ts">
+import { useAuthStore } from "~/stores/useAuthStore";
+const auth = useAuthStore();
+function handleLogout() {
+  auth.clear(), navigateTo("/");
+}
+</script>
