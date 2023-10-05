@@ -79,10 +79,12 @@ async function onSubmit() {
 }
 
 const disabledDate = (time: Date) => {
-  return time.getTime() < Date.now();
-  // Enable Today
-  //   time.getTime() + 3600 * 1000 * 24 < Date.now();
+  return (
+    time.getTime() < Date.now() && time.getTime() > Date.now() + 86400000 * 30
+  );
 };
+// Enable Today
+//   time.getTime() + 3600 * 1000 * 24 < Date.now();
 
 const shortcuts = [
   {

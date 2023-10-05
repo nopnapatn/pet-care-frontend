@@ -324,19 +324,10 @@
   resolved "https://registry.npmjs.org/@ctrl/tinycolor/-/tinycolor-3.6.1.tgz"
   integrity sha512-SITSV6aIXsuVNV3f3O0f2n/cgyEDWoSqtZMYiAmcsYHydcKrOz3gUxB/iXd/Qf08+IZX4KpgNbvUdMBmWz+kcA==
 
-"@element-plus/icons-vue@^2.0.6", "@element-plus/icons-vue@>=0.2.6":
+"@element-plus/icons-vue@^2.0.6":
   version "2.1.0"
   resolved "https://registry.npmjs.org/@element-plus/icons-vue/-/icons-vue-2.1.0.tgz"
   integrity sha512-PSBn3elNoanENc1vnCfh+3WA9fimRC7n+fWkf3rE5jvv+aBohNHABC/KAR5KWPecxWxDTVT1ERpRbOMRcOV/vA==
-
-"@element-plus/nuxt@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.npmjs.org/@element-plus/nuxt/-/nuxt-1.0.6.tgz"
-  integrity sha512-UdZ1YD4gSpXL7vIciYVRXBHPMTq/FFfLqtWiTVA18n/65tAw75HvJE1OmvA3ZhW8tMAxhv3IGzh4zA5zdFXCFg==
-  dependencies:
-    "@nuxt/kit" "^3.7.1"
-    magic-string "^0.27.0"
-    unplugin "^1.0.1"
 
 "@esbuild-kit/cjs-loader@^2.4.2":
   version "2.4.2"
@@ -3023,7 +3014,7 @@ electron-to-chromium@^1.4.477:
   resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.508.tgz"
   integrity sha512-FFa8QKjQK/A5QuFr2167myhMesGrhlOBD+3cYNxO9/S4XzHEXesyTD/1/xF644gC8buFPz3ca6G1LOQD0tZrrg==
 
-element-plus@^2.3.14, element-plus@>=2:
+element-plus@^2.3.14:
   version "2.3.14"
   resolved "https://registry.npmjs.org/element-plus/-/element-plus-2.3.14.tgz"
   integrity sha512-9yvxUaU4jXf2ZNPdmIxoj/f8BG8CDcGM6oHa9JIqxLjQlfY4bpzR1E5CjNimnOX3rxO93w1TQ0jTVt0RSxh9kA==
@@ -7230,7 +7221,7 @@ unplugin-vue-router@^0.6.4:
     unplugin "^1.3.1"
     yaml "^2.2.2"
 
-unplugin@^1.0.1, unplugin@^1.3.1, unplugin@^1.4.0:
+unplugin@^1.3.1, unplugin@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/unplugin/-/unplugin-1.4.0.tgz"
   integrity sha512-5x4eIEL6WgbzqGtF9UV8VEC/ehKptPXDS6L2b0mv4FRMkJxRtjaJfOWDd6a8+kYbqsjklix7yWP0N3SUepjXcg==

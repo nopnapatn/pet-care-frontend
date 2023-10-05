@@ -12,7 +12,6 @@ export default defineNuxtConfig({
     "@formkit/nuxt",
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
-    "@element-plus/nuxt",
   ],
 
   css: ["~/assets/css/main.css"],
