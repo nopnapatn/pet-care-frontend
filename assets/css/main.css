@@ -9,7 +9,7 @@
 
 @layer comonents {
   .auth-layout {
-    @apply flex bg-primary-beige justify-center items-center pb-40 max-sm:px-4 lg:px-40 min-h-screen;
+    @apply flex bg-base-100 justify-center items-center pb-40 max-sm:px-4 lg:px-40 min-h-screen;
   }
 }
 @layer utilities {

@@ -1,6 +1,17 @@
 <template>
   <section>
-    <div class="bg-primary-beige">
+    <div class="relative">
+        <img src="/images/room1.png" alt="">
+
+      <div
+            class="absolute display-large text-5xl w-full h-full  text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-800 opacity-70"
+          >
+            <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
+              <div>Pet Care</div>
+            </div>  
+          </div>
+    </div>
+    <div class="bg-primary">
       <div
         class="flex-col justify-center items-center text-center py-8 px-4 mx-auto max-w-screen-xl lg:py-8"
       >
