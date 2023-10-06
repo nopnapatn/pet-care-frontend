@@ -1,11 +1,20 @@
 <template>
-  <h1>This is test page</h1>
   <form class="mt-8 mb-4 space-y-6 text-center" @submit.prevent="onSubmit()">
+    <div class="flex-col">
+      <h1>Room ID: {{ route.params.id }}</h1>
+      <h1>
+        {{ roomType.title }}
+      </h1>
+      <h1>Available amount: {{ roomType.available_amount }}</h1>
+      <h1>Price: {{ roomType.price }}</h1>
+      <h1>{{ formData.nights }} / Nights</h1>
+    </div>
     <!-- Start Date Picker -->
     <div class="demo-datetime-picker">
       <div class="block">
         <span class="demonstration">Default</span>
         <el-date-picker
+          @change="calculateNights()"
           v-model="formData.date"
           type="daterange"
           start-placeholder="Start date"
@@ -33,22 +42,49 @@
 </template>
 
 <script setup lang="ts">
+const route = useRoute();
+const { data: roomType, error } = await useMyFetch<any>(
+  `room-types/${route.params.id}`,
+  {}
+);
+
 const formData = reactive({
   date: "",
   amount: "",
+  nights: 0,
 });
 
+const startDate = formData.date[0];
+const endDate = formData.date[1];
+
+function calculateNights() {
+  const startDate = formData.date[0];
+  const endDate = formData.date[1];
+  formData.nights = Math.floor(
+    (Date.parse(endDate) - Date.parse(startDate)) / 86400000
+  );
+}
+
 async function onSubmit() {
-  let startDate = formData.date[0];
-  let endDate = formData.date[1];
   console.log(startDate);
   console.log(endDate);
   console.log(formData.amount);
+  //   const { data: data, error } = await useMyFetch<any>(
+  //     `room-types/${route.params.id}/book`,
+  //     {
+  //       method: "POST",
+  //       body: formData,
+  //     }
+  //   );
 }
 
 const disabledDate = (time: Date) => {
-  return time.getTime() < Date.now();
+  return (
+    time.getTime() < Date.now() && time.getTime() > Date.now() + 86400000 * 30
+  );
 };
+// Enable Today
+//   time.getTime() + 3600 * 1000 * 24 < Date.now();
 
 const shortcuts = [
   {
@@ -73,27 +109,3 @@ const shortcuts = [
   },
 ];
 </script>
-
-<style scoped>
-.demo-datetime-picker {
-  display: flex;
-  width: 100%;
-  padding: 0;
-  flex-wrap: wrap;
-}
-.demo-datetime-picker .block {
-  padding: 30px 0;
-  text-align: center;
-  border-right: solid 1px var(--el-border-color);
-  flex: 1;
-}
-.demo-datetime-picker .block:last-child {
-  border-right: none;
-}
-.demo-datetime-picker .demonstration {
-  display: block;
-  color: var(--el-text-color-secondary);
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-</style>

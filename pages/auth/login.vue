@@ -67,8 +67,8 @@
             <TheButtonAuth
               colort="bg-primary-green-100"
               colorb="bg-primary-green-200"
-              >Login to your account</TheButtonAuth
-            >
+              >Login to your account
+            </TheButtonAuth>
             <TheButtonAuth
               colort="bg-primary-orange-50"
               colorb="bg-primary-orange-100"
