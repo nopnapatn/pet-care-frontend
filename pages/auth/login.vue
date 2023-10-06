@@ -143,9 +143,15 @@ async function onSubmit() {
       let firstName = user.value["first_name"];
       let lastName = user.value["last_name"];
       let email = user.value["email"];
-      auth.setUser(firstName, lastName, email);
+      let role = user.value["role"];
+      let id = user.value["id"];
+      auth.setUser(firstName, lastName, email, role, id);
       console.log("Auth user:", auth.user);
-      await navigateTo("/test");
+      if (role === "ADMIN") {
+        await navigateTo("/dashboard");
+      } else {
+        await navigateTo("/");
+      }
     }
   }
 

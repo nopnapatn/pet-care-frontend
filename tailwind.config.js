@@ -8,6 +8,7 @@ module.exports = {
     "./nuxt.config.{js,ts}",
     "./app.vue",
     "./node_modules/flowbite/**/*.{js,ts}",
+    "node_modules/preline/dist/*.js",
   ],
   theme: {
     extend: {},
@@ -74,6 +75,10 @@ module.exports = {
       },
     ],
   },
-  plugins: [require("flowbite/plugin"), require("daisyui")],
+  plugins: [
+    require("flowbite/plugin"),
+    require("daisyui"),
+    require("preline/plugin"),
+  ],
   darkMode: "class",
 };
