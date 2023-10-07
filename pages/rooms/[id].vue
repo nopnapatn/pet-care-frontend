@@ -9,32 +9,40 @@
       <h1>Price: {{ roomType.price }}</h1>
       <h1>{{ formData.nights }} / Nights</h1>
     </div>
-    <!-- Start Date Picker -->
-    <div class="demo-datetime-picker">
-      <div class="block">
-        <span class="demonstration">Default</span>
-        <el-date-picker
-          @change="calculateNights()"
-          v-model="formData.date"
-          type="daterange"
-          start-placeholder="Start date"
-          end-placeholder="End date"
-          format="YYYY-MM-DD"
-          value-format="YYYY-MM-DD"
-          :disabled-date="disabledDate"
-          :shortcuts="shortcuts"
-        />
-      </div>
-    </div>
-    <!-- End Date Picker -->
+
+    <!-- Start Datepicker -->
+    <VueDatePicker
+      v-model="date"
+      range
+      format="dd/M/yyyy"
+      :enable-time-picker="false"
+      disable-year-select
+      auto-apply
+      placeholder="Select date"
+      :min-date="new Date(new Date().setDate(new Date().getDate() + 1))"
+      :max-date="new Date(new Date().setDate(new Date().getDate() + 30))"
+      required
+    ></VueDatePicker>
+
+    <!-- End Datepicker -->
+    <!-- Owner Instruction -->
+    <textarea
+      v-model="formData.ownerInstruction"
+      cols="30"
+      rows="10"
+      placeholder="Tell Staff about your pets instruction"
+    ></textarea>
+    <!-- End Owner Instruction -->
+    <!-- Amount -->
     <input
       type="number"
       placeholder="Amount of your pets"
       min="0"
-      max="4"
-      v-model="formData.amount"
+      :max="roomType.max_pets"
+      v-model="formData.petsAmount"
       class="input input-bordered w-full max-w-xs"
     />
+    <!-- End Amount -->
     <TheButtonAuth colort="bg-primary-green-100" colorb="bg-primary-green-200"
       >Submit
     </TheButtonAuth>
@@ -42,70 +50,64 @@
 </template>
 
 <script setup lang="ts">
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+
 const route = useRoute();
 const { data: roomType, error } = await useMyFetch<any>(
   `room-types/${route.params.id}`,
   {}
 );
 
+const date = ref("");
+
 const formData = reactive({
-  date: "",
-  amount: "",
+  roomTypeId: route.params.id,
+  startDate: "",
+  endDate: "",
+  petsAmount: "",
   nights: 0,
+  ownerInstruction: "",
 });
 
-const startDate = formData.date[0];
-const endDate = formData.date[1];
-
-function calculateNights() {
-  const startDate = formData.date[0];
-  const endDate = formData.date[1];
-  formData.nights = Math.floor(
-    (Date.parse(endDate) - Date.parse(startDate)) / 86400000
-  );
+function calculateNights(date1: string, date2: string) {
+  return (Date.parse(date2) - Date.parse(date1)) / 86400000;
 }
+
+watch(date, (newDate) => {
+  formData.startDate = formatDate(date.value[0]);
+  formData.endDate = formatDate(date.value[1]);
+  console.log(formData.startDate);
+  console.log(formData.endDate);
+  formData.nights = calculateNights(date.value[0], date.value[1]);
+});
 
 async function onSubmit() {
-  console.log(startDate);
-  console.log(endDate);
-  console.log(formData.amount);
-  //   const { data: data, error } = await useMyFetch<any>(
-  //     `room-types/${route.params.id}/book`,
-  //     {
-  //       method: "POST",
-  //       body: formData,
-  //     }
-  //   );
+  console.log(formData);
+  const { data: response, error } = await useMyFetch<any>(
+    `room-types/${route.params.id}/book`,
+    {
+      method: "POST",
+      body: {
+        room_type_id: formData.roomTypeId,
+        check_in: formData.startDate,
+        check_out: formData.endDate,
+        pets_amount: formData.petsAmount,
+        owner_instruction: formData.ownerInstruction,
+      },
+    }
+  );
+  if (response.value !== null) {
+    await navigateTo("/");
+  }
 }
 
-const disabledDate = (time: Date) => {
-  return (
-    time.getTime() < Date.now() && time.getTime() > Date.now() + 86400000 * 30
-  );
-};
-// Enable Today
-//   time.getTime() + 3600 * 1000 * 24 < Date.now();
+function formatDate(date: string) {
+  var d = new Date(date).toLocaleDateString(),
+    month = d.split("/")[0],
+    day = d.split("/")[1],
+    year = d.split("/")[2];
 
-const shortcuts = [
-  {
-    text: "Today",
-    value: new Date(),
-  },
-  {
-    text: "Tommorow",
-    value: () => {
-      const date = new Date();
-      date.setTime(date.getTime() + 3600 * 1000 * 24);
-      return date;
-    },
-  },
-  {
-    text: "Next week",
-    value: () => {
-      const date = new Date();
-      date.setTime(date.getTime() + 3600 * 1000 * 24 * 7);
-      return date;
-    },
-  },
-];
+  return [year, month, day].join("-");
+}
 </script>
