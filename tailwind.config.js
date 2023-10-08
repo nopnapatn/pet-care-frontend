@@ -13,6 +13,7 @@ module.exports = {
     extend: {},
     fontFamily: {
       body: [
+        "Arial",
         "Inter",
         "ui-sans-serif",
         "system-ui",
@@ -21,7 +22,6 @@ module.exports = {
         "Segoe UI",
         "Roboto",
         "Helvetica Neue",
-        "Arial",
         "Noto Sans",
         "sans-serif",
         "Apple Color Emoji",
@@ -30,6 +30,7 @@ module.exports = {
         "Noto Color Emoji",
       ],
       sans: [
+        "Arial",
         "Inter",
         "ui-sans-serif",
         "system-ui",
@@ -38,7 +39,6 @@ module.exports = {
         "Segoe UI",
         "Roboto",
         "Helvetica Neue",
-        "Arial",
         "Noto Sans",
         "sans-serif",
         "Apple Color Emoji",
@@ -47,6 +47,7 @@ module.exports = {
         "Noto Color Emoji",
       ],
       primary: "Spicy Soup",
+      secondary: "Arial",
     },
   },
   daisyui: {
@@ -70,9 +71,12 @@ module.exports = {
           warning: "#a3830f",
 
           error: "#ef6b6b",
+
+          "my-black": "#1f2937",
         },
       },
     ],
+    utils: true,
   },
   plugins: [require("flowbite/plugin"), require("daisyui")],
   darkMode: "class",

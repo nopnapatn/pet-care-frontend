@@ -1,32 +1,25 @@
 <template>
-  <a
-    class="group relative inline-flex items-center overflow-hidden rounded-lg px-8 py-3 text-primary-white focus:outline-none focus:ring shadow-lg"
+  <NuxtLink
+    class="group relative inline-flex items-center overflow-hidden rounded-lg px-8 hover:pr-10 py-3 text-primary-white focus:outline-none focus:ring shadow-lg"
     :to="to"
-    :class="class"
+    :class="color"
   >
-    <span class="absolute -end-full transition-all group-hover:end-4">
-      <svg
-        class="h-5 w-5 rtl:rotate-180"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M17 8l4 4m0 0l-4 4m4-4H3"
-        />
-      </svg>
+    <span class="absolute mr-2 -end-full transition-all group-hover:end-4">
+      <img
+        src="/images/icons/paw-icon.png"
+        width="24"
+        height="24"
+        alt="Paw icon"
+        title="Paw icon"
+      />
     </span>
 
-    <span class="headline-small transition-all group-hover:me-4">
+    <span class="text-xl text-white font-bold transition-all group-hover:me-4">
       <slot />
     </span>
-  </a>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["to", "class"]);
+const props = defineProps(["to", "color"]);
 </script>

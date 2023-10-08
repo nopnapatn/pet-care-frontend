@@ -1,6 +1,6 @@
 <template>
   <TheHeader />
-  <div class="bg-primary-white">
+  <div class="bg-white">
     <slot />
   </div>
   <TheFooter />

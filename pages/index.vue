@@ -1,55 +1,41 @@
 <template>
   <section>
     <div class="relative">
-        <img src="/images/room1.png" alt="">
+      <img
+        class="object-cover w-full h-screen"
+        src="/images/room1.png"
+        alt=""
+      />
 
       <div
-            class="absolute display-large text-5xl w-full h-full  text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-800 opacity-70"
-          >
-            <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
-              <div>Pet Care</div>
-            </div>  
-          </div>
-    </div>
-    <div class="bg-primary">
-      <div
-        class="flex-col justify-center items-center text-center py-8 px-4 mx-auto max-w-screen-xl lg:py-8"
+        class="absolute w-full h-screen top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-800/60"
       >
-        <div class="h-24 max-sm:h-0"></div>
-        <div>
-          <div
-            class="mb-6 display-large tracking-tight leading-none text-primary-orange-100 max-sm:text-6xl"
+        <div
+          class="display-large text-primary pt-48 pb-16 px-4 mx-auto max-w-screen-xl text-center"
+        >
+          Pet Care
+        </div>
+        <p
+          class="mb-16 text-center text-4xl text-zinc-50 sm:px-16 lg:px-48 max-sm:text-3xl"
+        >
+          Loving pet care in your neighborhood™<br /><br />
+          Book our services for your pet
+        </p>
+        <div
+          class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-4 sm:space-x-4"
+        >
+          <TheButtonHome to="/room" color="bg-secondary"
+            >Book now</TheButtonHome
           >
-            Pet Cares
-          </div>
-          <p
-            class="mb-16 display-small text-primary-green-100 sm:px-16 lg:px-48 max-sm:text-3xl"
-          >
-            Loving pet care in your neighborhood™<br /><br />
-            Book our services for your pet
-          </p>
-          <div
-            class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-4 sm:space-x-4"
-          >
-            <TheButtonHome to="/" class="bg-primary-orange-100"
-              >Book now</TheButtonHome
-            >
-          </div>
         </div>
       </div>
-      <div class="flex justify-center object-bottom">
-        <img src="/images/banner-home.png" alt="" class="absolute" />
-      </div>
-      <div class="bg-primary-beige h-40 w-screen max-sm:h-32"></div>
-      <div class="h-6 max-sm:h-4"></div>
-      <div class="bg-primary-white h-24"></div>
     </div>
 
-    <div class="bg-primary-white shadow-lg">
+    <div class="bg-zinc-100">
       <div
-        class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:pt-8 lg:pb-48"
+        class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:pt-8 lg:pb-28"
       >
-        <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
+        <div class="mx-auto max-w-screen-md text-center pt-8 mb-8 lg:mb-12">
           <span class="headline-large text-primary-orange-100"
             >Our Services</span
           >
@@ -59,43 +45,28 @@
           </p>
         </div>
         <div
-          class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0"
+          class="space-y-8 mt-4 lg:grid lg:grid-cols-2 px-36 sm:gap-6 xl:gap-10 lg:space-y-0"
         >
-          <div class="h-72 rounded-lg bg-primary-white shadow-lg"></div>
-          <div class="h-72 rounded-lg bg-primary-white shadow-lg"></div>
-          <div class="h-72 rounded-lg bg-primary-white shadow-lg"></div>
+          <NuxtLink
+            to="/room"
+            class="h-72 block rounded-xl border border-gray-100 p-4 shadow-md hover:border-primary/70 hover:ring-2 hover:ring-primary/70 focus:outline-none focus:ring"
+          ></NuxtLink>
+          <div
+            class="h-72 block rounded-xl border border-gray-100 p-4 shadow-md hover:border-primary/70 hover:ring-2 hover:ring-primary/70 focus:outline-none focus:ring"
+          ></div>
         </div>
       </div>
     </div>
 
-    <div class="bg-primary-pink">
-      <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-32 lg:px-6">
-        <div
-          class="space-y-8 lg:grid lg:grid-cols-4 sm:gap-6 xl:gap-10 lg:space-y-0"
-        >
-          <div
-            class="mx-auto max-w-screen-md text-center flex flex-col justify-center h-full mb-8 lg:mb-12"
-          >
-            <div
-              class="mb-4 headline-large text-primary-orange-100 tracking-tight font-extrabold"
-            >
-              Get Products
-            </div>
-            <div class="mb-5 font-light text-primary-black sm:text-xl">
-              Checkout thousands products for your pet.
-            </div>
-            <div
-              class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-4 sm:space-x-4"
-            >
-              <TheButtonHome to="/" class="bg-primary-green-100"
-                >Shop now</TheButtonHome
-              >
-            </div>
-          </div>
-
-          <TheCardShop />
-          <TheCardShop />
-          <TheCardShop />
+    <div class="hero min-h-screen bg-primary/20">
+      <div class="hero-content flex-col px-8 gap-16 lg:flex-row-reverse">
+        <TheCarousal></TheCarousal>
+        <div>
+          <h1 class="text-5xl font-primary font-bold">Get Products!</h1>
+          <p class="text-base py-6">
+            Checkout thousands products for your pet.
+          </p>
+          <button class="btn btn-secondary text-white">SHOP NOW</button>
         </div>
       </div>
     </div>

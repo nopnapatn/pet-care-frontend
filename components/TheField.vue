@@ -1,13 +1,12 @@
 <template>
-  <div>
-    <label
-      :for="id"
-      class="block mb-2 text-sm font-medium text-primary-black"
-      >{{ label }}</label
+  <div class="flex">
+    <span
+      class="inline-flex items-center px-3 text-sm text-gray-900 bg-neutral-100 border border-r-0 border-gray-200 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
     >
-
+      {{ label }}
+    </span>
     <input
-      class="bg-gray-50 border border-gray-300 text-primary-black text-sm rounded-lg focus:ring-primary-green-100 focus:border-primary-green-100 block w-full p-2.5"
+      class="rounded-none rounded-r-lg bg-gray-50 border text-my-black focus:ring-primary focus:border-primary block flex-1 min-w-0 w-full text-sm border-gray-200 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
       :id="id"
       :placeholder="placeholder"
       :required="required"
