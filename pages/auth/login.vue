@@ -148,43 +148,5 @@ async function onSubmit() {
       await navigateTo("/test");
     }
   }
-
-  // if (error && error.value) {
-  //   console.log(error);
-  //   console.log(error.value);
-  //   const { data } = error.value!;
-
-  //   if (data.errors && data.errors.email) {
-  //     errorMessage.email = data.errors.email.join(" "); // Concatenate array elements into a single string
-  //   } else {
-  //     errorMessage.email = "";
-  //   }
-
-  //   if (data.errors && data.errors.password) {
-  //     errorMessage.password = data.errors.password.join(" "); // Concatenate array elements into a single string
-  //   } else {
-  //     errorMessage.password = "";
-  //   }
-
-  //   console.log(error.value);
-
-  //   if (JSON.stringify(error.value).includes("401")) {
-  //     statusMessage.value = "Wrong email or password, please try again.";
-  //   }
-  // } else {
-  //   console.log(response.value);
-  //   localStorage.setItem("token", response.value.token);
-  //   localStorage.setItem("user", JSON.stringify(response.value.user));
-  //   await navigateTo("/test");
-  // }
-
-  // if (response.value !== null) {
-  //   console.log(response.value);
-  //   localStorage.setItem("token", response.value.token);
-  //   localStorage.setItem("user", JSON.stringify(response.value.user));
-  //   await navigateTo("/");
-  // } else {
-  //   errorMessage.value = "User does not exist. Please check your credentials.";
-  // }
 }
 </script>

@@ -87,6 +87,15 @@
                 >Shop
               </NuxtLink>
             </li>
+            <li>
+              <NuxtLink
+                v-if="auth.isLogin"
+                to="/profile/show"
+                class="text-primary-orange-100 hover:text-primary-green-100"
+                aria-current="page"
+                >Profile
+              </NuxtLink>
+            </li>
           </ul>
         </div>
       </div>
