@@ -1,13 +1,15 @@
 <template>
-  <section>
+  <section class="rooms-layout">
     <div v-for="roomType in roomTypes" :key="roomType.id">
-      <NuxtLink :to="`rooms/` + roomType.id">
-        <TheCardRoomType
-          :room="roomType.title"
-          :amount="roomType.available_amount"
-          :price="roomType.price"
-        ></TheCardRoomType>
-      </NuxtLink>
+      <TheCardRoomType
+        :title="roomType.title"
+        :description="roomType.description"
+        :price="roomType.price"
+        :available_amount="roomType.available_amount"
+        :max_pets="roomType.max_pets"
+        :to="`rooms/` + roomType.id"
+        :image="`images/room` + roomType.id + `.png`"
+      ></TheCardRoomType>
     </div>
   </section>
 </template>
