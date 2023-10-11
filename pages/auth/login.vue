@@ -45,7 +45,7 @@
           <NuxtLink
             href="/"
             class="ml-auto text-sm font-medium text-my-black mb-6 hover:text-gray-600"
-            >Lost Password?</NuxtLink
+            >Forget Password?</NuxtLink
           >
         </div>
         <TheButtonAuth class="w-full" colort="bg-primary" colorb="bg-secondary"
