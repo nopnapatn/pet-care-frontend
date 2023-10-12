@@ -60,8 +60,8 @@
       <span class="headline-large text-my-black">Conditions</span>
     </div>
     <!-- Shop banner -->
-    <div class="hero min-h-fit bg-primary/20">
-      <div class="hero-content flex-col px-8 gap-16 lg:flex-row-reverse">
+    <div class="min-h-fit bg-primary/20">
+      <div class="flex items-center justify-between pl-40 lg:flex-row-reverse">
         <TheCarousal></TheCarousal>
         <div>
           <h1 class="text-5xl font-primary font-bold">Get Products!</h1>
