@@ -22,7 +22,7 @@
             </li>
             <li>
               <NuxtLink
-                to="/room"
+                to="/rooms"
                 class="text-primary-orange-100 hover:text-primary-green-100"
                 aria-current="page"
               >
