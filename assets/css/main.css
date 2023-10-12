@@ -17,7 +17,7 @@
 }
 @layer utilities {
   .font-main {
-    @apply font-primary;
+    @apply font-secondary;
   }
   .display-large {
     @apply text-8xl font-primary;

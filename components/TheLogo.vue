@@ -1,10 +1,10 @@
 <template>
   <NuxtLink to="/" class="flex items-center">
-    <!-- <img
-      src="https://cdn.dribbble.com/userupload/2641917/file/original-eebdcaf8f1b014a0d1c66e8cd3d86257.png"
-      class="h-8 mr-3"
+    <img
+      src="/images/icons/dog-cat-black.png"
+      class="h-8 mr-3 self-center"
       alt=""
-    /> -->
+    />
     <span
       class="self-center text-primary-green-100 headline-medium whitespace-nowrap"
       >Pet Care</span

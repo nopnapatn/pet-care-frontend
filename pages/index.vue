@@ -1,106 +1,79 @@
 <template>
   <section>
+    <!-- Banner -->
     <div class="relative">
-        <img src="/images/room1.png" alt="">
+      <img
+        class="object-cover w-full h-screen"
+        src="/images/room1.png"
+        alt=""
+      />
 
       <div
-            class="absolute display-large text-5xl w-full h-full  text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-800 opacity-70"
-          >
-            <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
-              <div>Pet Care</div>
-            </div>  
-          </div>
-    </div>
-    <div class="bg-primary">
-      <div
-        class="flex-col justify-center items-center text-center py-8 px-4 mx-auto max-w-screen-xl lg:py-8"
+        class="absolute w-full h-screen top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-800/60"
       >
-        <div class="h-24 max-sm:h-0"></div>
+        <div
+          class="display-large text-primary pt-48 pb-10 px-4 mx-auto max-w-screen-xl text-center"
+        >
+          Pet Care
+        </div>
+        <p
+          class="mb-16 text-center text-4xl text-zinc-50 sm:px-16 lg:px-48 max-sm:text-3xl"
+        >
+          Loving pet care in your neighborhood™<br /><br />
+          Book our services for your pet
+        </p>
+        <div
+          class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-4 sm:space-x-4"
+        >
+          <TheButtonHome to="/room" color="bg-secondary"
+            >Book now</TheButtonHome
+          >
+        </div>
+      </div>
+    </div>
+    <!-- About -->
+    <div class="bg-neutral-50">
+      <div
+        class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:pt-10 lg:pb-28"
+      >
+        <div class="mx-auto max-w-screen-md text-center pt-8 mb-8 lg:mb-12">
+          <span class="headline-large text-my-black">About</span>
+          <p class="my-5 font-light text-my-black text-sm sm:text-xl">
+            Neko Luxury Cat Hotel is a cat hotel that was created by the love of
+            cats and more than 10 years of experience taking care of cats which
+            enable us to know cat's behaviors and characteristics well. There
+            are 5 different themes with 19 different designs of rooms. Each room
+            are design based on cats' behaviors that like to discover, climb,
+            jump, run around and sleep..
+          </p>
+        </div>
+        <!-- <div
+          class="space-y-8 mt-4 lg:grid lg:grid-cols-2 px-36 sm:gap-6 xl:gap-10 lg:space-y-0"
+        >
+          <TheCardAbout title="Hotel"></TheCardAbout>
+          <TheCardAbout title="Other Services"></TheCardAbout>
+        </div> -->
+      </div>
+    </div>
+    <!-- Conditions -->
+    <div class="flex flex-col py-16 px-40">
+      <span class="headline-large text-my-black">Conditions</span>
+    </div>
+    <!-- Shop banner -->
+    <div class="min-h-fit bg-primary/20">
+      <div class="flex items-center justify-between pl-40 lg:flex-row-reverse">
+        <TheCarousal></TheCarousal>
         <div>
-          <div
-            class="mb-6 display-large tracking-tight leading-none text-primary-orange-100 max-sm:text-6xl"
-          >
-            Pet Cares
-          </div>
-          <p
-            class="mb-16 display-small text-primary-green-100 sm:px-16 lg:px-48 max-sm:text-3xl"
-          >
-            Loving pet care in your neighborhood™<br /><br />
-            Book our services for your pet
+          <h1 class="text-5xl font-primary font-bold">Get Products!</h1>
+          <p class="text-base py-6">
+            Checkout thousands products for your pet.
           </p>
-          <div
-            class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-4 sm:space-x-4"
-          >
-            <TheButtonHome to="/" class="bg-primary-orange-100"
-              >Book now</TheButtonHome
-            >
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-center object-bottom">
-        <img src="/images/banner-home.png" alt="" class="absolute" />
-      </div>
-      <div class="bg-primary-beige h-40 w-screen max-sm:h-32"></div>
-      <div class="h-6 max-sm:h-4"></div>
-      <div class="bg-primary-white h-24"></div>
-    </div>
-
-    <div class="bg-primary-white shadow-lg">
-      <div
-        class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:pt-8 lg:pb-48"
-      >
-        <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
-          <span class="headline-large text-primary-orange-100"
-            >Our Services</span
-          >
-          <p class="my-5 font-light text-primary-black sm:text-xl">
-            Here at Pet Cares we focus on markets where technology, innovation,
-            and capital can unlock long-term value and drive economic growth.
-          </p>
-        </div>
-        <div
-          class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0"
-        >
-          <div class="h-72 rounded-lg bg-primary-white shadow-lg"></div>
-          <div class="h-72 rounded-lg bg-primary-white shadow-lg"></div>
-          <div class="h-72 rounded-lg bg-primary-white shadow-lg"></div>
+          <button class="btn btn-secondary text-white">SHOP NOW</button>
         </div>
       </div>
     </div>
-
-    <div class="bg-primary-pink">
-      <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-32 lg:px-6">
-        <div
-          class="space-y-8 lg:grid lg:grid-cols-4 sm:gap-6 xl:gap-10 lg:space-y-0"
-        >
-          <div
-            class="mx-auto max-w-screen-md text-center flex flex-col justify-center h-full mb-8 lg:mb-12"
-          >
-            <div
-              class="mb-4 headline-large text-primary-orange-100 tracking-tight font-extrabold"
-            >
-              Get Products
-            </div>
-            <div class="mb-5 font-light text-primary-black sm:text-xl">
-              Checkout thousands products for your pet.
-            </div>
-            <div
-              class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-4 sm:space-x-4"
-            >
-              <TheButtonHome to="/" class="bg-primary-green-100"
-                >Shop now</TheButtonHome
-              >
-            </div>
-          </div>
-
-          <TheCardShop />
-          <TheCardShop />
-          <TheCardShop />
-        </div>
-      </div>
-    </div>
-
-    <div class="bg-primary-white">
+    <!-- staff -->
+    <!-- <div class="bg-primary-white">
       <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-32 lg:px-6">
         <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-16">
           <div class="h-96 rounded-lg bg-gray-100"></div>
@@ -138,6 +111,18 @@
             </div>
           </div>
         </div>
+      </div>
+    </div> -->
+    <!-- Location -->
+    <div class="flex flex-col py-16 px-56 justify-center">
+      <!-- <span class="headline-large text-center text-my-black">Location</span> -->
+      <p class="py-10 pt-8 text-lg text-center">
+        50 Ngamwongwan Rd, Khwaeng Lat Yao,
+        <br />
+        Khet Chatuchak, Krung Thep Maha Nakhon 10900
+      </p>
+      <div class="flex justify-center">
+        <TheMap></TheMap>
       </div>
     </div>
   </section>
