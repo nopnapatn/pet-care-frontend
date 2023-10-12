@@ -45,6 +45,16 @@
                 >Shop
               </NuxtLink>
             </li>
+            <div v-if="auth.user.role === 'STAFF'">
+              <li>
+                <NuxtLink
+                  to="/dashboard"
+                  class="text-primary-orange-100 hover:text-primary-green-100"
+                  aria-current="page"
+                  >Dashboard
+                </NuxtLink>
+              </li>
+            </div>
           </ul>
         </div>
 

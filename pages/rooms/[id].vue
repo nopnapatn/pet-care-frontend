@@ -156,11 +156,18 @@ const { data: roomType, error } = await useMyFetch<any>(
 
 const date = ref("");
 
+const totalPrice = computed(() => {
+  if (formData.nights !== 0 && formData.petsAmount !== 0) {
+    return formData.petsAmount * roomType.value.price * formData.nights;
+  }
+  return 0;
+});
+
 const formData = reactive({
   roomTypeId: route.params.id,
   startDate: "",
   endDate: "",
-  petsAmount: "",
+  petsAmount: 0,
   nights: 0,
   ownerInstruction: "",
 });
@@ -169,6 +176,7 @@ function calculateNights(date1: string, date2: string) {
   return (Date.parse(date2) - Date.parse(date1)) / 86400000;
 }
 
+// Watch for datepicker
 watch(date, (newDate) => {
   formData.startDate = formatDate(date.value[0]);
   formData.endDate = formatDate(date.value[1]);
@@ -197,6 +205,7 @@ async function onSubmit() {
   }
 }
 
+// Format date to "YYYY-MM-DD"
 function formatDate(date: string) {
   var d = new Date(date).toLocaleDateString(),
     month = d.split("/")[0],

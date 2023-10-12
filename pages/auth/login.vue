@@ -115,12 +115,12 @@ async function onSubmit() {
     });
     if (user.value !== null) {
       console.log(user.value);
+      let id = user.value["id"];
       let firstName = user.value["first_name"];
       let lastName = user.value["last_name"];
       let email = user.value["email"];
       let role = user.value["role"];
-      let id = user.value["id"];
-      auth.setUser(firstName, lastName, email, role, id);
+      auth.setUser(id, firstName, lastName, email, role);
       console.log("Auth user:", auth.user);
       if (role === "ADMIN") {
         await navigateTo("/dashboard");
