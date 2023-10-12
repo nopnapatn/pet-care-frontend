@@ -1,61 +1,10 @@
 <template>
   <header>
-    <nav class="bg-primary-beige">
+    <nav class="bg-zinc-50 z-30 fixed w-full">
       <div
-        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 px-8"
       >
         <TheLogo />
-        <div class="flex md:order-2 items-center">
-          <div v-if="auth.isLogin" class="flex items-center gap-4">
-            <h1>{{ auth.user.firstName }}</h1>
-            <h1>{{ auth.user.lastName }}</h1>
-            <NuxtLink
-              to="/"
-              @click.prevent="handleLogout"
-              class="text-sm font-semibold text-primary-orange-100 hover:text-primary-green-100"
-            >
-              Logout
-            </NuxtLink>
-          </div>
-          <div v-else>
-            <NuxtLink
-              to="/auth/login"
-              class="text-sm font-semibold text-primary-orange-100 hover:text-primary-green-100"
-            >
-              Login
-            </NuxtLink>
-            <NuxtLink
-              to="/auth/register"
-              class="mx-6 headline-small text-primary-orange-100 hover:text-primary-green-100"
-            >
-              Register
-            </NuxtLink>
-          </div>
-          <button
-            data-collapse-toggle="navbar-cta"
-            type="button"
-            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-primary-black rounded-lg md:hidden"
-            aria-controls="navbar-cta"
-            aria-expanded="false"
-          >
-            <span class="sr-only">Open main menu</span>
-            <svg
-              class="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
-          </button>
-        </div>
         <div
           class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-cta"
@@ -65,10 +14,19 @@
           >
             <li>
               <NuxtLink
-                to="/room"
+                to="/"
                 class="text-primary-orange-100 hover:text-primary-green-100"
                 aria-current="page"
-                >Hotel Room
+                >Home
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink
+                to="/rooms"
+                class="text-primary-orange-100 hover:text-primary-green-100"
+                aria-current="page"
+              >
+                Rooms
               </NuxtLink>
             </li>
             <li>
@@ -96,11 +54,52 @@
                 >Profile
               </NuxtLink>
             </li>
+            <div v-if="auth.user.role === 'STAFF'">
+              <li>
+                <NuxtLink
+                  to="/dashboard"
+                  class="text-primary-orange-100 hover:text-primary-green-100"
+                  aria-current="page"
+                  >Dashboard
+                </NuxtLink>
+              </li>
+            </div>
           </ul>
+        </div>
+
+        <div class="flex items-center order-3">
+          <div v-if="auth.isLogin" class="flex items-center gap-4">
+            <h1>{{ auth.user.firstName }}</h1>
+            <h1>{{ auth.user.lastName }}</h1>
+            <NuxtLink
+              to="/"
+              @click.prevent="handleLogout"
+              class="text-sm font-semibold text-primary-orange-100 hover:text-primary-green-100"
+            >
+              Logout
+            </NuxtLink>
+          </div>
+          <div v-else>
+            <NuxtLink
+              to="/auth/login"
+              class="text-md mr-3 text-my-black hover:text-secondary"
+            >
+              Login
+            </NuxtLink>
+            <!-- <NuxtLink
+              to="/auth/register"
+              class="mx-6 headline-small text-primary-orange-100 hover:text-primary-green-100"
+            >
+              Register
+            </NuxtLink> -->
+          </div>
+          <TheSidebar></TheSidebar>
         </div>
       </div>
     </nav>
   </header>
+
+  <!-- drawer component -->
 </template>
 
 <script setup lang="ts">

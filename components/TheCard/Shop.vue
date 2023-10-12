@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full max-w-sm bg-primary-white rounded-lg shadow">
+  <div class="w-full max-w-xs bg-white rounded-box shadow">
     <a href="#">
       <img
         class="p-8 rounded-t-lg"
