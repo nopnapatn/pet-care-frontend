@@ -1,4 +1,9 @@
 <template>
+  <section class="bg-gray-200">
+    <div class="lg:px-40">
+      <TheGallery />
+    </div>
+  </section>
   <section>
     <div class="">
       <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
