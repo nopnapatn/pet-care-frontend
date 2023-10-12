@@ -11,6 +11,9 @@
   .auth-layout {
     @apply flex bg-base-100 justify-center items-center pb-40 max-sm:px-4 lg:px-40 min-h-screen;
   }
+  .rooms-layout {
+    @apply lg:px-40 lg:py-16;
+  }
 }
 @layer utilities {
   .font-main {
