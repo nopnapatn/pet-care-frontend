@@ -12,16 +12,16 @@
         <h2 class="card-title">{{ room }}</h2>
         <p>{{ amount }} Room left</p>
         <h3>${{ price }} / night</h3>
-        <nuxt-link to="">
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary">Booking</button>
-          </div>
-        </nuxt-link>
+        <div class="card-actions justify-end">
+          <nuxt-link :to="to">
+            <button class="btn btn-primary">Book</button>
+          </nuxt-link>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["amount", "room", "price"]);
+const props = defineProps(["amount", "room", "price", "to"]);
 </script>

@@ -1,13 +1,12 @@
 <template>
   <section>
     <div v-for="roomType in roomTypes" :key="roomType.id">
-      <NuxtLink :to="`rooms/` + roomType.id">
-        <TheCardRoomType
-          :room="roomType.title"
-          :amount="roomType.available_amount"
-          :price="roomType.price"
-        ></TheCardRoomType>
-      </NuxtLink>
+      <TheCardRoomType
+        :room="roomType.title"
+        :amount="roomType.available_amount"
+        :price="roomType.price"
+        :to="`rooms/` + roomType.id"
+      ></TheCardRoomType>
     </div>
   </section>
 </template>
