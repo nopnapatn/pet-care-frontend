@@ -1,5 +1,5 @@
 <template>
-  <li for="my-drawer-4">
+  <li>
     <NuxtLink :to="to" class="flex items-center bg-zinc-50 border h-12">
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -2,24 +2,24 @@
   <section class="auth-layout">
     <TheCardAuth title="Login">
       <form class="mt-8 space-y-6" @submit.prevent="onSubmit()">
-        <TheField
+        <TheFieldText
           id="email"
           v-model="formData.email"
           label="Email"
           placeholder="email@example.com"
           autocomplete="on"
           required
-        ></TheField>
+        ></TheFieldText>
         <!-- <div v-if="errorMessage.email" class="text-sm text-red-500">
           {{ errorMessage.email }}
         </div> -->
-        <TheField
+        <TheFieldText
           id="password"
           v-model="formData.password"
           label="Password"
           placeholder="********"
           required
-        ></TheField>
+        ></TheFieldText>
         <!-- <div v-if="errorMessage.password" class="text-sm text-red-500">
           {{ errorMessage.password }}
         </div> -->

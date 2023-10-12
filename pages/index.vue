@@ -55,8 +55,12 @@
         </div> -->
       </div>
     </div>
+    <!-- Conditions -->
+    <div class="flex flex-col py-16 px-40">
+      <span class="headline-large text-my-black">Conditions</span>
+    </div>
     <!-- Shop banner -->
-    <div class="hero min-h-screen bg-primary/20">
+    <div class="hero min-h-fit bg-primary/20">
       <div class="hero-content flex-col px-8 gap-16 lg:flex-row-reverse">
         <TheCarousal></TheCarousal>
         <div>
@@ -67,10 +71,6 @@
           <button class="btn btn-secondary text-white">SHOP NOW</button>
         </div>
       </div>
-    </div>
-    <!-- Conditions -->
-    <div class="flex flex-col py-16 px-40">
-      <span class="headline-large text-my-black">Conditions</span>
     </div>
     <!-- staff -->
     <!-- <div class="bg-primary-white">
@@ -114,8 +114,8 @@
       </div>
     </div> -->
     <!-- Location -->
-    <div class="flex flex-col py-16 px-40 justify-center">
-      <span class="headline-large text-center text-my-black">Location</span>
+    <div class="flex flex-col py-16 px-56 justify-center">
+      <!-- <span class="headline-large text-center text-my-black">Location</span> -->
       <p class="py-10 pt-8 text-lg text-center">
         50 Ngamwongwan Rd, Khwaeng Lat Yao,
         <br />

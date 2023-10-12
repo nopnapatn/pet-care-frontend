@@ -2,7 +2,7 @@
   <section class="auth-layout">
     <TheCardAuth title="Register">
       <form class="mt-8 space-y-6" @submit.prevent="onSubmit()">
-        <TheField
+        <TheFieldText
           id="email"
           v-model="formData.email"
           label="Email"
@@ -10,11 +10,11 @@
           autocomplete="on"
           required
         >
-        </TheField>
+        </TheFieldText>
         <!-- <div v-if="errorMessage.email" class="text-sm text-red-500">
           {{ errorMessage.email }}
         </div> -->
-        <TheField
+        <TheFieldText
           id="firstName"
           v-model="formData.firstName"
           label="First Name"
@@ -22,11 +22,11 @@
           autocomplete="on"
           required
         >
-        </TheField>
+        </TheFieldText>
         <!-- <div v-if="errorMessage.firstName" class="text-sm text-red-500">
           {{ errorMessage.firstName }}
         </div> -->
-        <TheField
+        <TheFieldText
           id="lastName"
           v-model="formData.lastName"
           label="Last Name"
@@ -34,29 +34,29 @@
           autocomplete="on"
           required
         >
-        </TheField>
+        </TheFieldText>
         <!-- <div v-if="errorMessage.lastName" class="text-red-500">
           {{ errorMessage.lastName }}
         </div> -->
-        <TheField
+        <TheFieldText
           id="password"
           v-model="formData.password"
           label="Password"
           placeholder="********"
           required
         >
-        </TheField>
+        </TheFieldText>
         <!-- <div v-if="errorMessage.password" class="text-red-500">
           {{ errorMessage.password }}
         </div> -->
-        <TheField
+        <TheFieldText
           id="confirmPassword"
           v-model="formData.confirmPassword"
           label="Confirm Password"
           placeholder="********"
           required
         >
-        </TheField>
+        </TheFieldText>
 
         <div v-if="errorMessage.confirmPassword" class="text-error text-sm">
           {{ errorMessage.confirmPassword }}
