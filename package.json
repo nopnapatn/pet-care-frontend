@@ -25,6 +25,7 @@
     "@formkit/nuxt": "^1.1.0",
     "@formkit/vue": "^1.2.0-071f6ff",
     "@googlemaps/js-api-loader": "^1.16.2",
+    "@nuxt/ui": "^2.9.0",
     "@pinia/nuxt": "^0.4.11",
     "@vuepic/vue-datepicker": "^7.0.0",
     "class-variance-authority": "^0.7.0",
