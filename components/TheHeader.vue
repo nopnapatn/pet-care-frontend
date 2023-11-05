@@ -14,7 +14,7 @@
           >
             <li>
               <NuxtLink
-                to="#"
+                to="/"
                 class="text-primary-orange-100 hover:text-primary-green-100"
                 aria-current="page"
                 >Home

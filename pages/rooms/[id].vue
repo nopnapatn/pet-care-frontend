@@ -194,7 +194,7 @@ const formData = reactive({
 });
 
 function calculateNights(date1: string, date2: string) {
-  return (Date.parse(date2) - Date.parse(date1)) / 86400000;
+  return (Date.parse(date2) - Date.parse(date1)) / 86400000 + 1;
 }
 
 // Watch for datepicker
@@ -223,11 +223,12 @@ async function onSubmit() {
     }
   );
   if (response.value !== null) {
-    // await navigateTo("/test");
+    // await navigateTo("/payment/" + response.value["id"]);
+    const bookingOrderId = response.value["booking_order"]["id"];
+    await navigateTo(`/payments/create?bookingOrderId=${bookingOrderId}`);
     console.log(response.value);
   }
   console.log(error);
-  console.log(error.value);
 }
 
 // Format date to "YYYY-MM-DD"
