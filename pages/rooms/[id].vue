@@ -82,6 +82,27 @@
                 Price details
               </h2>
 
+              <div class="flex justify-between items-center mb-4">
+                <div class="text-gray-600">Price per night</div>
+                <div class="text-gray-800 font-semibold">
+                  {{ roomType.price }} THB
+                </div>
+              </div>
+
+              <div class="flex justify-between items-center mb-4">
+                <div class="text-gray-600">Number of nights</div>
+                <div class="text-gray-800 font-semibold">
+                  {{ formData.nights }} Nights
+                </div>
+              </div>
+
+              <div class="flex justify-between items-center mb-4">
+                <div class="text-gray-600">Total Price</div>
+                <div class="text-gray-800 font-semibold">
+                  {{ totalPrice }} THB
+                </div>
+              </div>
+
               <form @submit.prevent="onSubmit()">
                 <div class="grid gap-4">
                   <div>
@@ -126,10 +147,10 @@
 
                 <div class="mt-4 grid">
                   <button
-                    type="submit"
+                    @submit.prevent="onSubmit()"
                     class="inline-flex justify-center items-center gap-x-3 text-center bg-blue-600 hover:bg-blue-700 border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800"
                   >
-                    Booking
+                    Book
                   </button>
                 </div>
               </form>
@@ -168,8 +189,8 @@ const formData = reactive({
   startDate: "",
   endDate: "",
   petsAmount: 0,
-  nights: 0,
   ownerInstruction: "",
+  nights: 0,
 });
 
 function calculateNights(date1: string, date2: string) {
@@ -192,6 +213,7 @@ async function onSubmit() {
     {
       method: "POST",
       body: {
+        user_id: auth.user.id,
         room_type_id: formData.roomTypeId,
         check_in: formData.startDate,
         check_out: formData.endDate,
@@ -201,8 +223,11 @@ async function onSubmit() {
     }
   );
   if (response.value !== null) {
-    await navigateTo("/");
+    // await navigateTo("/test");
+    console.log(response.value);
   }
+  console.log(error);
+  console.log(error.value);
 }
 
 // Format date to "YYYY-MM-DD"

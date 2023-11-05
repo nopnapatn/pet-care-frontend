@@ -10,9 +10,9 @@
           autocomplete="on"
           required
         ></TheFieldText>
-        <!-- <div v-if="errorMessage.email" class="text-sm text-red-500">
+        <div v-if="errorMessage.email" class="text-sm text-red-500">
           {{ errorMessage.email }}
-        </div> -->
+        </div>
         <TheFieldText
           id="password"
           v-model="formData.password"
@@ -20,9 +20,9 @@
           placeholder="********"
           required
         ></TheFieldText>
-        <!-- <div v-if="errorMessage.password" class="text-sm text-red-500">
+        <div v-if="errorMessage.password" class="text-sm text-red-500">
           {{ errorMessage.password }}
-        </div> -->
+        </div>
 
         <div v-if="statusMessage" class="text-sm text-red-500">
           {{ statusMessage }}
@@ -125,7 +125,7 @@ async function onSubmit() {
       if (role === "ADMIN") {
         await navigateTo("/dashboard");
       } else {
-        await navigateTo("/");
+        await navigateTo("/rooms");
       }
     }
   }

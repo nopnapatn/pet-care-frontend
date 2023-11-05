@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink to="/" class="flex items-center">
+  <NuxtLink to="#" class="flex items-center">
     <img
       src="/images/icons/dog-cat-black.png"
       class="h-8 mr-3 self-center"

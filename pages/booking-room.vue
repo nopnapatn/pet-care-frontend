@@ -7,7 +7,3 @@
     </section>
 </template>
 
-<script setup lang="ts">
-    import { Modal } from 'flowbite'
-    import type { ModalOptions, ModalInterface } from 'flowbite'
-</script>
