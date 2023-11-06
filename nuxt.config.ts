@@ -38,4 +38,7 @@ export default defineNuxtConfig({
     // ~/components/base/Btn.vue => <BaseBtn />
     "~/components",
   ],
+  colorMode: {
+    preference: "light",
+  },
 });

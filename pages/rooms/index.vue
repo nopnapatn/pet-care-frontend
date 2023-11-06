@@ -1,7 +1,7 @@
 <template>
   <!-- Hero -->
   <section>
-    <div class="max-w-[85rem] mx-auto px-4 bg-black sm:px-6 lg:px-8 py-20">
+    <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="relative mx-auto max-w-4xl grid space-y-5 sm:space-y-10">
         <!-- Title -->
         <div class="text-center">
@@ -31,35 +31,35 @@
                 >
                   Date
                 </span>
-                <!-- Date -->
-                <VueDatePicker
-                  hide-input-icon
-                  v-model="date"
-                  range
-                  format="dd/M/yyyy"
-                  :enable-time-picker="false"
-                  disable-year-select
-                  auto-apply
-                  placeholder="Select date"
-                  :min-date="
-                    new Date(new Date().setDate(new Date().getDate() + 1))
-                  "
-                  :max-date="
-                    new Date(new Date().setDate(new Date().getDate() + 30))
-                  "
-                  required
-                ></VueDatePicker>
+                <UPopover :popper="{ placement: 'bottom-start' }">
+                  <UButton
+                    icon="i-heroicons-calendar-days-20-solid"
+                    :label="label"
+                  />
+                  <template #panel="{ close }">
+                    <LazyDatePicker
+                      v-model="date"
+                      @close="close"
+                      :min-date="
+                        new Date(new Date().setDate(new Date().getDate() + 1))
+                      "
+                      :max-date="
+                        new Date(new Date().setDate(new Date().getDate() + 30))
+                      "
+                    />
+                  </template>
+                </UPopover>
               </div>
             </div>
             <div
               class="pt-2 sm:pt-0 sm:pl-3 border-t border-gray-200 sm:border-t-0 sm:border-l sm:flex-[1_0_0%] dark:border-gray-700"
             >
               <div>
-                <TheFieldText
-                  id="Pets"
-                  label="Pets"
-                  type="number"
-                  min="0"
+                <UInput
+                  icon="i-heroicons-magnifying-glass-20-solid"
+                  size="xl"
+                  color="white"
+                  :trailing="false"
                   v-model="formData.petsAmount"
                   required
                 />
@@ -81,7 +81,7 @@
   </section>
   <!-- End Hero -->
 
-  <div>
+  <div class="pb-16">
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-2 mx-auto">
       <div class="flex items-center">
         <span
@@ -142,7 +142,10 @@
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div v-for="roomType in roomTypes" :key="roomType.id">
-          <button @click="navigateToRoomDetails(roomType)">
+          <button
+            @click="navigateToRoomDetails(roomType)"
+            class="h-full w-full"
+          >
             <TheCardRoomType
               :title="roomType.title"
               :description="roomType.description"
@@ -150,7 +153,6 @@
               :available_amount="roomType.available_amount"
               :max_pets="roomType.max_pets"
               :image="`images/room${roomType.id}.png`"
-              :to="`/rooms/${roomType.id}`"
             >
             </TheCardRoomType>
           </button>
@@ -161,15 +163,23 @@
 </template>
 
 <script setup lang="ts">
-import VueDatePicker from "@vuepic/vue-datepicker";
 const { data: roomTypes, error } = await useMyFetch<any>("room-types", {});
 
-const date = ref("");
+const date = ref(new Date(new Date().setDate(new Date().getDate() + 1)));
+const label = computed(() =>
+  date.value.toLocaleDateString("en-us", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  })
+);
 
 const formData = reactive({
   startDate: "",
   endDate: "",
   petsAmount: 0,
+  label: "",
 });
 
 // Format date to "YYYY-MM-DD"
@@ -184,10 +194,11 @@ function formatDate(date: string) {
 
 // Watch for datepicker
 watch(date, (newDate) => {
-  formData.startDate = formatDate(date.value[0]);
-  formData.endDate = formatDate(date.value[1]);
-  console.log(formData.startDate);
-  console.log(formData.endDate);
+  // formData.startDate = formatDate(date.value[0]);
+  // formData.endDate = formatDate(date.value[1]);
+  // console.log(formData.startDate);
+  // console.log(formData.endDate);
+  console.log(date.value);
 });
 
 async function navigateToRoomDetails(roomType: { id: any }) {
