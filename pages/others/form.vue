@@ -60,17 +60,42 @@
         </li>
       </ol>
     </div>
-    <div class="flex justify-center py-6 pb-8">
-      <select
-        name="pet-size"
-        id="pet-size"
-        class="select select-bordered bg-white focus:ring-primary focus:border-primary"
-      >
-        <!-- <option disabled selected>What's your pet size?</option> -->
-        <option value="2">Small</option>
-        <option value="3">Medium</option>
-        <option value="4">Large</option>
-      </select>
+    <div class="flex items-center justify-start px-8 gap-x-4 py-8">
+      <!-- <div class="flex justify-center py-6 pb-8">
+        <select
+          name="pet-size"
+          id="pet-size"
+          class="select select-bordered bg-white focus:ring-primary focus:border-primary"
+        >
+          <option value="2">Small</option>
+          <option value="3">Medium</option>
+          <option value="4">Large</option>
+        </select>
+      </div> -->
+
+      <USelect v-model="size" :options="sizes" />
+
+      <div class="flex">
+        <!-- Start Date Picker -->
+        <span
+          class="inline-flex items-center px-3 text-sm text-gray-900 bg-neutral-100 border border-r-0 border-gray-200 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
+        >
+          Date
+        </span>
+        <VueDatePicker
+          v-model="date"
+          range
+          format="dd/M/yyyy"
+          :enable-time-picker="false"
+          disable-year-select
+          auto-apply
+          placeholder="Select date"
+          :min-date="new Date(new Date().setDate(new Date().getDate() + 1))"
+          :max-date="new Date(new Date().setDate(new Date().getDate() + 30))"
+          required
+        ></VueDatePicker>
+        <!-- End Date Picker -->
+      </div>
     </div>
     <div class="grid grid-cols-3">
       <!-- col 1 -->
@@ -300,3 +325,37 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+
+const date = ref("");
+
+const formData = reactive({
+  startDate: "",
+  // endDate: "",
+  // petsAmount: 0,
+});
+
+function formatDate(date: string) {
+  var d = new Date(date).toLocaleDateString(),
+    month = d.split("/")[0],
+    day = d.split("/")[1],
+    year = d.split("/")[2];
+
+  return [year, month, day].join("-");
+}
+
+watch(date, (newDate) => {
+  formData.startDate = formatDate(date.value[0]);
+  // formData.endDate = formatDate(date.value[1]);
+  console.log(formData.startDate);
+  // console.log(formData.endDate);
+  console.log(date.value);
+});
+
+const sizes = ["Small", "Medium", "Larges"];
+
+const size = ref(sizes[0]);
+</script>
