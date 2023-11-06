@@ -26,34 +26,35 @@
           >
             <div class="pb-2 sm:pb-0 sm:flex-[1_0_0%]">
               <div class="flex">
+                <!-- Start Date Picker -->
                 <span
                   class="inline-flex items-center px-3 text-sm text-gray-900 bg-neutral-100 border border-r-0 border-gray-200 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
                 >
                   Date
                 </span>
-                <UPopover :popper="{ placement: 'bottom-start' }">
-                  <UButton
-                    icon="i-heroicons-calendar-days-20-solid"
-                    :label="label"
-                  />
-                  <template #panel="{ close }">
-                    <LazyDatePicker
-                      v-model="date"
-                      @close="close"
-                      :min-date="
-                        new Date(new Date().setDate(new Date().getDate() + 1))
-                      "
-                      :max-date="
-                        new Date(new Date().setDate(new Date().getDate() + 30))
-                      "
-                    />
-                  </template>
-                </UPopover>
+                <VueDatePicker
+                  v-model="date"
+                  range
+                  format="dd/M/yyyy"
+                  :enable-time-picker="false"
+                  disable-year-select
+                  auto-apply
+                  placeholder="Select date"
+                  :min-date="
+                    new Date(new Date().setDate(new Date().getDate() + 1))
+                  "
+                  :max-date="
+                    new Date(new Date().setDate(new Date().getDate() + 30))
+                  "
+                  required
+                ></VueDatePicker>
+                <!-- End Date Picker -->
               </div>
             </div>
             <div
               class="pt-2 sm:pt-0 sm:pl-3 border-t border-gray-200 sm:border-t-0 sm:border-l sm:flex-[1_0_0%] dark:border-gray-700"
             >
+              <!-- PET AMOUNT -->
               <div>
                 <UInput
                   icon="i-heroicons-magnifying-glass-20-solid"
@@ -103,18 +104,15 @@
         <span class="pl-4">Cat</span>
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div v-for="roomType in roomTypes" :key="roomType.id">
-          <button
-            @click="navigateToRoomDetails(roomType)"
-            class="h-full w-full"
-          >
+        <div v-for="catRoom in catRooms" :key="catRoom.id">
+          <button @click="navigateToRoomDetails(catRoom)" class="h-full w-full">
             <TheCardRoomType
-              :title="roomType.title"
-              :description="roomType.description"
-              :price="roomType.price"
-              :available_amount="roomType.available_amount"
-              :max_pets="roomType.max_pets"
-              :image="`images/room${roomType.id}.png`"
+              :title="catRoom.title"
+              :description="catRoom.description"
+              :price="catRoom.price"
+              :available_amount="catRoom.available_amount"
+              :max_pets="catRoom.max_pets"
+              :image="`images/room${catRoom.id}.png`"
             >
             </TheCardRoomType>
           </button>
@@ -141,18 +139,15 @@
         <span class="pl-4">Dog</span>
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div v-for="roomType in roomTypes" :key="roomType.id">
-          <button
-            @click="navigateToRoomDetails(roomType)"
-            class="h-full w-full"
-          >
+        <div v-for="dogRoom in dogRooms" :key="dogRoom.id">
+          <button @click="navigateToRoomDetails(dogRoom)" class="h-full w-full">
             <TheCardRoomType
-              :title="roomType.title"
-              :description="roomType.description"
-              :price="roomType.price"
-              :available_amount="roomType.available_amount"
-              :max_pets="roomType.max_pets"
-              :image="`images/room${roomType.id}.png`"
+              :title="dogRoom.title"
+              :description="dogRoom.description"
+              :price="dogRoom.price"
+              :available_amount="dogRoom.available_amount"
+              :max_pets="dogRoom.max_pets"
+              :image="`images/room${dogRoom.id}.png`"
             >
             </TheCardRoomType>
           </button>
@@ -163,23 +158,20 @@
 </template>
 
 <script setup lang="ts">
-const { data: roomTypes, error } = await useMyFetch<any>("room-types", {});
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
 
-const date = ref(new Date(new Date().setDate(new Date().getDate() + 1)));
-const label = computed(() =>
-  date.value.toLocaleDateString("en-us", {
-    weekday: "long",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  })
-);
+const { data: roomTypes, error } = await useMyFetch<any>("room-types", {});
+const { data: dogRooms } = await useMyFetch<any>("room-types/dog-rooms", {});
+const { data: catRooms } = await useMyFetch<any>("room-types/cat-rooms", {});
+
+// const date = ref(new Date(new Date().setDate(new Date().getDate() + 1)));
+const date = ref("");
 
 const formData = reactive({
   startDate: "",
   endDate: "",
   petsAmount: 0,
-  label: "",
 });
 
 // Format date to "YYYY-MM-DD"
@@ -194,10 +186,10 @@ function formatDate(date: string) {
 
 // Watch for datepicker
 watch(date, (newDate) => {
-  // formData.startDate = formatDate(date.value[0]);
-  // formData.endDate = formatDate(date.value[1]);
-  // console.log(formData.startDate);
-  // console.log(formData.endDate);
+  formData.startDate = formatDate(date.value[0]);
+  formData.endDate = formatDate(date.value[1]);
+  console.log(formData.startDate);
+  console.log(formData.endDate);
   console.log(date.value);
 });
 
