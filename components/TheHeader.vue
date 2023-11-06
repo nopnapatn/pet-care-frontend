@@ -15,7 +15,7 @@
             <li>
               <NuxtLink
                 to="/"
-                class="text-primary-orange-100 hover:text-primary-green-100"
+                class="text-my-black hover:text-primary-green-100"
                 aria-current="page"
                 >Home
               </NuxtLink>
@@ -23,7 +23,7 @@
             <li>
               <NuxtLink
                 to="/rooms"
-                class="text-primary-orange-100 hover:text-primary-green-100"
+                class="text-my-black hover:text-primary-green-100"
                 aria-current="page"
               >
                 Rooms
@@ -31,34 +31,17 @@
             </li>
             <li>
               <NuxtLink
-                to="#"
-                class="text-primary-orange-100 hover:text-primary-green-100"
+                to="/others"
+                class="text-my-black hover:text-primary-green-100"
                 aria-current="page"
                 >Other Services</NuxtLink
               >
-            </li>
-            <li>
-              <NuxtLink
-                to="#"
-                class="text-primary-orange-100 hover:text-primary-green-100"
-                aria-current="page"
-                >Shop
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink
-                v-if="auth.isLogin"
-                to="/profile/show"
-                class="text-primary-orange-100 hover:text-primary-green-100"
-                aria-current="page"
-                >Profile
-              </NuxtLink>
             </li>
             <div v-if="auth.user.role === 'STAFF'">
               <li>
                 <NuxtLink
                   to="/dashboard"
-                  class="text-primary-orange-100 hover:text-primary-green-100"
+                  class="text-my-black hover:text-primary-green-100"
                   aria-current="page"
                   >Dashboard
                 </NuxtLink>
@@ -69,14 +52,11 @@
 
         <div class="flex items-center order-3">
           <div v-if="auth.isLogin" class="flex items-center gap-4">
-            <h1>{{ auth.user.firstName }}</h1>
-            <h1>{{ auth.user.lastName }}</h1>
             <NuxtLink
-              to="/"
-              @click.prevent="handleLogout"
-              class="text-sm font-semibold text-primary-orange-100 hover:text-primary-green-100"
+              to="/booked"
+              class="inline-flex whitespace-nowrap text-my-black hover:text-primary-green-100"
             >
-              Logout
+              My Booked
             </NuxtLink>
           </div>
           <div v-else>
@@ -88,7 +68,7 @@
             </NuxtLink>
             <!-- <NuxtLink
               to="/auth/register"
-              class="mx-6 headline-small text-primary-orange-100 hover:text-primary-green-100"
+              class="mx-6 headline-small text-my-black hover:text-primary-green-100"
             >
               Register
             </NuxtLink> -->

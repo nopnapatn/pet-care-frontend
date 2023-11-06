@@ -1,6 +1,7 @@
 <template>
   <li>
-    <NuxtLink :to="to" class="flex items-center bg-zinc-50 border h-12">
+    <!-- <NuxtLink :to="to" class="flex items-center bg-zinc-50 border h-12"> -->
+    <NuxtLink :to="to" class="flex items-center h-12">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 512 512"

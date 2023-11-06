@@ -56,20 +56,27 @@
       </div>
     </div>
     <!-- Conditions -->
-    <div class="flex flex-col py-16 px-40">
-      <span class="headline-large text-my-black">Conditions</span>
+    <div class="min-h-fit bg-primary/20">
+      <div class="flex flex-col py-16 px-40">
+        <span class="headline-large text-my-black">Conditions</span>
+        <div class="grid grid-cols-3">
+          <div class=" ">Age and vaccines</div>
+          <div>dfdsfs</div>
+          <div>dfdsfs</div>
+        </div>
+      </div>
     </div>
     <!-- Shop banner -->
     <div class="min-h-fit bg-primary/20">
       <div class="flex items-center justify-between pl-40 lg:flex-row-reverse">
-        <TheCarousal></TheCarousal>
+        <!-- <TheCarousal></TheCarousal>
         <div>
           <h1 class="text-5xl font-primary font-bold">Get Products!</h1>
           <p class="text-base py-6">
             Checkout thousands products for your pet.
           </p>
           <button class="btn btn-secondary text-white">SHOP NOW</button>
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- staff -->
