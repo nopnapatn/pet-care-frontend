@@ -26,48 +26,12 @@
     <div
       class="mt-auto flex border-t border-gray-200 divide-x divide-gray-200 dark:border-gray-700 dark:divide-gray-700"
     >
-      <button
-        @click="isOpen = true"
-        class="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-bl-xl font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm sm:p-4 dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
-      >
-        Room Detail
-        <UModal v-model="isOpen" prevent-close>
-          <UCard
-            :ui="{
-              ring: '',
-              divide: 'divide-y divide-gray-100 dark:divide-gray-800',
-            }"
-          >
-            <template #header>
-              <div class="flex items-center justify-between">
-                <h3
-                  class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
-                >
-                  Modal
-                </h3>
-                <UButton
-                  color="gray"
-                  variant="ghost"
-                  icon="i-heroicons-x-mark-20-solid"
-                  class="-my-1"
-                  @click="isOpen = false"
-                />
-              </div>
-            </template>
-
-            <!-- <Placeholder class="h-32">
-              {{ title }} <br />
-              {{ description }}
-            </Placeholder> -->
-          </UCard>
-        </UModal>
-      </button>
-      <button
+      <div
         @click="navigateToRoomDetails(roomData)"
         class="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-br-xl font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm sm:p-4 dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
       >
-        View API
-      </button>
+        ฿{{ price }} / day
+      </div>
     </div>
   </div>
 </template>
