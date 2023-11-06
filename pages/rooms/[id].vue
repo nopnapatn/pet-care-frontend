@@ -122,6 +122,7 @@
 </template>
 
 <script setup lang="ts">
+import { start } from "@popperjs/core";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { useAuthStore } from "~/stores/useAuthStore";
 
@@ -132,15 +133,6 @@ const { data: roomType, error } = await useMyFetch<any>(
   `room-types/${route.params.id}`,
   {}
 );
-
-const date = ref("");
-
-// const totalPrice = computed(() => {
-//   if (formData.nights !== 0 && formData.petsAmount !== 0) {
-//     return formData.petsAmount * roomType.value.price * formData.nights;
-//   }
-//   return 0;
-// });
 
 const totalPrice = computed(() => {
   if (route.query.startDate && route.query.endDate && route.query.petsAmount) {
@@ -157,7 +149,11 @@ const totalPrice = computed(() => {
 });
 
 const formData = reactive({
+  user_id: auth.user.id,
   roomTypeId: route.params.id,
+  checkIn: route.query.startDate,
+  checkOut: route.query.endDate,
+  petsAmount: route.query.petsAmount,
   ownerInstruction: "",
   nights: 0,
 });
@@ -165,7 +161,6 @@ const formData = reactive({
 function calculateNights(date1: string, date2: string) {
   return (Date.parse(date2) - Date.parse(date1)) / 86400000 + 1;
 }
-
 async function onSubmit() {
   console.log(formData);
   const { data: response, error } = await useMyFetch<any>(
@@ -174,7 +169,7 @@ async function onSubmit() {
       method: "POST",
       body: {
         user_id: auth.user.id,
-        room_type_id: formData.roomTypeId,
+        room_type_id: route.params.id,
         check_in: route.query.startDate,
         check_out: route.query.endDate,
         pets_amount: route.query.petsAmount,
@@ -182,16 +177,15 @@ async function onSubmit() {
       },
     }
   );
+
   if (response.value !== null) {
-    // await navigateTo("/payment/" + response.value["id"]);
+    console.log("Booking Order Created");
+    console.log(response.value);
     const bookingOrderId = response.value["booking_order"]["id"];
     await navigateTo(`/payments/create?bookingOrderId=${bookingOrderId}`);
     console.log(response.value);
   }
-  console.log(error);
+  console.log("Error");
+  console.log(error.value);
 }
-
-console.log(route.query.startDate);
-console.log(route.query.endDate);
-console.log(route.query.petsAmount);
 </script>

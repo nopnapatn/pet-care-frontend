@@ -170,11 +170,30 @@
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 
-const { data: roomTypes, error } = await useMyFetch<any>("room-types", {});
-const { data: dogRooms } = await useMyFetch<any>("room-types/dog-rooms", {});
-const { data: catRooms } = await useMyFetch<any>("room-types/cat-rooms", {});
+// const { data: dogRooms } = await useMyFetch<any>("room-types/dog-rooms", {});
+// const { data: catRooms } = await useMyFetch<any>("room-types/cat-rooms", {});
+type RoomType = {
+  id: number;
+  title: string;
+  description: string;
+  price: string;
+  status: string;
+  pet_type: string;
+  available_amount: number;
+  max_pets: number;
+  start: string;
+  created_at: string;
+  updated_at: string;
+};
 
-// const date = ref(new Date(new Date().setDate(new Date().getDate() + 1)));
+const { data: roomTypes, error } = await useMyFetch<any>("room-types", {});
+const dogRooms = roomTypes.value.filter((roomType: RoomType) => {
+  return roomType.pet_type === "DOG";
+});
+const catRooms = roomTypes.value.filter((roomType: RoomType) => {
+  return roomType.pet_type === "CAT";
+});
+
 const date = ref("");
 
 const formData = reactive({
@@ -182,6 +201,29 @@ const formData = reactive({
   endDate: "",
   petsAmount: 0,
 });
+
+async function getStart() {
+  const { data: availableRooms, error } = await useMyFetch<any>(
+    `room-types/get-available-types`,
+    {
+      method: "POST",
+      body: {
+        startDate: formData.startDate,
+        endDate: formData.endDate,
+        petsAmount: formData.petsAmount,
+      },
+    }
+  );
+  catRooms.value = availableRooms.value.filter((roomType: RoomType) => {
+    return roomType.pet_type === "CAT";
+  });
+  dogRooms.value = availableRooms.value.filter((roomType: RoomType) => {
+    return roomType.pet_type === "DOG";
+  });
+  if (error) {
+    console.log(error);
+  }
+}
 
 // Format date to "YYYY-MM-DD"
 function formatDate(date: string) {
@@ -204,10 +246,7 @@ watch(date, (newDate) => {
 
 async function navigateToRoomDetails(roomType: { id: any }) {
   await navigateTo(
-    `/rooms/${roomType.id}
-      ?startDate=${formData.startDate}
-      &endDate=${formData.endDate}
-      &petsAmount=${formData.petsAmount}`
+    `/rooms/${roomType.id}?startDate=${formData.startDate}&endDate=${formData.endDate}&petsAmount=${formData.petsAmount}`
   );
 }
 </script>
