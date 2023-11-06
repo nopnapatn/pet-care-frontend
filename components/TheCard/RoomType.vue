@@ -55,10 +55,10 @@
               </div>
             </template>
 
-            <Placeholder class="h-32">
+            <!-- <Placeholder class="h-32">
               {{ title }} <br />
               {{ description }}
-            </Placeholder>
+            </Placeholder> -->
           </UCard>
         </UModal>
       </button>

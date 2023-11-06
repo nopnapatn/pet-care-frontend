@@ -1,20 +1,23 @@
 <template>
   <section>
+    <div class="py-20"></div>
     <div v-for="roomType in roomTypes" :key="roomType.id">
       <TheCardRoomType
         :room="roomType.title"
         :amount="roomType.available_amount"
         :price="roomType.price"
       ></TheCardRoomType>
-      <div class="card-actions justify-center">
-        <nuxt-link :to="`edit-room/${roomType.id}`">
-          <button class="btn btn-primary">Edit</button>
-        </nuxt-link>
-      </div>
-      <div class="card-actions justify-center">
-        <nuxt-link @click="deleteRoomType(roomType.id)">
-          <button class="btn btn-primary">Delete</button>
-        </nuxt-link>
+      <div class="flex">
+        <div class="card-actions justify-center">
+          <nuxt-link :to="`edit-room/${roomType.id}`">
+            <button class="btn btn-primary">Edit</button>
+          </nuxt-link>
+        </div>
+        <div class="card-actions justify-center">
+          <nuxt-link @click="deleteRoomType(roomType.id)">
+            <button class="btn btn-primary">Delete</button>
+          </nuxt-link>
+        </div>
       </div>
     </div>
   </section>
