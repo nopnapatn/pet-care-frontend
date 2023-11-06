@@ -88,7 +88,9 @@
               Register
             </NuxtLink> -->
           </div>
-          <TheSidebar></TheSidebar>
+          <div v-if="auth.user.role !== 'STAFF'">
+            <TheSidebar></TheSidebar>
+          </div>
         </div>
       </div>
     </nav>

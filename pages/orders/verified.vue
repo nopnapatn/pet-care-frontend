@@ -83,7 +83,7 @@
 
 <script setup lang="ts">
 const { pending, data: bookingOrders } = await useMyFetch<any>(
-  "booking-orders",
+  "booking-orders/verified",
   {}
 );
 const page = ref(1);

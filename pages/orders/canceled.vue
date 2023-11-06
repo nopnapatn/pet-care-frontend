@@ -46,7 +46,7 @@
             <NuxtLink
               to="/orders/complete"
               class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-              >Settings</NuxtLink
+              >Complete</NuxtLink
             >
           </li>
           <li class="mr-2">
@@ -83,7 +83,7 @@
 
 <script setup lang="ts">
 const { pending, data: bookingOrders } = await useMyFetch<any>(
-  "booking-orders",
+  "booking-orders/canceled",
   {}
 );
 const page = ref(1);
