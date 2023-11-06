@@ -18,106 +18,48 @@
         <div
           class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-gray-700"
         >
-          <div class="flex">
-            <label
-              for="firstName"
-              class="inline-block text-sm font-medium dark:text-white"
-            >
-              First Name
-            </label>
-            <div class="mt-2 space-y-3">
-              <input
-                id="firstName"
-                type="text"
-                class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                placeholder="Enter your first name"
-                v-model="formData.firstName"
-                label="First Name"
-              />
-              <div v-if="errorMessage.firstName" class="text-sm text-red-500">
-                {{ errorMessage.firstName }}
+          <div class="flex gap-10">
+            <div>
+              <label
+                for="firstName"
+                class="inline-block text-sm font-medium dark:text-white"
+              >
+                Name
+              </label>
+              <div class="mt-2 space-y-3">
+                <input
+                  id="firstName"
+                  type="text"
+                  class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                  placeholder="Enter your first name"
+                  v-model="formData.name"
+                  label="First Name"
+                />
+                <div v-if="errorMessage.name" class="text-sm text-red-500">
+                  {{ errorMessage.name }}
+                </div>
               </div>
             </div>
-
-            <label
-              for="lastName"
-              class="inline-block text-sm font-medium dark:text-white"
-            >
-              Last Name
-            </label>
-            <div class="mt-2 space-y-3">
-              <input
-                id="lastName"
-                type="text"
-                class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                placeholder="Enter your last name"
-                v-model="formData.lastName"
-                label="First Name"
-              />
-              <div v-if="errorMessage.lastName" class="text-sm text-red-500">
-                {{ errorMessage.lastName }}
+            <div>
+              <label
+                for="amount"
+                class="inline-block text-sm font-medium dark:text-white"
+              >
+                Amount
+              </label>
+              <div class="mt-2 space-y-3">
+                <input
+                  id="amount"
+                  type="number"
+                  class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                  placeholder="Enter amount of money"
+                  v-model="formData.amount"
+                  label="First Name"
+                />
+                <div v-if="errorMessage.amount" class="text-sm text-red-500">
+                  {{ errorMessage.amount }}
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <label
-          for="email"
-          class="inline-block text-sm font-medium dark:text-white"
-        >
-          Email
-        </label>
-        <div class="mt-2 space-y-3">
-          <input
-            id="email"
-            type="email"
-            class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-            placeholder="Enter your email"
-            v-model="formData.email"
-            label="First Name"
-          />
-          <div v-if="errorMessage.email" class="text-sm text-red-500">
-            {{ errorMessage.email }}
-          </div>
-        </div>
-        <div class="flex">
-          <label
-            for="orderNumber"
-            class="inline-block text-sm font-medium dark:text-white"
-          >
-            Order Number
-          </label>
-          <div class="mt-2 space-y-3">
-            <input
-              id="orderNumber"
-              type="number"
-              class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-              placeholder="Enter your order number"
-              v-model="formData.orderNumber"
-              label="First Name"
-            />
-            <div v-if="errorMessage.orderNumber" class="text-sm text-red-500">
-              {{ errorMessage.orderNumber }}
-            </div>
-          </div>
-
-          <label
-            for="amount"
-            class="inline-block text-sm font-medium dark:text-white"
-          >
-            Amount
-          </label>
-          <div class="mt-2 space-y-3">
-            <input
-              id="amount"
-              type="number"
-              class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-              placeholder="Enter amount of money"
-              v-model="formData.amount"
-              label="First Name"
-            />
-            <div v-if="errorMessage.amount" class="text-sm text-red-500">
-              {{ errorMessage.amount }}
             </div>
           </div>
         </div>
@@ -227,92 +169,80 @@
 
 <script setup lang="ts">
 import { useAuthStore } from "~/stores/useAuthStore";
+
 const route = useRoute();
 const auth = useAuthStore();
-console.log("Hi");
-console.log(route.params);
-console.log(route.params.id);
-const petsAmount = route.params.petsAmount;
-
+console.log(route.query.bookingOrderId);
 const formData = reactive({
-  firstName: "",
-  lastName: "",
-  email: "",
-  orderNumber: "",
+  user_id: auth.user.id,
+  booking_order_id: route.query.bookingOrderId,
+  name: "",
   amount: "",
   time: "",
   date: "",
 });
 
 const errorMessage = reactive({
-  email: "",
-  firstName: "",
-  lastName: "",
-  orderNumber: "",
+  name: "",
   amount: "",
   time: "",
   date: "",
 });
 
 async function onSubmit() {
-  errorMessage.email = "";
-  errorMessage.firstName = "";
-  errorMessage.lastName = "";
-  errorMessage.orderNumber = "";
+  errorMessage.name = "";
   errorMessage.amount = "";
   errorMessage.time = "";
   errorMessage.date = "";
 
-  if (!formData.email) {
-    errorMessage.email = "Email is required";
-  }
-  if (!formData.firstName) {
-    errorMessage.firstName = "First Name is required";
-  }
-  if (!formData.lastName) {
-    errorMessage.lastName = "Last Name is required";
-  }
-  if (!formData.orderNumber) {
-    errorMessage.orderNumber = "Order Number is required";
-  }
-  if (!formData.amount) {
-    errorMessage.amount = "Amount is required";
-  }
-  if (!formData.time) {
-    errorMessage.time = "Time is required";
-  }
-  if (!formData.date) {
-    errorMessage.date = "Date is required";
-  }
+  // if (!formData.email) {
+  //   errorMessage.email = "Email is required";
+  // }
+  // if (!formData.firstName) {
+  //   errorMessage.firstName = "First Name is required";
+  // }
+  // if (!formData.lastName) {
+  //   errorMessage.lastName = "Last Name is required";
+  // }
+  // if (!formData.orderNumber) {
+  //   errorMessage.orderNumber = "Order Number is required";
+  // }
+  // if (!formData.amount) {
+  //   errorMessage.amount = "Amount is required";
+  // }
+  // if (!formData.time) {
+  //   errorMessage.time = "Time is required";
+  // }
+  // if (!formData.date) {
+  //   errorMessage.date = "Date is required";
+  // }
 
-  if (
-    errorMessage.email ||
-    errorMessage.firstName ||
-    errorMessage.lastName ||
-    errorMessage.orderNumber ||
-    errorMessage.amount ||
-    errorMessage.time ||
-    errorMessage.date
-  ) {
-    return;
-  }
+  // if (
+  //   errorMessage.email ||
+  //   errorMessage.firstName ||
+  //   errorMessage.lastName ||
+  //   errorMessage.orderNumber ||
+  //   errorMessage.amount ||
+  //   errorMessage.time ||
+  //   errorMessage.date
+  // ) {
+  //   return;
+  // }
 
   console.log(formData);
-  const { data: response, error } = await useMyFetch<any>(
-    `room-types/${route.params.id}/book`,
-    {
-      method: "POST",
-      body: {
-        user_id: auth.user.id,
-        order_number: formData.orderNumber,
-        amount: formData.amount,
-        time: formData.time,
-        date: formData.date,
-      },
-    }
-  );
-  if (response.value !== null) {
-    await navigateTo("/");
-  }
+  const { data: response, error } = await useMyFetch<any>(`payments/store`, {
+    method: "POST",
+    body: {
+      user_id: auth.user.id,
+      amount: formData.amount,
+      time: formData.time,
+      date: formData.date,
+    },
+  });
+  console.log(response);
+  console.log(error);
+  // if (response.value !== null) {
+  //   await navigateTo("/");
+  // }
 }
 </script>

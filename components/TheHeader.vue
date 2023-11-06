@@ -54,16 +54,22 @@
                 >Profile
               </NuxtLink>
             </li>
-            <div v-if="auth.user.role === 'STAFF'">
-              <li>
-                <NuxtLink
-                  to="/dashboard"
-                  class="text-primary-orange-100 hover:text-primary-green-100"
-                  aria-current="page"
-                  >Dashboard
-                </NuxtLink>
-              </li>
-            </div>
+            <li v-if="auth.user.role === 'STAFF'">
+              <NuxtLink
+                to="/dashboard"
+                class="text-primary-orange-100 hover:text-primary-green-100"
+                aria-current="page"
+                >Dashboard
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink
+                to="/test"
+                class="text-primary-orange-100 hover:text-primary-green-100"
+                aria-current="page"
+                >Test</NuxtLink
+              >
+            </li>
           </ul>
         </div>
 
@@ -72,7 +78,7 @@
             <h1>{{ auth.user.firstName }}</h1>
             <h1>{{ auth.user.lastName }}</h1>
             <NuxtLink
-              to="/"
+              to="/auth/login"
               @click.prevent="handleLogout"
               class="text-sm font-semibold text-primary-orange-100 hover:text-primary-green-100"
             >

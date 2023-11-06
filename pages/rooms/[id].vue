@@ -143,12 +143,12 @@ const formData = reactive({
   startDate: "",
   endDate: "",
   petsAmount: 0,
-  nights: 0,
   ownerInstruction: "",
+  nights: 0,
 });
 
 function calculateNights(date1: string, date2: string) {
-  return (Date.parse(date2) - Date.parse(date1)) / 86400000;
+  return (Date.parse(date2) - Date.parse(date1)) / 86400000 + 1;
 }
 
 async function onSubmit() {
@@ -158,6 +158,7 @@ async function onSubmit() {
     {
       method: "POST",
       body: {
+        user_id: auth.user.id,
         room_type_id: formData.roomTypeId,
         check_in: formData.startDate,
         check_out: formData.endDate,
@@ -167,8 +168,12 @@ async function onSubmit() {
     }
   );
   if (response.value !== null) {
-    await navigateTo("/");
+    // await navigateTo("/payment/" + response.value["id"]);
+    const bookingOrderId = response.value["booking_order"]["id"];
+    await navigateTo(`/payments/create?bookingOrderId=${bookingOrderId}`);
+    console.log(response.value);
   }
+  console.log(error);
 }
 
 console.log(route.query.startDate);
