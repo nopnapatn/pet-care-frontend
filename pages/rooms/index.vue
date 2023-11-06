@@ -150,7 +150,7 @@
               :price="dogRoom.price"
               :available_amount="dogRoom.available_amount"
               :max_pets="dogRoom.max_pets"
-              :image="dogRoom.image_"
+              :image="`images/room${dogRoom.id}.png`"
             >
             </TheCardRoomType>
           </button>
