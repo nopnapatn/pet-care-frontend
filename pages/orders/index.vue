@@ -58,28 +58,16 @@
           </li>
         </ul>
       </div>
-      <div class="py-2"></div>
-      <div>
-        <UInput v-model="searchQuery" placeholder="Filter name..." />
-        <UTable
-          :empty-state="{
-            icon: 'i-heroicons-circle-stack-20-solid',
-            label: 'No items.',
-          }"
-          :columns="columns"
-          :rows="rows"
-          :sort="{ column: 'checkIn', direction: 'asc' }"
-          :loading="pending"
-          :loading-state="{
-            icon: 'i-heroicons-arrow-path-20-solid',
-            label: 'Loading...',
-          }"
-        />
-        <UPagination
-          v-model="page"
-          :page-count="pageCount"
-          :total="filteredRows.length"
-        />
+      <!-- table -->
+      <div class="table-responsive">
+        <DataTable class="table table-striped table-bordered display">
+          <thead>
+            <tr>
+              <th>Column 1</th>
+              <th>Column 2</th>
+            </tr>
+          </thead>
+        </DataTable>
       </div>
     </div>
   </div>
