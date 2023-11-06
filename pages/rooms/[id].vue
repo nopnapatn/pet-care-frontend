@@ -36,7 +36,7 @@
                   {{ roomType.title }}
                 </h3>
                 <p class="mt-1 text-sm text-gray-500">
-                  We're here to help with any questions or code.
+                  We're here to help with any questions Meow Meow.
                 </p>
                 <!-- <div
                   class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800"
@@ -65,7 +65,7 @@
               <div>
                 <h3 class="font-semibold text-gray-800">Contact details</h3>
                 <p class="mt-1 text-sm text-gray-500">
-                  We're here to help with any questions or code.
+                  We're here to help with any questions just Meow Meow
                 </p>
                 <div
                   class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800"
@@ -85,30 +85,81 @@
           <div
             class="bg-white shadow flex flex-col border rounded-xl p-4 sm:p-6 lg:p-8"
           >
-            <h2 class="mb-8 text-xl font-semibold text-gray-800">
-              Price details
-            </h2>
-            {{ route.query.startDate }} - {{ route.query.endDate }}
-            <br />
-            {{ route.query.petsAmount }} Pets
-            <br />
-            {{ totalPrice }}
             <form @submit.prevent="onSubmit()">
-              <div class="grid gap-4">
-                <div>
-                  <textarea
-                    v-model="formData.ownerInstruction"
-                    cols="45"
-                    rows="10"
-                    placeholder="Tell Staff about your pets instruction"
-                  ></textarea>
-                </div>
-              </div>
-
               <div class="mt-4 grid">
+                <div
+                  class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"
+                >
+                  <div class="flex items-center justify-between mb-4">
+                    <h5
+                      class="text-xl font-bold leading-none text-gray-900 dark:text-white"
+                    >
+                      Price Detail
+                    </h5>
+                  </div>
+                  <div class="flow-root">
+                    <ul
+                      role="list"
+                      class="divide-y divide-gray-200 dark:divide-gray-700"
+                    >
+                      <li class="py-3 sm:py-4">
+                        <div class="flex items-center space-x-4">
+                          <div class="flex-shrink-0"></div>
+                          <div class="flex-1 min-w-0">
+                            <p
+                              class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                            >
+                              Check In: {{ route.query.startDate }}
+                            </p>
+                            <p
+                              class="text-sm text-gray-900 truncate dark:text-gray-400"
+                            >
+                              Check Out: {{ route.query.endDate }}
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="py-3 sm:py-4">
+                        <div class="flex items-center space-x-4">
+                          <div class="flex-shrink-0"></div>
+                          <div class="flex-1 min-w-0">
+                            <p
+                              class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                            >
+                              {{ route.query.petsAmount }}
+                            </p>
+                          </div>
+                          <div
+                            class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+                          >
+                            Pets
+                          </div>
+                        </div>
+                      </li>
+                      <li class="py-3 sm:py-4">
+                        <div class="flex items-center space-x-4">
+                          <div class="flex-shrink-0"></div>
+                          <div class="flex-1 min-w-0">
+                            <p
+                              class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                            >
+                              {{ totalPrice }}
+                            </p>
+                          </div>
+                          <div
+                            class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+                          >
+                            Baht.
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="py-2"></div>
                 <button
                   type="submit"
-                  class="inline-flex justify-center items-center gap-x-3 text-center bg-blue-600 hover:bg-blue-700 border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800"
+                  class="inline-flex justify-center items-center gap-x-3 text-center bg-primary hover:bg-blue-700 border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800"
                 >
                   Booking
                 </button>
@@ -122,7 +173,6 @@
 </template>
 
 <script setup lang="ts">
-import { start } from "@popperjs/core";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { useAuthStore } from "~/stores/useAuthStore";
 
@@ -133,7 +183,9 @@ const { data: roomType, error } = await useMyFetch<any>(
   `room-types/${route.params.id}`,
   {}
 );
-
+console.log(route.query.startDate);
+console.log(route.query.endDate);
+console.log(route.query.petsAmount);
 const totalPrice = computed(() => {
   if (route.query.startDate && route.query.endDate && route.query.petsAmount) {
     return (
@@ -183,7 +235,9 @@ async function onSubmit() {
     console.log("Booking Order Created");
     console.log(response.value);
     const bookingOrderId = response.value["booking_order"]["id"];
-    await navigateTo(`/payments/create?bookingOrderId=${bookingOrderId}`);
+    await navigateTo(
+      `/payments/create?bookingOrderId=${bookingOrderId}&type=HOTEL`
+    );
     console.log(response.value);
   }
   console.log("Error");
