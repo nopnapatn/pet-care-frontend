@@ -39,14 +39,6 @@
             </li>
             <li>
               <NuxtLink
-                to="#"
-                class="text-primary-orange-100 hover:text-primary-green-100"
-                aria-current="page"
-                >Shop
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink
                 v-if="auth.isLogin"
                 to="/profile/show"
                 class="text-primary-orange-100 hover:text-primary-green-100"
@@ -76,14 +68,8 @@
         <div class="flex items-center order-3">
           <div v-if="auth.isLogin" class="flex items-center gap-4">
             <NuxtLink
-<<<<<<< HEAD
-              to="/auth/login"
-              @click.prevent="handleLogout"
-              class="text-sm font-semibold text-primary-orange-100 hover:text-primary-green-100"
-=======
               to="/booked"
               class="inline-flex whitespace-nowrap text-my-black hover:text-primary-green-100"
->>>>>>> feature/services
             >
               My Booked
             </NuxtLink>
