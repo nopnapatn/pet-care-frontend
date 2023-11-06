@@ -123,8 +123,7 @@ const auth = useAuthStore();
 console.log(route.query.bookingOrderId);
 const formData = reactive({
   user_id: auth.user.id,
-  // booking_order_id: route.query.bookingOrderId,
-  booking_order_id: "1",
+  booking_order_id: route.query.bookingOrderId,
   name: "",
   amount: "",
   time: "",
@@ -154,7 +153,7 @@ async function onSubmit() {
   errorMessage.date = "";
 
   const formDataToSend = new FormData();
-  formDataToSend.append('booking_order_id', formData.booking_order_id);
+  formDataToSend.append('booking_order_id', formData.booking_order_id!.toString());
   formDataToSend.append('user_id', formData.user_id);
   formDataToSend.append('name', formData.name);
   formDataToSend.append('amount', formData.amount);
