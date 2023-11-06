@@ -46,7 +46,7 @@
             <NuxtLink
               to="/orders/complete"
               class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-              >Settings</NuxtLink
+              >Complete</NuxtLink
             >
           </li>
           <li class="mr-2">
@@ -62,6 +62,11 @@
       <div>
         <UInput v-model="searchQuery" placeholder="Filter name..." />
         <UTable
+          :empty-state="{
+            icon: 'i-heroicons-circle-stack-20-solid',
+            label: 'No items.',
+          }"
+          class="w-full"
           :columns="columns"
           :rows="rows"
           :sort="{ column: 'checkIn', direction: 'asc' }"
@@ -83,18 +88,24 @@
 
 <script setup lang="ts">
 const { pending, data: bookingOrders } = await useMyFetch<any>(
-  "booking-orders/verified",
+  "booking-orders/pending",
   {}
 );
 const page = ref(1);
 const pageCount = 10;
 const rows = computed(() => {
-  return filteredRows.value.slice(
-    (page.value - 1) * pageCount,
-    page.value * pageCount
-  );
+  // Check if filteredRows.value is an array
+  if (Array.isArray(filteredRows.value)) {
+    return filteredRows.value.slice(
+      (page.value - 1) * pageCount,
+      page.value * pageCount
+    );
+  } else {
+    // Handle the case where filteredRows.value is not an array
+    console.error("filteredRows is not an array.");
+    return [];
+  }
 });
-
 const searchQuery = ref("");
 const filteredRows = computed(() => {
   if (!searchQuery.value) {
@@ -143,11 +154,7 @@ const columns = [
     label: "Total Price",
     sortable: true,
   },
-  {
-    key: "status",
-    label: "Status",
-    sortable: true,
-  },
+
   //   {
   //     key: "actions",
   //     label: "Actions",

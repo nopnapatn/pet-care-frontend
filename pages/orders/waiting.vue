@@ -62,6 +62,10 @@
       <div>
         <UInput v-model="searchQuery" placeholder="Filter name..." />
         <UTable
+          :empty-state="{
+            icon: 'i-heroicons-circle-stack-20-solid',
+            label: 'No items.',
+          }"
           :columns="columns"
           :rows="rows"
           :sort="{ column: 'checkIn', direction: 'asc' }"
@@ -143,11 +147,7 @@ const columns = [
     label: "Total Price",
     sortable: true,
   },
-  {
-    key: "status",
-    label: "Status",
-    sortable: true,
-  },
+
   //   {
   //     key: "actions",
   //     label: "Actions",

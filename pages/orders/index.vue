@@ -46,7 +46,7 @@
             <NuxtLink
               to="/orders/complete"
               class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-              >Settings</NuxtLink
+              >Complete</NuxtLink
             >
           </li>
           <li class="mr-2">
@@ -62,6 +62,10 @@
       <div>
         <UInput v-model="searchQuery" placeholder="Filter name..." />
         <UTable
+          :empty-state="{
+            icon: 'i-heroicons-circle-stack-20-solid',
+            label: 'No items.',
+          }"
           :columns="columns"
           :rows="rows"
           :sort="{ column: 'checkIn', direction: 'asc' }"
@@ -143,11 +147,7 @@ const columns = [
     label: "Total Price",
     sortable: true,
   },
-  {
-    key: "status",
-    label: "Status",
-    sortable: true,
-  },
+
   //   {
   //     key: "actions",
   //     label: "Actions",
