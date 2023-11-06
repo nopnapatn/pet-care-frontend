@@ -35,6 +35,18 @@
           required
         >
         </TheFieldText>
+        <!-- <div v-if="errorMessage.firstName" class="text-sm text-red-500">
+          {{ errorMessage.firstName }}
+        </div> -->
+        <TheFieldText
+          id="phoneNumber"
+          v-model="formData.phoneNumber"
+          label="Phone Number"
+          placeholder="Doe"
+          autocomplete="on"
+          required
+        >
+        </TheFieldText>
         <!-- <div v-if="errorMessage.lastName" class="text-red-500">
           {{ errorMessage.lastName }}
         </div> -->
@@ -88,6 +100,7 @@ const formData = reactive({
   email: "",
   firstName: "",
   lastName: "",
+  phoneNumber: "",
   password: "",
   confirmPassword: "",
 });
@@ -96,6 +109,7 @@ const errorMessage = reactive({
   email: "",
   firstName: "",
   lastName: "",
+  phoneNumber: "",
   password: "",
   confirmPassword: "",
 });
@@ -104,6 +118,7 @@ async function onSubmit() {
   errorMessage.email = "";
   errorMessage.firstName = "";
   errorMessage.lastName = "";
+  errorMessage.phoneNumber = "";
   errorMessage.password = "";
   errorMessage.confirmPassword = "";
 
@@ -119,6 +134,9 @@ async function onSubmit() {
   if (!formData.lastName) {
     errorMessage.lastName = "Last name is required.";
   }
+  if (!formData.phoneNumber) {
+    errorMessage.phoneNumber = "Phone number is required.";
+  }
   if (!formData.confirmPassword) {
     errorMessage.confirmPassword = "Confirm Password is required.";
   }
@@ -131,6 +149,7 @@ async function onSubmit() {
     errorMessage.password ||
     errorMessage.firstName ||
     errorMessage.lastName ||
+    errorMessage.phoneNumber ||
     errorMessage.confirmPassword
   ) {
     return;
@@ -142,6 +161,7 @@ async function onSubmit() {
       email: formData.email,
       first_name: formData.firstName,
       last_name: formData.lastName,
+      phone_number: formData.phoneNumber,
       password: formData.password,
       confirm_password: formData.confirmPassword,
     },

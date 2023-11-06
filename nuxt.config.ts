@@ -29,7 +29,7 @@ export default defineNuxtConfig({
     { path: "~/user-module/components", pathPrefix: false },
 
     // ~/components/special-components/Btn.vue => <SpecialBtn />
-    { path: "~/components/special-components", prefix: "Special" },
+    // { path: "~/components/special-components", prefix: "Special" },
 
     // It's important that this comes last if you have overrides you wish to apply
     // to sub-directories of `~/components`.

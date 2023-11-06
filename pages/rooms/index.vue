@@ -1,42 +1,213 @@
 <template>
-  <section class="rooms-layout">
-    <div>
-      <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-2 mx-auto">
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div v-for="roomType in roomTypes" :key="roomType.id">
-            <TheCardRoomType
-              :title="roomType.title"
-              :description="roomType.description"
-              :price="roomType.price"
-              :available_amount="roomType.available_amount"
-              :max_pets="roomType.max_pets"
-              :to="`rooms/` + roomType.id"
-              :image="`images/room` + roomType.id + `.png`"
-            ></TheCardRoomType>
-          </div>
+  <!-- Hero -->
+  <section>
+    <div class="max-w-[85rem] mx-auto px-4 bg-black sm:px-6 lg:px-8 py-20">
+      <div class="relative mx-auto max-w-4xl grid space-y-5 sm:space-y-10">
+        <!-- Title -->
+        <div class="text-center">
+          <p
+            class="text-xs font-semibold text-gray-500 tracking-wide uppercase mb-3 dark:text-gray-200"
+          >
+            Small business solutions
+          </p>
+          <h1
+            class="text-3xl text-gray-800 font-bold sm:text-5xl lg:text-6xl lg:leading-tight dark:text-gray-200"
+          >
+            Turn online shoppers into
+            <span class="text-blue-500">lifetime customers</span>
+          </h1>
         </div>
-      </div>
-    </div>
-    <div>
-      <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-4 mx-auto">
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div v-for="roomType in roomTypes" :key="roomType.id">
-            <TheCardRoomType
-              :title="roomType.title"
-              :description="roomType.description"
-              :price="roomType.price"
-              :available_amount="roomType.available_amount"
-              :max_pets="roomType.max_pets"
-              :to="`rooms/` + roomType.id"
-              :image="`images/room` + roomType.id + `.png`"
-            ></TheCardRoomType>
+        <!-- End Title -->
+
+        <!-- Form -->
+        <form>
+          <div
+            class="mx-auto max-w-6xl sm:flex sm:space-x-3 p-3 bg-white border items-center rounded-lg shadow-lg shadow-gray-100 dark:bg-slate-900 dark:border-gray-700 dark:shadow-gray-900/[.2]"
+          >
+            <div class="pb-2 sm:pb-0 sm:flex-[1_0_0%]">
+              <div class="flex">
+                <span
+                  class="inline-flex items-center px-3 text-sm text-gray-900 bg-neutral-100 border border-r-0 border-gray-200 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
+                >
+                  Date
+                </span>
+                <VueDatePicker
+                  hide-input-icon
+                  v-model="date"
+                  range
+                  format="dd/M/yyyy"
+                  :enable-time-picker="false"
+                  disable-year-select
+                  auto-apply
+                  placeholder="Select date"
+                  :min-date="
+                    new Date(new Date().setDate(new Date().getDate() + 1))
+                  "
+                  :max-date="
+                    new Date(new Date().setDate(new Date().getDate() + 30))
+                  "
+                  required
+                ></VueDatePicker>
+              </div>
+            </div>
+            <div
+              class="pt-2 sm:pt-0 sm:pl-3 border-t border-gray-200 sm:border-t-0 sm:border-l sm:flex-[1_0_0%] dark:border-gray-700"
+            >
+              <div>
+                <TheFieldText
+                  id="Pets"
+                  label="Pets"
+                  type="number"
+                  min="0"
+                  v-model="formData.petsAmount"
+                  required
+                />
+              </div>
+            </div>
+            <div class="pt-2 sm:pt-0 grid sm:block sm:flex-[0_0_auto]">
+              <a
+                class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm sm:p-4 dark:focus:ring-offset-gray-800"
+                href="#"
+              >
+                Get started
+              </a>
+            </div>
           </div>
-        </div>
+        </form>
+        <!-- End Form -->
       </div>
     </div>
   </section>
+  <!-- End Hero -->
+
+  <div>
+    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-2 mx-auto">
+      <div class="flex items-center">
+        <span
+          class="inline-flex justify-center items-center my-4 w-[46px] h-[46px] rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+        >
+          <svg
+            class="w-5 h-5"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"
+            />
+          </svg>
+        </span>
+        <span class="pl-4">Cat</span>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div v-for="roomType in roomTypes" :key="roomType.id">
+          <button
+            @click="navigateToRoomDetails(roomType)"
+            class="h-full w-full"
+          >
+            <TheCardRoomType
+              :title="roomType.title"
+              :description="roomType.description"
+              :price="roomType.price"
+              :available_amount="roomType.available_amount"
+              :max_pets="roomType.max_pets"
+              :image="`images/room${roomType.id}.png`"
+            >
+            </TheCardRoomType>
+          </button>
+        </div>
+      </div>
+      <div class="py-8"></div>
+      <div class="flex items-center">
+        <span
+          class="inline-flex justify-center items-center my-4 w-[46px] h-[46px] rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+        >
+          <svg
+            class="w-5 h-5"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"
+            />
+          </svg>
+        </span>
+        <span class="pl-4">Dog</span>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div v-for="roomType in roomTypes" :key="roomType.id">
+          <button @click="navigateToRoomDetails(roomType)">
+            <TheCardRoomType
+              :title="roomType.title"
+              :description="roomType.description"
+              :price="roomType.price"
+              :available_amount="roomType.available_amount"
+              :max_pets="roomType.max_pets"
+              :image="`images/room${roomType.id}.png`"
+            >
+            </TheCardRoomType>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
+import VueDatePicker from "@vuepic/vue-datepicker";
 const { data: roomTypes, error } = await useMyFetch<any>("room-types", {});
+
+const date = ref("");
+
+const formData = reactive({
+  startDate: "",
+  endDate: "",
+  petsAmount: 0,
+});
+
+// Format date to "YYYY-MM-DD"
+function formatDate(date: string) {
+  var d = new Date(date).toLocaleDateString(),
+    month = d.split("/")[0],
+    day = d.split("/")[1],
+    year = d.split("/")[2];
+
+  return [year, month, day].join("-");
+}
+
+// Watch for datepicker
+watch(date, (newDate) => {
+  formData.startDate = formatDate(date.value[0]);
+  formData.endDate = formatDate(date.value[1]);
+  console.log(formData.startDate);
+  console.log(formData.endDate);
+});
+
+async function navigateToRoomDetails(roomType: { id: any }) {
+  await navigateTo(
+    `/rooms/${roomType.id}
+      ?startDate=${formData.startDate}
+      &endDate=${formData.endDate}
+      &petsAmount=${formData.petsAmount}`
+  );
+}
 </script>
+
+<style>
+.dp__theme_light {
+  --dp-background-color: #f9fafb;
+  --dp-primary-color: #e8ac96;
+}
+
+:root {
+  /*Font sizes*/
+  --dp-font-size: 1.2rem; /*Default font-size*/
+  --dp-preview-font-size: 0.8rem; /*Font size of the date preview in the action row*/
+  --dp-time-font-size: 0.8rem; /*Font size in the time picker*/
+}
+</style>

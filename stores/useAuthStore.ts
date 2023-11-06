@@ -8,6 +8,7 @@ export const useAuthStore = defineStore("auth", {
         id: "",
         firstName: "",
         lastName: "",
+        phoneNumber: "",
         email: "",
         role: "",
       },
@@ -24,12 +25,14 @@ export const useAuthStore = defineStore("auth", {
       id: string,
       firstName: string,
       lastName: string,
+      phoneNumber: string,
       email: string,
       role: string
     ) {
       this.user.id = id;
       this.user.firstName = firstName;
       this.user.lastName = lastName;
+      this.user.phoneNumber = phoneNumber;
       this.user.email = email;
       this.user.role = role;
     },
@@ -38,6 +41,7 @@ export const useAuthStore = defineStore("auth", {
       this.user.id = "";
       this.user.firstName = "";
       this.user.lastName = "";
+      this.user.phoneNumber = "";
       this.user.email = "";
       this.user.role = "";
     },
