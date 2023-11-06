@@ -65,6 +65,7 @@
                   type="number"
                   id=""
                   min="1"
+                  v-model="formData.petsAmount"
                   class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="0"
                 />
@@ -140,16 +141,16 @@
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div v-for="dogRoom in dogRooms" :key="dogRoom.id">
           <button
-            @click="navigateToRoomDetails(dogRooms)"
+            @click="navigateToRoomDetails(dogRoom)"
             class="w-full rounded-b-xl"
           >
             <TheCardRoomType
-              :title="dogRooms.title"
-              :description="dogRooms.description"
-              :price="dogRooms.price"
-              :available_amount="dogRooms.available_amount"
-              :max_pets="dogRooms.max_pets"
-              :image="`images/room${dogRooms.id}.png`"
+              :title="dogRoom.title"
+              :description="dogRoom.description"
+              :price="dogRoom.price"
+              :available_amount="dogRoom.available_amount"
+              :max_pets="dogRoom.max_pets"
+              :image="dogRoom.image_"
             >
             </TheCardRoomType>
           </button>
