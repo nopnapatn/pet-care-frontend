@@ -13,14 +13,14 @@
       </svg>
     </span>
     <label
-      for="UserEmail"
-      class="block overflow-hidden w-full rounded-r-md border border-gray-200 px-3 py-2 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
+      class="block overflow-hidden w-full rounded-r-md border border-gray-200 px-3 py-2 shadow-sm focus-within:border-primary focus-within:ring-1 focus-within:ring-primary"
     >
       <span class="text-xs font-medium text-gray-700">{{ title }}</span>
 
       <input
         type="email"
-        id="UserEmail"
+        :id="id"
+        :value="value"
         :placeholder="placeholder"
         class="mt-1 w-full border-none p-0 focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
       />
@@ -29,5 +29,5 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["title", "placeholder"]);
+const props = defineProps(["title", "value", "placeholder", "id"]);
 </script>

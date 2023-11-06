@@ -15,7 +15,7 @@
             <li>
               <NuxtLink
                 to="/"
-                class="text-primary-orange-100 hover:text-primary-green-100"
+                class="text-my-black hover:text-primary-green-100"
                 aria-current="page"
                 >Home
               </NuxtLink>
@@ -23,7 +23,7 @@
             <li>
               <NuxtLink
                 to="/rooms"
-                class="text-primary-orange-100 hover:text-primary-green-100"
+                class="text-my-black hover:text-primary-green-100"
                 aria-current="page"
               >
                 Rooms
@@ -31,8 +31,8 @@
             </li>
             <li>
               <NuxtLink
-                to="#"
-                class="text-primary-orange-100 hover:text-primary-green-100"
+                to="/others"
+                class="text-my-black hover:text-primary-green-100"
                 aria-current="page"
                 >Other Services</NuxtLink
               >
@@ -75,14 +75,17 @@
 
         <div class="flex items-center order-3">
           <div v-if="auth.isLogin" class="flex items-center gap-4">
-            <h1>{{ auth.user.firstName }}</h1>
-            <h1>{{ auth.user.lastName }}</h1>
             <NuxtLink
+<<<<<<< HEAD
               to="/auth/login"
               @click.prevent="handleLogout"
               class="text-sm font-semibold text-primary-orange-100 hover:text-primary-green-100"
+=======
+              to="/booked"
+              class="inline-flex whitespace-nowrap text-my-black hover:text-primary-green-100"
+>>>>>>> feature/services
             >
-              Logout
+              My Booked
             </NuxtLink>
           </div>
           <div v-else>
@@ -94,7 +97,7 @@
             </NuxtLink>
             <!-- <NuxtLink
               to="/auth/register"
-              class="mx-6 headline-small text-primary-orange-100 hover:text-primary-green-100"
+              class="mx-6 headline-small text-my-black hover:text-primary-green-100"
             >
               Register
             </NuxtLink> -->
