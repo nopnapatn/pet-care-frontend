@@ -38,11 +38,11 @@
                 <p class="mt-1 text-sm text-gray-500">
                   We're here to help with any questions or code.
                 </p>
-                <div
+                <!-- <div
                   class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800"
                 >
                   {{ formData.nights }} Nights
-                </div>
+                </div> -->
               </div>
             </div>
 
@@ -88,7 +88,11 @@
             <h2 class="mb-8 text-xl font-semibold text-gray-800">
               Price details
             </h2>
-
+            {{ route.query.startDate }} - {{ route.query.endDate }}
+            <br />
+            {{ route.query.petsAmount }} Pets
+            <br />
+            {{ totalPrice }}
             <form @submit.prevent="onSubmit()">
               <div class="grid gap-4">
                 <div>
@@ -131,18 +135,29 @@ const { data: roomType, error } = await useMyFetch<any>(
 
 const date = ref("");
 
+// const totalPrice = computed(() => {
+//   if (formData.nights !== 0 && formData.petsAmount !== 0) {
+//     return formData.petsAmount * roomType.value.price * formData.nights;
+//   }
+//   return 0;
+// });
+
 const totalPrice = computed(() => {
-  if (formData.nights !== 0 && formData.petsAmount !== 0) {
-    return formData.petsAmount * roomType.value.price * formData.nights;
+  if (route.query.startDate && route.query.endDate && route.query.petsAmount) {
+    return (
+      Number(route.query.petsAmount) *
+      roomType.value.price *
+      calculateNights(
+        route.query.startDate as string,
+        route.query.endDate as string
+      )
+    );
   }
   return 0;
 });
 
 const formData = reactive({
   roomTypeId: route.params.id,
-  startDate: "",
-  endDate: "",
-  petsAmount: 0,
   ownerInstruction: "",
   nights: 0,
 });
@@ -160,9 +175,9 @@ async function onSubmit() {
       body: {
         user_id: auth.user.id,
         room_type_id: formData.roomTypeId,
-        check_in: formData.startDate,
-        check_out: formData.endDate,
-        pets_amount: formData.petsAmount,
+        check_in: route.query.startDate,
+        check_out: route.query.endDate,
+        pets_amount: route.query.petsAmount,
         owner_instruction: formData.ownerInstruction,
       },
     }

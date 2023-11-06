@@ -31,6 +31,7 @@
                 >
                   Date
                 </span>
+                <!-- Date -->
                 <VueDatePicker
                   hide-input-icon
                   v-model="date"
@@ -149,6 +150,7 @@
               :available_amount="roomType.available_amount"
               :max_pets="roomType.max_pets"
               :image="`images/room${roomType.id}.png`"
+              :to="`/rooms/${roomType.id}`"
             >
             </TheCardRoomType>
           </button>

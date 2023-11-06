@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink>
+  <NuxtLink :to="to">
     <div
       class="grid border h-full rounded-xl shadow-sm hover:shadow-lg divide-y overflow-hidden sm:flex sm:divide-y-0 sm:divide-x dark:border-gray-700 dark:shadow-slate-700/[.7] dark:divide-gray-600"
     >
@@ -35,5 +35,6 @@ const props = defineProps([
   "available_amount",
   "max_pets",
   "image",
+  "to",
 ]);
 </script>
