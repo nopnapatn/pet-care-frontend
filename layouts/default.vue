@@ -1,7 +1,6 @@
 <template>
   <TheHeader />
-  <div class="bg-white pt-16">
+  <div class="bg-white pt-20">
     <slot />
   </div>
-  <TheFooter />
 </template>

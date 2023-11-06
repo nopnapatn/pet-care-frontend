@@ -121,7 +121,7 @@
       </div>
     </div> -->
     <!-- Location -->
-    <div class="flex flex-col py-16 px-56 justify-center">
+    <div class="flex flex-col py-16 px-56 justify-center pb-36">
       <!-- <span class="headline-large text-center text-my-black">Location</span> -->
       <p class="py-10 pt-8 text-lg text-center">
         50 Ngamwongwan Rd, Khwaeng Lat Yao,
@@ -130,6 +130,12 @@
       </p>
       <div class="flex justify-center">
         <TheMap></TheMap>
+      </div>
+      <div class="flex justify-center mt-16 bg-green-300">
+        <h1>1</h1>
+        <h1>2</h1>
+        <h1>3</h1>
+        <h1>4</h1>
       </div>
     </div>
   </section>
