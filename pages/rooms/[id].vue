@@ -183,7 +183,9 @@ async function onSubmit() {
     console.log("Booking Order Created");
     console.log(response.value);
     const bookingOrderId = response.value["booking_order"]["id"];
-    await navigateTo(`/payments/create?bookingOrderId=${bookingOrderId}`);
+    await navigateTo(
+      `/payments/create?bookingOrderId=${bookingOrderId}&type=HOTEL`
+    );
     console.log(response.value);
   }
   console.log("Error");

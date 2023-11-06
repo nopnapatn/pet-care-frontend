@@ -182,6 +182,7 @@ const formData = reactive({
   amount: "",
   time: "",
   date: "",
+  type: route.query.type,
   slip: null,
 });
 
@@ -233,20 +234,21 @@ async function onSubmit() {
   formDataToSend.append("amount", formData.amount);
   formDataToSend.append("time", formData.time);
   formDataToSend.append("date", formData.date);
+  formDataToSend.append("type", route.query.type as string);
 
   if (formData.slip !== null) {
     formDataToSend.append("slip", formData.slip);
   }
 
+  console.log(formData);
   const { data: response, error } = await useMyFetch<any>(`payments/store`, {
     method: "POST",
     body: formDataToSend,
   });
-  console.log(response.value["message"]);
-  if (response.value.status === 200) {
-    await navigateTo("/");
-  } else {
-    errorMessage.slip = response.value["message"];
+  if (response !== null) {
+    // to mybooking
+    console.log(response.value);
+    // await navigateTo("/");
   }
 }
 </script>
