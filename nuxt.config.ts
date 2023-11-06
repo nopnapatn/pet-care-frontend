@@ -7,11 +7,11 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   modules: [
+    "@nuxtjs/tailwindcss",
     "@formkit/auto-animate/nuxt",
     "@formkit/nuxt",
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
-    "@nuxt/ui",
   ],
 
   css: ["~/assets/css/main.css"],
@@ -38,7 +38,4 @@ export default defineNuxtConfig({
     // ~/components/base/Btn.vue => <BaseBtn />
     "~/components",
   ],
-  colorMode: {
-    preference: "light",
-  },
 });

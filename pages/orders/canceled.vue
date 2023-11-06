@@ -4,7 +4,60 @@
     <div class="p-4 sm:ml-64">
       <div
         class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700"
-      ></div>
+      >
+        <ul class="flex flex-wrap -mb-px">
+          <li class="mr-2">
+            <NuxtLink
+              to="/orders"
+              class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              >Order List</NuxtLink
+            >
+          </li>
+          <li class="mr-2">
+            <NuxtLink
+              to="/orders/waiting"
+              class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              >Waiting</NuxtLink
+            >
+          </li>
+          <li class="mr-2">
+            <NuxtLink
+              to="/orders/pending"
+              class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              >Pending</NuxtLink
+            >
+          </li>
+          <li class="mr-2">
+            <NuxtLink
+              to="/orders/verified"
+              class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              >Verified</NuxtLink
+            >
+          </li>
+          <li class="mr-2">
+            <NuxtLink
+              to="/orders/inuse"
+              class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              >In Use</NuxtLink
+            >
+          </li>
+          <li class="mr-2">
+            <NuxtLink
+              to="/orders/complete"
+              class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              >Complete</NuxtLink
+            >
+          </li>
+          <li class="mr-2">
+            <NuxtLink
+              to="/orders/canceled"
+              class="inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
+              aria-current="page"
+              >Canceled</NuxtLink
+            >
+          </li>
+        </ul>
+      </div>
       <!-- Table Section -->
       <div class="max-w-[85rem] py-10 sm:px-6 lg:px-8 mx-auto">
         <!-- Card -->

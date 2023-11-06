@@ -123,7 +123,7 @@ async function onSubmit() {
       let role = user.value["role"];
       auth.setUser(id, firstName, lastName, phone_number, email, role);
       console.log("Auth user:", auth.user);
-      if (role === "ADMIN") {
+      if (role === "STAFF") {
         await navigateTo("/dashboard");
       } else {
         await navigateTo("/rooms");
