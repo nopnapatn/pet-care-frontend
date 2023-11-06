@@ -11,40 +11,20 @@
     </div>
 
     <!-- Start Datepicker -->
-    <VueDatePicker
-      v-model="date"
-      range
-      format="dd/M/yyyy"
-      :enable-time-picker="false"
-      disable-year-select
-      auto-apply
-      placeholder="Select date"
-      :min-date="new Date(new Date().setDate(new Date().getDate() + 1))"
-      :max-date="new Date(new Date().setDate(new Date().getDate() + 30))"
-      required
-    ></VueDatePicker>
+    <VueDatePicker v-model="date" range format="dd/M/yyyy" :enable-time-picker="false" disable-year-select auto-apply
+      placeholder="Select date" :min-date="new Date(new Date().setDate(new Date().getDate() + 1))"
+      :max-date="new Date(new Date().setDate(new Date().getDate() + 30))" required></VueDatePicker>
 
     <!-- End Datepicker -->
     <!-- Owner Instruction -->
-    <textarea
-      v-model="formData.ownerInstruction"
-      cols="30"
-      rows="10"
-      placeholder="Tell Staff about your pets instruction"
-    ></textarea>
+    <textarea v-model="formData.ownerInstruction" cols="30" rows="10"
+      placeholder="Tell Staff about your pets instruction"></textarea>
     <!-- End Owner Instruction -->
     <!-- Amount -->
-    <input
-      type="number"
-      placeholder="Amount of your pets"
-      min="0"
-      :max="roomType.max_pets"
-      v-model="formData.petsAmount"
-      class="input input-bordered w-full max-w-xs"
-    />
+    <input type="number" placeholder="Amount of your pets" min="0" :max="roomType.max_pets" v-model="formData.petsAmount"
+      class="input input-bordered w-full max-w-xs" />
     <!-- End Amount -->
-    <TheButtonAuth colort="bg-primary-green-100" colorb="bg-primary-green-200"
-      >Submit
+    <TheButtonAuth colort="bg-primary-green-100" colorb="bg-primary-green-200">Submit
     </TheButtonAuth>
   </form>
 </template>
