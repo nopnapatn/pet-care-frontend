@@ -1,30 +1,75 @@
 <template>
-  <NuxtLink :to="to">
-    <div
-      class="grid border h-full rounded-xl shadow-sm hover:shadow-lg divide-y overflow-hidden sm:flex sm:divide-y-0 sm:divide-x dark:border-gray-700 dark:shadow-slate-700/[.7] dark:divide-gray-600"
-    >
-      <div class="flex flex-col flex-[1_0_0%] bg-white dark:bg-gray-800">
-        <img
-          class="w-full h-56 rounded-t-xl sm:rounded-tr-none"
-          :src="image"
-          alt="Image Description"
-        />
-        <div class="p-4 flex-1 md:p-5">
-          <h3 class="text-lg font-bold text-gray-800 dark:text-white">
-            {{ title }}
-          </h3>
-          <p class="mt-1 text-gray-800 dark:text-gray-400">
-            {{ description }}
-          </p>
-        </div>
-        <div class="p-4 border-t sm:px-5 dark:border-gray-700">
-          <p class="text-xs text-gray-800 dark:text-gray-500">
-            {{ price }} ฿ / day.
-          </p>
-        </div>
+  <div
+    class="group flex flex-col h-full bg-white border border-gray-200 shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]"
+  >
+    <img
+      src="/images/room1.png"
+      class="h-52 flex flex-col justify-center items-center bg-primary rounded-t-xl"
+    />
+    <div>
+      <div class="p-4 md:p-6">
+        <span
+          class="block mb-1 text-xs font-semibold uppercase text-blue-600 dark:text-blue-500"
+        >
+          Available: {{ available_amount }}
+        </span>
+        <h3
+          class="text-xl font-semibold text-gray-800 dark:text-gray-300 dark:hover:text-white"
+        >
+          {{ title }}
+        </h3>
+        <p class="mt-3 text-gray-500">
+          {{ description }}
+        </p>
       </div>
     </div>
-  </NuxtLink>
+    <div
+      class="mt-auto flex border-t border-gray-200 divide-x divide-gray-200 dark:border-gray-700 dark:divide-gray-700"
+    >
+      <button
+        @click="isOpen = true"
+        class="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-bl-xl font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm sm:p-4 dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+      >
+        Room Detail
+        <UModal v-model="isOpen" prevent-close>
+          <UCard
+            :ui="{
+              ring: '',
+              divide: 'divide-y divide-gray-100 dark:divide-gray-800',
+            }"
+          >
+            <template #header>
+              <div class="flex items-center justify-between">
+                <h3
+                  class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+                >
+                  Modal
+                </h3>
+                <UButton
+                  color="gray"
+                  variant="ghost"
+                  icon="i-heroicons-x-mark-20-solid"
+                  class="-my-1"
+                  @click="isOpen = false"
+                />
+              </div>
+            </template>
+
+            <Placeholder class="h-32">
+              {{ title }} <br />
+              {{ description }}
+            </Placeholder>
+          </UCard>
+        </UModal>
+      </button>
+      <button
+        @click="navigateToRoomDetails(roomData)"
+        class="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-br-xl font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm sm:p-4 dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+      >
+        View API
+      </button>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -35,6 +80,23 @@ const props = defineProps([
   "available_amount",
   "max_pets",
   "image",
-  "to",
+  "roomData",
 ]);
+
+const isOpen = ref(false);
+
+const formData = reactive({
+  startDate: "",
+  endDate: "",
+  petsAmount: 0,
+});
+
+async function navigateToRoomDetails(roomType: { id: any }) {
+  await navigateTo(
+    `/rooms/${roomType.id}
+      ?startDate=${formData.startDate}
+      &endDate=${formData.endDate}
+      &petsAmount=${formData.petsAmount}`
+  );
+}
 </script>

@@ -83,7 +83,7 @@
   <!-- End Hero -->
 
   <div class="pb-16">
-    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-2 mx-auto">
+    <div class="max-w-[85rem] px-4 p-10 sm:px-6 lg:px-24 lg:py-2 mx-auto">
       <div class="flex items-center">
         <span
           class="inline-flex justify-center items-center my-4 w-[46px] h-[46px] rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
@@ -105,16 +105,20 @@
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div v-for="catRoom in catRooms" :key="catRoom.id">
-          <button @click="navigateToRoomDetails(catRoom)" class="h-full w-full">
-            <TheCardRoomType
-              :title="catRoom.title"
-              :description="catRoom.description"
-              :price="catRoom.price"
-              :available_amount="catRoom.available_amount"
-              :max_pets="catRoom.max_pets"
-              :image="`images/room${catRoom.id}.png`"
-            >
-            </TheCardRoomType>
+          <TheCardRoomType
+            :title="catRoom.title"
+            :description="catRoom.description"
+            :price="catRoom.price"
+            :available_amount="catRoom.available_amount"
+            :max_pets="catRoom.max_pets"
+            :image="`images/room${catRoom.id}.png`"
+          >
+          </TheCardRoomType>
+          <button
+            @click="navigateToRoomDetails(catRoom)"
+            class="w-full rounded-b-xl"
+          >
+            <div class="bg-black">asdsa</div>
           </button>
         </div>
       </div>
@@ -140,16 +144,21 @@
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div v-for="dogRoom in dogRooms" :key="dogRoom.id">
-          <button @click="navigateToRoomDetails(dogRoom)" class="h-full w-full">
-            <TheCardRoomType
-              :title="dogRoom.title"
-              :description="dogRoom.description"
-              :price="dogRoom.price"
-              :available_amount="dogRoom.available_amount"
-              :max_pets="dogRoom.max_pets"
-              :image="`images/room${dogRoom.id}.png`"
-            >
-            </TheCardRoomType>
+          <TheCardRoomType
+            :title="dogRoom.title"
+            :description="dogRoom.description"
+            :price="dogRoom.price"
+            :available_amount="dogRoom.available_amount"
+            :max_pets="dogRoom.max_pets"
+            :image="`images/room${dogRoom.id}.png`"
+            :roomData="dogRooms"
+          >
+          </TheCardRoomType>
+          <button
+            @click="navigateToRoomDetails(dogRoom)"
+            class="w-full rounded-b-xl"
+          >
+            <div class="bg-black">asdsa</div>
           </button>
         </div>
       </div>
