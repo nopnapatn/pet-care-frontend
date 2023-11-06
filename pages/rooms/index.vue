@@ -246,7 +246,7 @@ watch(date, (newDate) => {
 
 async function navigateToRoomDetails(roomType: { id: any }) {
   await navigateTo(
-    `/rooms/${roomType.id}?startDate=${formData.startDate}&endDate=${formData.endDate}&petsAmount=${formData.petsAmount}`
+    `/rooms/${roomType.id}?startDate=${formData.startDate}&endDate=${formData.endDate}&petsAmount=${formData.petsAmount}&type='BOOKING'}`
   );
 }
 </script>

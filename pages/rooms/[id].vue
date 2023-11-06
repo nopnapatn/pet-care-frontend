@@ -174,6 +174,7 @@ async function onSubmit() {
         check_out: route.query.endDate,
         pets_amount: route.query.petsAmount,
         owner_instruction: formData.ownerInstruction,
+        type: route.query.type,
       },
     }
   );
