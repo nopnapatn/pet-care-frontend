@@ -248,6 +248,8 @@ async function onSubmit() {
   if (response !== null) {
     // to mybooking
     console.log(response.value);
+    console.log(response.value["message"]);
+    console.log(response.value["imagePath"]);
     // await navigateTo("/");
   }
 }

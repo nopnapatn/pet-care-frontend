@@ -140,16 +140,16 @@
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div v-for="dogRoom in dogRooms" :key="dogRoom.id">
           <button
-            @click="navigateToRoomDetails(dogRooms)"
+            @click="navigateToRoomDetails(dogRoom)"
             class="w-full rounded-b-xl"
           >
             <TheCardRoomType
-              :title="dogRooms.title"
-              :description="dogRooms.description"
-              :price="dogRooms.price"
-              :available_amount="dogRooms.available_amount"
-              :max_pets="dogRooms.max_pets"
-              :image="`images/room${dogRooms.id}.png`"
+              :title="dogRoom.title"
+              :description="dogRoom.description"
+              :price="dogRoom.price"
+              :available_amount="dogRoom.available_amount"
+              :max_pets="dogRoom.max_pets"
+              :image="`images/room${dogRoom.id}.png`"
             >
             </TheCardRoomType>
           </button>

@@ -45,6 +45,7 @@ const props = defineProps([
   "max_pets",
   "image",
   "roomData",
+  "image_url",
 ]);
 
 const isOpen = ref(false);
