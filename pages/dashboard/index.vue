@@ -1,13 +1,4 @@
 <template>
-  <div class="flex-col text-center">
-    <h1>This is admin page</h1>
-    <NuxtLink
-      to="/dashboard/room"
-      class="bg-slate-500 p-2 rounded-lg text-white"
-    >
-      Manage Room
-    </NuxtLink>
-  </div>
   <section>
     <!-- Table Section -->
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
