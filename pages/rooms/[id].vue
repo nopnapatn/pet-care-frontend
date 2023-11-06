@@ -183,7 +183,9 @@ const { data: roomType, error } = await useMyFetch<any>(
   `room-types/${route.params.id}`,
   {}
 );
-
+console.log(route.query.startDate);
+console.log(route.query.endDate);
+console.log(route.query.petsAmount);
 const totalPrice = computed(() => {
   if (route.query.startDate && route.query.endDate && route.query.petsAmount) {
     return (

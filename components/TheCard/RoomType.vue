@@ -3,7 +3,7 @@
     class="group flex flex-col h-full bg-white border border-gray-200 shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]"
   >
     <img
-      src="/images/room1.png"
+      src="image"
       class="h-52 flex flex-col justify-center items-center bg-primary rounded-t-xl"
     />
     <div>
