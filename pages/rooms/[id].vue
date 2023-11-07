@@ -5,9 +5,9 @@
         class="carousel carousel-center max-w-6xl space-x-4 bg-translate rounded-xl"
       >
         <div class="carousel-item">
-          <TheCardGallery />
-          <TheCardGallery />
-          <TheCardGallery />
+          <TheCardGallery :id="roomType.id" />
+          <TheCardGallery :id="roomType.id" />
+          <TheCardGallery :id="roomType.id" />
         </div>
       </div>
     </div>
