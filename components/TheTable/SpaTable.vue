@@ -22,18 +22,18 @@
       <tbody>
         <tr class="border-b border-gray-200 dark:border-gray-700">
           <td class="px-6 py-4 text-center text-gray-500">Small</td>
-          <td class="px-6 py-4 text-center text-gray-500">$30 & up</td>
-          <td class="px-6 py-4 text-center text-gray-500">$35 & up</td>
+          <td class="px-6 py-4 text-center text-gray-500">$30</td>
+          <td class="px-6 py-4 text-center text-gray-500">$35</td>
         </tr>
         <tr class="border-b border-gray-200 dark:border-gray-700">
           <td class="px-6 py-4 text-center text-gray-500">Medium</td>
-          <td class="px-6 py-4 text-center text-gray-500">$30 & up</td>
-          <td class="px-6 py-4 text-center text-gray-500">$35 & up</td>
+          <td class="px-6 py-4 text-center text-gray-500">$30</td>
+          <td class="px-6 py-4 text-center text-gray-500">$35</td>
         </tr>
         <tr class="border-b border-gray-200 dark:border-gray-700">
           <td class="px-6 py-4 text-center text-gray-500">Large</td>
-          <td class="px-6 py-4 text-center text-gray-500">$30 & up</td>
-          <td class="px-6 py-4 text-center text-gray-500">$35 & up</td>
+          <td class="px-6 py-4 text-center text-gray-500">$30</td>
+          <td class="px-6 py-4 text-center text-gray-500">$35</td>
         </tr>
       </tbody>
     </table>
