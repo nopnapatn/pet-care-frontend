@@ -42,7 +42,7 @@
           id="phoneNumber"
           v-model="formData.phoneNumber"
           label="Phone Number"
-          placeholder="Doe"
+          placeholder="Enter your phone number"
           autocomplete="on"
           required
         >
@@ -188,7 +188,7 @@ async function onSubmit() {
       if (user.value !== null) {
         const { name, email } = user.value;
         // auth.setUser(name, email);
-        await navigateTo("/test");
+        await navigateTo("/");
       }
     }
   }
