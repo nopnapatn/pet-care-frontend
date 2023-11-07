@@ -186,9 +186,16 @@ async function onSubmit() {
         method: "POST",
       });
       if (user.value !== null) {
-        const { name, email } = user.value;
-        // auth.setUser(name, email);
-        await navigateTo("/");
+        let id = user.value["id"];
+        let firstName = user.value["first_name"];
+        let lastName = user.value["last_name"];
+        let phone_number = user.value["phone_number"];
+        let email = user.value["email"];
+        let role = user.value["role"];
+        auth.setUser(id, firstName, lastName, phone_number, email, role);
+        console.log("Auth user:", auth.user);
+        console.log(auth.user.id);
+        await navigateTo("/auth/login");
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-2xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     <!-- Card -->
-    <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
+    <div class="bg-white rounded-2xl shadow p-4 sm:p-7 dark:bg-slate-900">
       <div class="text-center mb-8">
         <h2
           class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200"
@@ -30,7 +30,7 @@
                 <input
                   id="firstName"
                   type="text"
-                  class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                  class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
                   placeholder="Enter your first name"
                   v-model="formData.name"
                   label="First Name"
@@ -51,7 +51,7 @@
                 <input
                   id="amount"
                   type="number"
-                  class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                  class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
                   placeholder="Enter amount of money"
                   v-model="formData.amount"
                   label="First Name"
@@ -74,7 +74,7 @@
           <input
             id="time"
             type="time"
-            class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+            class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
             placeholder="Enter your time"
             v-model="formData.time"
             label="First Name"
@@ -95,7 +95,7 @@
           <input
             id="date"
             type="date"
-            class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+            class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
             placeholder="Enter your date"
             v-model="formData.date"
             label="First Name"
@@ -115,7 +115,7 @@
 
           <label
             for="af-submit-app-upload-images"
-            class="group p-4 sm:p-7 block cursor-pointer text-center border-2 border-dashed border-gray-200 rounded-lg focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2 dark:border-gray-700"
+            class="group p-4 sm:p-7 block cursor-pointer text-center border-2 border-dashed border-gray-200 rounded-lg focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 dark:border-gray-700"
           >
             <input
               id="af-submit-app-upload-images"
@@ -157,7 +157,7 @@
         <div class="mt-5 flex justify-end gap-x-2">
           <button
             type="submit"
-            class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+            class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
           >
             Save
           </button>

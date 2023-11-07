@@ -25,7 +25,7 @@
             class="mx-auto max-w-6xl sm:flex sm:space-x-3 p-3 bg-white border items-center rounded-lg shadow-lg shadow-gray-100 dark:bg-slate-900 dark:border-gray-700 dark:shadow-gray-900/[.2]"
           >
             <div class="pb-2 sm:pb-0 sm:flex-[1_0_0%]">
-              <div class="flex">
+              <div class="flex" id="date-picker">
                 <!-- Start Date Picker -->
                 <span
                   class="inline-flex items-center px-3 text-sm text-gray-900 bg-neutral-100 border border-r-0 border-gray-200 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
@@ -74,6 +74,8 @@
           </div>
         </form>
         <!-- End Form -->
+
+        <div class="p-0 text-red-600">{{ errorMessage.petsAmount }}</div>
       </div>
     </div>
   </section>
@@ -102,7 +104,7 @@
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div v-for="catRoom in catRooms" :key="catRoom.id">
-          <button
+          <a
             @click="navigateToRoomDetails(catRoom)"
             class="w-full rounded-b-xl"
           >
@@ -115,7 +117,7 @@
               :image="`images/room${catRoom.id}.png`"
             >
             </TheCardRoomType>
-          </button>
+          </a>
         </div>
       </div>
       <div class="py-8"></div>
@@ -196,6 +198,10 @@ const formData = reactive({
   petsAmount: 0,
 });
 
+const errorMessage = reactive({
+  petsAmount: "",
+});
+
 async function getStart() {
   const { data: availableRooms, error } = await useMyFetch<any>(
     `room-types/get-available-types`,
@@ -239,6 +245,11 @@ watch(date, (newDate) => {
 });
 
 async function navigateToRoomDetails(roomType: { id: any }) {
+  if (!formData.startDate || !formData.endDate || !formData.petsAmount) {
+    alert("Please select date and pets amount");
+    errorMessage.petsAmount = "Please select date and pets amount";
+    return;
+  }
   await navigateTo(
     `/rooms/${roomType.id}?startDate=${formData.startDate}&endDate=${formData.endDate}&petsAmount=${formData.petsAmount}&type='BOOKING'}`
   );

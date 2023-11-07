@@ -19,6 +19,7 @@
           label="Password"
           placeholder="********"
           required
+          type="password"
         ></TheFieldText>
         <div v-if="errorMessage.password" class="text-sm text-red-500">
           {{ errorMessage.password }}
