@@ -68,10 +68,10 @@
         <div class="flex items-center order-3">
           <div v-if="auth.isLogin" class="flex items-center gap-4">
             <NuxtLink
-              to="/booked"
+              to="/auth/profile"
               class="inline-flex whitespace-nowrap text-my-black hover:text-primary-green-100"
             >
-              My Booked
+              {{ auth.user.firstName + " " + auth.user.lastName }}
             </NuxtLink>
           </div>
           <div v-else>

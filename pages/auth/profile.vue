@@ -75,3 +75,72 @@
 import { useAuthStore } from "~/stores/useAuthStore";
 const auth = useAuthStore();
 </script>
+<!-- <script setup lang="ts">
+import { useAuthStore } from "~/stores/useAuthStore";
+import useMyFetch from "@/composables/useMyFetch";
+
+const auth = useAuthStore().user;
+
+// Fetch user data using the user's email
+const { data: user } = await useMyFetch<any>(`profile/${auth.email}`, {});
+
+const editedProfile = reactive({
+  phone_number: user.value.phone_number,
+  // address: user.value.address,
+  // image: null, // Store the selected image file
+});
+
+const handleImageUpload = async (event: any) => {
+  const file = event.target.files[0];
+  editedProfile.image = file;
+  console.log("Image uploaded successfully!", editedProfile.image);
+};
+
+const updateProfile = async () => {
+  try {
+    // Create a FormData object to send the image file and other data
+    const formData = new FormData();
+
+    formData.append("phone_number", editedProfile.phone_number);
+    // formData.append("address", editedProfile.address);
+
+    console.log("formData:", formData.get("phone_number"));
+    // console.log("formData:", formData.get("address"));
+
+    // if (editedProfile.image !== null) {
+    //   formData.append("image", editedProfile.image);
+    // }
+
+    // console.log("formData:", formData.get("image"));
+
+    // Make an API call to update the user's profile with the editedProfile values
+    const updatedUserData = await useMyFetch<any>(`profile/${auth.email}`, {
+      method: "POST",
+      body: formData,
+    });
+
+    // Update the user object with the new data
+    user.value.phone_number = updatedUserData.data.value.phone_number;
+    // user.value.address = updatedUserData.data.value.address;
+    // user.value.image_url = updatedUserData.data.value.image_url;
+
+    console.log("Profile updated successfully!");
+
+    await navigateTo("/profile/show");
+  } catch (error) {
+    console.error("Error updating profile:", error);
+  }
+};
+
+const getImageUrl = (imagePath: string) => {
+  if (imagePath) {
+    // Use Laravel's asset function to generate the URL
+    const modifiedPath = "http://localhost" + "/storage/" + imagePath;
+    console.log(modifiedPath);
+    return modifiedPath;
+  } else {
+    // If imagePath is empty, use a default image path
+    return "/images/banner-login.png";
+  }
+};
+</script> -->

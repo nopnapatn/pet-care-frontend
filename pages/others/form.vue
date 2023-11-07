@@ -197,7 +197,7 @@
                 >Brush Out</label
               >
             </div>
-            <h1>$45</h1>
+            <h1>+ $45</h1>
           </div>
           <!-- c2 -->
           <div class="flex justify-between w-full">
@@ -215,7 +215,7 @@
                 >Breath Freshening</label
               >
             </div>
-            <h1>$45</h1>
+            <h1>+ $45</h1>
           </div>
           <!-- c3 -->
           <div class="flex justify-between w-full">
@@ -233,7 +233,7 @@
                 >Nail Trim & File</label
               >
             </div>
-            <h1>$45</h1>
+            <h1>+ $45</h1>
           </div>
           <!-- c4 -->
           <div class="flex justify-between w-full">
@@ -251,7 +251,7 @@
                 >Medicated Ear Cleaning</label
               >
             </div>
-            <h1>$45</h1>
+            <h1>+ $45</h1>
           </div>
           <!-- c5 -->
           <div class="flex justify-between w-full">
@@ -269,7 +269,7 @@
                 >Flea Bath</label
               >
             </div>
-            <h1>$45</h1>
+            <h1>+ $45</h1>
           </div>
           <!-- c6 -->
           <div class="flex justify-between w-full">
@@ -287,7 +287,7 @@
                 >Shed Reducing Treatment</label
               >
             </div>
-            <h1>$45</h1>
+            <h1>+ $45</h1>
           </div>
           <!-- c7 -->
           <div class="flex justify-between w-full">
@@ -305,7 +305,7 @@
                 >Paw Polish</label
               >
             </div>
-            <h1>$45</h1>
+            <h1>+ $45</h1>
           </div>
         </div>
       </div>
