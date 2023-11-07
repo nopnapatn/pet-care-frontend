@@ -17,6 +17,7 @@
           id="password"
           v-model="formData.password"
           label="Password"
+          type="password"
           placeholder="********"
           required
         ></TheFieldText>

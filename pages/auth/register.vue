@@ -54,6 +54,7 @@
           id="password"
           v-model="formData.password"
           label="Password"
+          type="password"
           placeholder="********"
           required
         >
@@ -65,6 +66,7 @@
           id="confirmPassword"
           v-model="formData.confirmPassword"
           label="Confirm Password"
+          type="password"
           placeholder="********"
           required
         >
