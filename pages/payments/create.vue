@@ -250,7 +250,7 @@ async function onSubmit() {
     console.log(response.value);
     console.log(response.value["message"]);
     console.log(response.value["imagePath"]);
-    // await navigateTo("/");
+    await navigateTo("/booked");
   }
 }
 </script>
