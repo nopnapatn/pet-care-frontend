@@ -126,7 +126,7 @@ async function onSubmit() {
       if (role === "STAFF") {
         await navigateTo("/dashboard");
       } else {
-        await navigateTo("/rooms");
+        await navigateTo("/");
       }
     }
   }

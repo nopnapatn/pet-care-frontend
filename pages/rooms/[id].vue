@@ -143,7 +143,7 @@
                             <p
                               class="text-sm font-medium text-gray-900 truncate dark:text-white"
                             >
-                              {{ totalPrice }}
+                              {{ Math.floor(totalPrice) }}
                             </p>
                           </div>
                           <div

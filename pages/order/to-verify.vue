@@ -7,22 +7,20 @@
     <!-- card -->
     <div class="p-4"></div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div v-for="catRoom in catRooms" :key="catRoom.id">
-        <button
-          @click="navigateToRoomDetails(catRoom)"
-          class="w-full rounded-b-xl"
-        >
-          <TheCardRoomType
-            :title="catRoom.title"
-            :description="catRoom.description"
-            :price="catRoom.price"
-            :available_amount="catRoom.available_amount"
-            :max_pets="catRoom.max_pets"
-            :image="`images/room${catRoom.id}.png`"
+      <div v-for="bookingOrder in bookingOrders" :key="bookingOrder.id">
+        <button class="w-full rounded-b-xl">
+          <!-- <TheCardRoomType
+            :title="bookingOrder.room_type.title"
+            :description="bookingOrder.room_type.description"
+            :price="bookingOrder.room_type.price"
+            :available_amount="bookingOrder.room_type.available_amount"
+            :max_pets="bookingOrder.room_type.max_pets"
+            :image="`images/room${bookingOrder.room_type.id}.png`"
           >
-          </TheCardRoomType>
+          </TheCardRoomType> -->
         </button>
       </div>
+      <div v-f></div>
     </div>
   </div>
 </template>
@@ -47,69 +45,10 @@ type RoomType = {
   updated_at: string;
 };
 
-const { data: roomTypes, error } = await useMyFetch<any>("room-types", {});
-const dogRooms = roomTypes.value.filter((roomType: RoomType) => {
-  return roomType.pet_type === "DOG";
-});
-const catRooms = roomTypes.value.filter((roomType: RoomType) => {
-  return roomType.pet_type === "CAT";
-});
-
-const date = ref("");
-
-const formData = reactive({
-  startDate: "",
-  endDate: "",
-  petsAmount: 0,
-});
-
-async function getStart() {
-  const { data: availableRooms, error } = await useMyFetch<any>(
-    `room-types/get-available-types`,
-    {
-      method: "POST",
-      body: {
-        startDate: formData.startDate,
-        endDate: formData.endDate,
-        petsAmount: formData.petsAmount,
-      },
-    }
-  );
-  catRooms.value = availableRooms.value.filter((roomType: RoomType) => {
-    return roomType.pet_type === "CAT";
-  });
-  dogRooms.value = availableRooms.value.filter((roomType: RoomType) => {
-    return roomType.pet_type === "DOG";
-  });
-  if (error) {
-    console.log(error);
-  }
-}
-
-// Format date to "YYYY-MM-DD"
-function formatDate(date: string) {
-  var d = new Date(date).toLocaleDateString(),
-    month = d.split("/")[0],
-    day = d.split("/")[1],
-    year = d.split("/")[2];
-
-  return [year, month, day].join("-");
-}
-
-// Watch for datepicker
-watch(date, (newDate) => {
-  formData.startDate = formatDate(date.value[0]);
-  formData.endDate = formatDate(date.value[1]);
-  console.log(formData.startDate);
-  console.log(formData.endDate);
-  console.log(date.value);
-});
-
-async function navigateToRoomDetails(roomType: { id: any }) {
-  await navigateTo(
-    `/rooms/${roomType.id}?startDate=${formData.startDate}&endDate=${formData.endDate}&petsAmount=${formData.petsAmount}`
-  );
-}
+const { data: bookingOrders, error } = await useMyFetch<any>(
+  "booking-orders/pending",
+  {}
+);
 </script>
 
 <style>
