@@ -37,7 +37,7 @@
                 >Other Services</NuxtLink
               >
             </li>
-            <li>
+            <!-- <li>
               <NuxtLink
                 v-if="auth.isLogin"
                 to="/profile/show"
@@ -45,7 +45,7 @@
                 aria-current="page"
                 >Profile
               </NuxtLink>
-            </li>
+            </li> -->
             <li v-if="auth.user.role === 'STAFF'">
               <NuxtLink
                 to="/dashboard"
@@ -54,14 +54,14 @@
                 >Dashboard
               </NuxtLink>
             </li>
-            <li>
+            <!-- <li>
               <NuxtLink
                 to="/test"
                 class="text-primary-orange-100 hover:text-primary-green-100"
                 aria-current="page"
                 >Test</NuxtLink
               >
-            </li>
+            </li> -->
           </ul>
         </div>
 
