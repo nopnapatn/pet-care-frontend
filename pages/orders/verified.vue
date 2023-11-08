@@ -416,6 +416,7 @@
                             type="button"
                             class="block"
                             data-hs-overlay="#hs-ai-invoice-modal"
+                            @click="handleCheckIn(bookingOrder)"
                           >
                             <span class="px-6 py-1.5">
                               <span
@@ -436,7 +437,7 @@
                                     d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"
                                   />
                                 </svg>
-                                check in
+                                Check In
                               </span>
                             </span>
                           </button>
@@ -796,9 +797,19 @@ const { data: bookingOrders, error } = await useMyFetch<any>(
 );
 console.log(bookingOrders);
 
-async function handleCheckOut() {
-  console.log("check out");
-  const { data, error } = await useMyFetch<any>("booking-orders/check-out", {});
+async function handleCheckIn(bookingOrder: { id: any }) {
+  console.log("check in");
+  const { data: response, error } = await useMyFetch<any>(
+    `booking-orders/${bookingOrder.id}/check-in`,
+    {
+      method: "PUT",
+    }
+  );
+
+  if (response) {
+    console.log(response.value.message);
+    navigateTo("/orders/inuse");
+  }
 }
 
 const columns = [

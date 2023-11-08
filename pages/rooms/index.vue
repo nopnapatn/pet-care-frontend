@@ -215,12 +215,23 @@ async function getStart() {
       },
     }
   );
-  catRooms.value = availableRooms.value.filter((roomType: RoomType) => {
-    return roomType.pet_type === "CAT";
+
+  // Update the values in a reactive way
+  catRooms.length = 0; // Clear the array
+  dogRooms.length = 0; // Clear the array
+  availableRooms.value.forEach((roomType: RoomType) => {
+    if (
+      roomType.pet_type === "CAT" &&
+      roomType.available_amount > 0 &&
+      roomType.max_pets >= formData.petsAmount
+    ) {
+      catRooms.push(roomType);
+    }
+    if (roomType.pet_type === "DOG") {
+      dogRooms.push(roomType);
+    }
   });
-  dogRooms.value = availableRooms.value.filter((roomType: RoomType) => {
-    return roomType.pet_type === "DOG";
-  });
+
   if (error) {
     console.log(error);
   }
@@ -244,6 +255,17 @@ watch(date, (newDate) => {
   console.log(formData.endDate);
   console.log(date.value);
 });
+
+// watch(
+//   () => formData.petsAmount,
+//   (newPetsAmount) => {
+//     // Fetch updated data when the petsAmount changes
+//     console.log(newPetsAmount);
+//     formData.petsAmount = newPetsAmount;
+//     getStart();
+//     console.log("updated");
+//   }
+// );
 
 async function navigateToRoomDetails(roomType: { id: any }) {
   console.log(auth.user.id);

@@ -6,10 +6,10 @@
         <h2
           class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200"
         >
-          Payment for {{ route.params.id }}
+          Payment ID <span class="text-blue-500">#{{ route.params.id }}</span>
         </h2>
         <p class="text-sm text-gray-600 dark:text-gray-400">
-          Submit your billing information
+          verify payment information
         </p>
       </div>
 
@@ -31,11 +31,10 @@
                   id="firstName"
                   type="text"
                   class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                  placeholder="Enter your first name"
+                  :placeholder="payment.name"
                   label="First Name"
                   disabled
                 />
-                {{ payment.name }}
               </div>
             </div>
             <div>
@@ -50,11 +49,10 @@
                   id="amount"
                   type="number"
                   class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                  placeholder="Enter amount of money"
+                  :placeholder="payment.amount"
                   label="First Name"
                   disabled
                 />
-                {{ payment.amount }}
               </div>
             </div>
           </div>
@@ -69,12 +67,10 @@
         <div class="mt-2 space-y-3">
           <input
             id="time"
-            type="time"
             class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-            placeholder="Enter your time"
-            label="First Name"
+            :placeholder="payment.time"
+            disabled
           />
-          {{ payment.time }}
         </div>
 
         <label
@@ -109,7 +105,7 @@
             class="group p-4 sm:p-7 block cursor-pointer text-center border-2 border-dashed border-gray-200 rounded-lg focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 dark:border-gray-700"
           >
             <!-- Show Preview Image -->
-            <!-- <img :src="" alt="Preview Image" /> -->
+            <img :src="payment.slip_path" alt="Preview Image" />
           </label>
         </div>
         <!-- End Image -->
@@ -117,6 +113,7 @@
           <div class="mt-5 flex justify-end gap-x-2">
             <button
               type="button"
+              @click="rejectBookingOrder()"
               class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
             >
               Reject
@@ -125,6 +122,7 @@
           <div class="mt-5 flex justify-end gap-x-2">
             <button
               type="submit"
+              @click="verifyBookingOrder()"
               class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
             >
               Verify
@@ -143,11 +141,41 @@ import { useAuthStore } from "~/stores/useAuthStore";
 
 const route = useRoute();
 const auth = useAuthStore();
-
+console.log(route.query.paymentId);
 const { data: payment, error } = await useMyFetch<any>(
   `payments/+${route.params.id}`,
   {}
 );
+
+async function verifyBookingOrder() {
+  console.log("verify");
+  const { data: response, error } = await useMyFetch<any>(
+    `payments/${route.query.paymentId}/verify`,
+    {
+      method: "PUT",
+    }
+  );
+
+  if (response) {
+    console.log(response.value.message);
+    navigateTo("/orders/verified");
+  }
+}
+
+async function rejectBookingOrder() {
+  console.log("reject");
+  const { data: response, error } = await useMyFetch<any>(
+    `payments/${route.query.paymentId}/reject`,
+    {
+      method: "PUT",
+    }
+  );
+
+  if (response) {
+    console.log(response.value.message);
+    navigateTo("/orders/pending");
+  }
+}
 
 async function onSubmit() {}
 </script>
