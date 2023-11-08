@@ -402,7 +402,7 @@
                             type="button"
                             class="block"
                             data-hs-overlay="#hs-ai-invoice-modal"
-                            @click="handleCheckOut(bookingOrder.id)"
+                            @click="handleCheckOut(bookingOrder)"
                           >
                             <span class="px-6 py-1.5">
                               <span
@@ -782,16 +782,18 @@ const { data: bookingOrders, error } = await useMyFetch<any>(
   {}
 );
 
-async function handleCheckOut(bookOrderId: number) {
+async function handleCheckOut(bookingOrder: { id: any }) {
   console.log("check out");
-  const { data, error } = await useMyFetch<any>(
-    `booking-orders/${bookOrderId}/check-out`,
+  const { data: response, error } = await useMyFetch<any>(
+    `booking-orders/${bookingOrder.id}/check-out`,
     {
       method: "PUT",
     }
   );
-  if (data) {
-    console.log(data.value["message"]);
+
+  if (response) {
+    console.log(response.value.message);
+    navigateTo("/orders/complete");
   }
 }
 

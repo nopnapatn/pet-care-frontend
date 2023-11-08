@@ -6,7 +6,15 @@
       {{ bookingOrder.room_type.title }}
       {{ bookingOrder.status }}
       <div v-if="bookingOrder.status === 'WAITING'">
-        <button @click="navigateTo('/payments/create')">Verify</button>
+        <button
+          @click="
+            navigateTo(
+              `/payments/create?bookingOrderId=${bookingOrder.id}&type=HOTEL`
+            )
+          "
+        >
+          Verify
+        </button>
       </div>
     </div>
   </div>
@@ -19,7 +27,8 @@ const { data: bookingOrders, error } = await useMyFetch<any>(
   `booking-orders/${auth.user.id}/my-bookings`,
   {}
 );
-
-console.log(bookingOrders);
-console.log(error);
+// console.log(bookingOrders);
+if (error) {
+  console.log(error.value);
+}
 </script>
