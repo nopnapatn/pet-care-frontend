@@ -416,6 +416,7 @@
                             type="button"
                             class="block"
                             data-hs-overlay="#hs-ai-invoice-modal"
+                            @click="navigateTo(`/payments/${bookingOrder.id}`)"
                           >
                             <span class="px-6 py-1.5">
                               <span

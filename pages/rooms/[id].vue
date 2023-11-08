@@ -191,7 +191,7 @@ const totalPrice = computed(() => {
     return (
       Number(route.query.petsAmount) *
       roomType.value.price *
-      calculateNights(
+      calculateDays(
         route.query.startDate as string,
         route.query.endDate as string
       )
@@ -210,9 +210,10 @@ const formData = reactive({
   nights: 0,
 });
 
-function calculateNights(date1: string, date2: string) {
+function calculateDays(date1: string, date2: string) {
   return (Date.parse(date2) - Date.parse(date1)) / 86400000 + 1;
 }
+
 async function onSubmit() {
   if (auth.token === null) {
     await navigateTo(`/login`);
