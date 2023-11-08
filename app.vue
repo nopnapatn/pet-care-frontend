@@ -1,4 +1,7 @@
 <template>
+  <head>
+    <title>Pet Care</title>
+  </head>
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>

@@ -60,108 +60,95 @@
         </li>
       </ol>
     </div>
-    <div class="flex items-center justify-start px-8 gap-x-4 py-8">
-      <!-- <div class="flex justify-center py-6 pb-8">
-        <select
-          name="pet-size"
-          id="pet-size"
-          class="select select-bordered bg-white focus:ring-primary focus:border-primary"
-        >
-          <option value="2">Small</option>
-          <option value="3">Medium</option>
-          <option value="4">Large</option>
-        </select>
-      </div> -->
-
-      <USelect v-model="size" :options="sizes" />
-
-      <div class="flex">
-        <!-- Start Date Picker -->
-        <span
-          class="inline-flex items-center px-3 text-sm text-gray-900 bg-neutral-100 border border-r-0 border-gray-200 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
-        >
-          Date
-        </span>
-        <VueDatePicker
-          v-model="date"
-          range
-          format="dd/M/yyyy"
-          :enable-time-picker="false"
-          disable-year-select
-          auto-apply
-          placeholder="Select date"
-          :min-date="new Date(new Date().setDate(new Date().getDate() + 1))"
-          :max-date="new Date(new Date().setDate(new Date().getDate() + 30))"
-          required
-        ></VueDatePicker>
-        <!-- End Date Picker -->
-      </div>
+    <div class="flex pt-8 px-10 gap-8">
+      <h1>Size: Small</h1>
+      <h1>Date: 10/12/2023</h1>
     </div>
-    <div class="grid grid-cols-3">
+    <div class="grid grid-cols-3 pt-8">
       <!-- col 1 -->
       <div class="flex flex-col px-10 gap-y-4">
+        <!-- select pet -->
         <div class="flex flex-col gap-y-2">
           <h1 class="text-lg">Select Pet</h1>
           <div class="flex gap-4">
             <input
               type="radio"
               name="radio-1"
+              id="dog"
+              value="dog"
               class="text-secondary focus:ring-primary"
               checked
             />
-            <label for="radio1">Dog</label>
+            <label for="dog">Dog</label>
           </div>
           <div class="flex gap-4">
             <input
               type="radio"
               name="radio-1"
+              id="cat"
+              value="cat"
               class="text-secondary focus:ring-primary"
             />
-            <label for="radio1">Cat</label>
+            <label for="cat">Cat</label>
           </div>
         </div>
+        <!-- select package -->
         <div class="flex flex-col gap-y-2">
           <h1 class="text-lg">Select Package</h1>
           <div class="flex gap-4">
             <input
               type="radio"
               name="radio-2"
+              id="spa"
+              value="spa"
+              v-model="pack"
+              v-on:change="packSelected"
               class="text-secondary focus:ring-primary"
               checked
             />
-            <label for="radio2">Spa Bath Package</label>
+            <label for="spa">Spa Bath Package</label>
           </div>
           <div class="flex gap-4">
             <input
               type="radio"
               name="radio-2"
+              id="groom"
+              value="groom"
+              v-model="pack"
               class="text-secondary focus:ring-primary"
               checked
             />
-            <label for="radio3">All-Inclusive Groom Package</label>
+            <label for="groom">All-Inclusive Groom Package</label>
           </div>
           <div class="flex gap-4">
             <input
               type="radio"
               name="radio-2"
+              id="none"
+              value="none"
+              v-model="pack"
               class="text-secondary focus:ring-primary"
               checked
             />
-            <label for="radio3">None</label>
+            <label for="none">None</label>
           </div>
+          {{ pack }}
         </div>
       </div>
       <!-- col 2 -->
-      <div class="flex flex-col px-10">
+      <div class="flex flex-col px-1 mr-6">
         <div class="flex flex-col gap-y-4 items-start mb-4">
+          <!-- select type -->
           <div class="flex flex-col gap-y-2 w-full">
             <h1 class="text-lg">Select type</h1>
             <div class="flex gap-4">
               <input
                 type="radio"
                 name="radio-3"
+                id="radio3"
                 class="text-secondary focus:ring-primary"
-                checked
+                value="45"
+                v-model="picked"
               />
               <div class="flex justify-between w-full">
                 <label for="radio3">Trim Only</label>
@@ -172,15 +159,18 @@
               <input
                 type="radio"
                 name="radio-3"
+                id="radio4"
                 class="text-secondary focus:ring-primary"
-                checked
+                value="60"
+                v-model="picked"
               />
               <div class="flex justify-between w-full">
-                <label for="radio3">Complete Cut</label>
+                <label for="radio4">Complete Cut</label>
                 <h1>$60</h1>
               </div>
             </div>
           </div>
+          <!-- select a la carte -->
           <h1 class="text-lg">Select A La Carte Services</h1>
           <!-- c1 -->
           <div class="flex justify-between w-full">
@@ -188,7 +178,8 @@
               <input
                 id="checkbox-1"
                 type="checkbox"
-                value=""
+                value="350"
+                v-model="checkedALaCarte"
                 class="w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-secondary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
               <label
@@ -197,16 +188,16 @@
                 >Brush Out</label
               >
             </div>
-            <h1>+ $45</h1>
+            <h1>+ ฿350</h1>
           </div>
           <!-- c2 -->
           <div class="flex justify-between w-full">
             <div class="flex items-center">
               <input
-                checked
                 id="checkbox-2"
                 type="checkbox"
-                value=""
+                value="290"
+                v-model="checkedALaCarte"
                 class="w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-secondary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
               <label
@@ -215,16 +206,16 @@
                 >Breath Freshening</label
               >
             </div>
-            <h1>+ $45</h1>
+            <h1>+ ฿290</h1>
           </div>
           <!-- c3 -->
           <div class="flex justify-between w-full">
             <div class="flex items-center">
               <input
-                checked
                 id="checkbox-3"
                 type="checkbox"
-                value=""
+                value="550"
+                v-model="checkedALaCarte"
                 class="w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-secondary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
               <label
@@ -233,16 +224,16 @@
                 >Nail Trim & File</label
               >
             </div>
-            <h1>+ $45</h1>
+            <h1>+ ฿550</h1>
           </div>
           <!-- c4 -->
           <div class="flex justify-between w-full">
             <div class="flex items-center">
               <input
-                checked
                 id="checkbox-4"
                 type="checkbox"
-                value=""
+                value="349"
+                v-model="checkedALaCarte"
                 class="w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-secondary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
               <label
@@ -251,16 +242,16 @@
                 >Medicated Ear Cleaning</label
               >
             </div>
-            <h1>+ $45</h1>
+            <h1>+ ฿349</h1>
           </div>
           <!-- c5 -->
           <div class="flex justify-between w-full">
             <div class="flex items-center">
               <input
-                checked
                 id="checkbox-5"
                 type="checkbox"
-                value=""
+                value="359"
+                v-model="checkedALaCarte"
                 class="w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-secondary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
               <label
@@ -269,16 +260,16 @@
                 >Flea Bath</label
               >
             </div>
-            <h1>+ $45</h1>
+            <h1>+ ฿359</h1>
           </div>
           <!-- c6 -->
           <div class="flex justify-between w-full">
             <div class="flex items-center">
               <input
-                checked
                 id="checkbox-6"
                 type="checkbox"
-                value=""
+                value="700"
+                v-model="checkedALaCarte"
                 class="w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-secondary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
               <label
@@ -287,16 +278,16 @@
                 >Shed Reducing Treatment</label
               >
             </div>
-            <h1>+ $45</h1>
+            <h1>+ ฿700</h1>
           </div>
           <!-- c7 -->
           <div class="flex justify-between w-full">
             <div class="flex items-center">
               <input
-                checked
                 id="checkbox-7"
                 type="checkbox"
-                value=""
+                value="559"
+                v-model="checkedALaCarte"
                 class="w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-secondary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
               <label
@@ -305,7 +296,7 @@
                 >Paw Polish</label
               >
             </div>
-            <h1>+ $45</h1>
+            <h1>+ ฿559</h1>
           </div>
         </div>
       </div>
@@ -313,7 +304,9 @@
       <div class="bg-primary/20 mx-6 px-8 h-fit pb-8 rounded-lg">
         <div class="flex justify-between py-8">
           <h1>Total</h1>
-          <h1>฿300</h1>
+          <h1>฿{{ sum }}</h1>
+          <h1>฿{{ picked }}</h1>
+          <h1>฿{{ checkedALaCarte }}</h1>
         </div>
         <NuxtLink
           to="/others/report"
@@ -322,6 +315,10 @@
           Checkout
         </NuxtLink>
       </div>
+      <!-- <div id="app">
+        <input type="checkbox" v-model="checked" />
+        <label for="checkbox">{{ checked }}</label>
+      </div> -->
     </div>
   </div>
 </template>
@@ -330,32 +327,37 @@
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 
-const date = ref("");
+const checkedALaCarte = ref([]);
+const picked = ref([]);
+const pack = ref([]);
+var sum: number = 0;
+var sum_checked: number = 0;
 
-const formData = reactive({
-  startDate: "",
-  // endDate: "",
-  // petsAmount: 0,
+function packSelected() {}
+
+watch(checkedALaCarte, (newDate) => {
+  sum = 0;
+  sum_checked = 0;
+  for (var val of checkedALaCarte.value) {
+    sum += parseInt(val, 10);
+    sum_checked += parseInt(val, 10);
+  }
+  if (sum_checked == 0) {
+    sum += Number(picked.value);
+  } else if (Number(picked.value) != 0) {
+    sum = Number(picked.value) + sum_checked;
+  }
+});
+watch(picked, (newDate) => {
+  sum = sum_checked;
+  sum += Number(picked.value);
 });
 
-function formatDate(date: string) {
-  var d = new Date(date).toLocaleDateString(),
-    month = d.split("/")[0],
-    day = d.split("/")[1],
-    year = d.split("/")[2];
-
-  return [year, month, day].join("-");
-}
-
-watch(date, (newDate) => {
-  formData.startDate = formatDate(date.value[0]);
-  // formData.endDate = formatDate(date.value[1]);
-  console.log(formData.startDate);
-  // console.log(formData.endDate);
-  console.log(date.value);
-});
-
-const sizes = ["Small", "Medium", "Larges"];
-
-const size = ref(sizes[0]);
+// const vm = Vue.createApp({
+//   data() {
+//     return {
+//       checked: true,
+//     };
+//   },
+// }).mount("#app");
 </script>

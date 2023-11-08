@@ -31,7 +31,7 @@
         </span>
         <VueDatePicker
           v-model="date"
-          range
+          date
           format="dd/M/yyyy"
           :enable-time-picker="false"
           disable-year-select

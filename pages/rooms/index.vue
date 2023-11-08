@@ -226,7 +226,6 @@ async function getStart() {
   }
 }
 
-
 // Format date to "YYYY-MM-DD"
 function formatDate(date: string) {
   var d = new Date(date).toLocaleDateString(),
