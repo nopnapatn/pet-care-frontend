@@ -184,6 +184,7 @@ type RoomType = {
 };
 
 const { data: roomTypes, error } = await useMyFetch<any>("room-types", {});
+console.log(roomTypes.value);
 const dogRooms = roomTypes.value.filter((roomType: RoomType) => {
   return roomType.pet_type === "DOG";
 });
@@ -204,17 +205,26 @@ const errorMessage = reactive({
 });
 
 async function getStart() {
+  console.log("Updating...");
   const { data: availableRooms, error } = await useMyFetch<any>(
     `room-types/get-available-types`,
     {
       method: "POST",
       body: {
-        startDate: formData.startDate,
-        endDate: formData.endDate,
-        petsAmount: formData.petsAmount,
+        start_date: formData.startDate,
+        end_date: formData.endDate,
+        pets_amount: formData.petsAmount,
       },
     }
   );
+  if (availableRooms) {
+    console.log(availableRooms);
+    console.log(availableRooms.value);
+  }
+  if (error) {
+    console.log(error.value);
+    console.log(error.value?.message);
+  }
 
   // Update the values in a reactive way
   catRooms.length = 0; // Clear the array
@@ -231,11 +241,20 @@ async function getStart() {
       dogRooms.push(roomType);
     }
   });
-
-  if (error) {
-    console.log(error);
-  }
 }
+
+watch(
+  formData,
+  (newData) => {
+    const newPetsAmount = newData.petsAmount;
+    // Ensure that the value is valid (e.g., not empty)
+    if (newPetsAmount !== null) {
+      // Call the function to update room types
+      getStart();
+    }
+  },
+  { deep: true }
+);
 
 // Format date to "YYYY-MM-DD"
 function formatDate(date: string) {
@@ -255,17 +274,6 @@ watch(date, (newDate) => {
   console.log(formData.endDate);
   console.log(date.value);
 });
-
-// watch(
-//   () => formData.petsAmount,
-//   (newPetsAmount) => {
-//     // Fetch updated data when the petsAmount changes
-//     console.log(newPetsAmount);
-//     formData.petsAmount = newPetsAmount;
-//     getStart();
-//     console.log("updated");
-//   }
-// );
 
 async function navigateToRoomDetails(roomType: { id: any }) {
   console.log(auth.user.id);
