@@ -153,14 +153,24 @@
           </label>
         </div>
         <!-- End Image -->
-
-        <div class="mt-5 flex justify-end gap-x-2">
-          <button
-            type="submit"
-            class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-          >
-            Save
-          </button>
+        <div class="flex">
+          <div class="mt-5 flex justify-end gap-x-2">
+            <button
+              type="button"
+              @click="navigateTo('/booked')"
+              class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+            >
+              Later
+            </button>
+          </div>
+          <div class="mt-5 flex justify-end gap-x-2">
+            <button
+              type="submit"
+              class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+            >
+              Save
+            </button>
+          </div>
         </div>
         <!-- End Section -->
       </form>
@@ -174,7 +184,6 @@ import { useAuthStore } from "~/stores/useAuthStore";
 
 const route = useRoute();
 const auth = useAuthStore();
-console.log(route.query.bookingOrderId);
 const formData = reactive({
   user_id: auth.user.id,
   booking_order_id: route.query.bookingOrderId,

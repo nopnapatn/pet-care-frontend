@@ -214,6 +214,11 @@ function calculateNights(date1: string, date2: string) {
   return (Date.parse(date2) - Date.parse(date1)) / 86400000 + 1;
 }
 async function onSubmit() {
+  if (auth.token === null) {
+    await navigateTo(`/login`);
+    return;
+  }
+  console.log(auth.token);
   console.log(formData);
   const { data: response, error } = await useMyFetch<any>(
     `room-types/${route.params.id}/book`,
@@ -232,15 +237,17 @@ async function onSubmit() {
   );
 
   if (response.value !== null) {
-    // console.log("Booking Order Created");
-    // console.log(response.value);
+    console.log("Booking Order Created");
+    console.log(response.value.message);
+
     const bookingOrderId = response.value["booking_order"]["id"];
     await navigateTo(
       `/payments/create?bookingOrderId=${bookingOrderId}&type=HOTEL`
     );
     // console.log(response.value);
+  } else {
+    console.log("Error");
+    console.log(error.value?.message);
   }
-  console.log("Error");
-  console.log(error.value);
 }
 </script>

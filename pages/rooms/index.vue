@@ -165,7 +165,8 @@
 <script setup lang="ts">
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
-
+import { useAuthStore } from "~/stores/useAuthStore";
+const auth = useAuthStore();
 // const { data: dogRooms } = await useMyFetch<any>("room-types/dog-rooms", {});
 // const { data: catRooms } = await useMyFetch<any>("room-types/cat-rooms", {});
 type RoomType = {
@@ -245,6 +246,11 @@ watch(date, (newDate) => {
 });
 
 async function navigateToRoomDetails(roomType: { id: any }) {
+  console.log(auth.user.id);
+  if (!auth.user.id) {
+    navigateTo("/auth/login");
+    return;
+  }
   if (!formData.startDate || !formData.endDate || !formData.petsAmount) {
     alert("Please select date and pets amount");
     errorMessage.petsAmount = "Please select date and pets amount";

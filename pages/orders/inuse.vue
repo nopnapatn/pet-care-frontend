@@ -10,6 +10,7 @@
             <NuxtLink
               to="/orders"
               class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              aria-current="page"
               >Order List</NuxtLink
             >
           </li>
@@ -38,7 +39,6 @@
             <NuxtLink
               to="/orders/inuse"
               class="inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
-              aria-current="page"
               >In Use</NuxtLink
             >
           </li>
@@ -396,32 +396,20 @@
                             </div>
                           </a>
                         </td>
+
                         <td class="h-px w-px whitespace-nowrap">
-                          <a
+                          <button
+                            type="button"
                             class="block"
-                            href="javascript:;"
                             data-hs-overlay="#hs-ai-invoice-modal"
+                            @click="handleCheckOut(bookingOrder.id)"
                           >
-                            <div class="px-6 py-2">
+                            <span class="px-6 py-1.5">
                               <span
-                                class="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                              >
-                                {{ bookingOrder.status }}
-                              </span>
-                            </div>
-                          </a>
-                        </td>
-                        <td class="h-px w-px whitespace-nowrap">
-                          <a class="block" href="javascript:;">
-                            <button
-                              class="px-6 py-1.5"
-                              @click.prevent="handleCheckOut()"
-                            >
-                              <div
-                                class="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white"
+                                class="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-lg border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
                               >
                                 <svg
-                                  class="w-4 h-4"
+                                  class="flex-shrink-0 w-4 h-4"
                                   xmlns="http://www.w3.org/2000/svg"
                                   width="16"
                                   height="16"
@@ -435,10 +423,10 @@
                                     d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"
                                   />
                                 </svg>
-                                Check out
-                              </div>
-                            </button>
-                          </a>
+                                Check Out
+                              </span>
+                            </span>
+                          </button>
                         </td>
                       </tr>
                     </tbody>
@@ -790,13 +778,21 @@
 
 <script setup lang="ts">
 const { data: bookingOrders, error } = await useMyFetch<any>(
-  "booking-orders",
+  "booking-orders/in-use",
   {}
 );
 
-async function handleCheckOut() {
+async function handleCheckOut(bookOrderId: number) {
   console.log("check out");
-  const { data, error } = await useMyFetch<any>("booking-orders/check-out", {});
+  const { data, error } = await useMyFetch<any>(
+    `booking-orders/${bookOrderId}/check-out`,
+    {
+      method: "PUT",
+    }
+  );
+  if (data) {
+    console.log(data.value["message"]);
+  }
 }
 
 const columns = [

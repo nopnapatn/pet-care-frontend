@@ -10,6 +10,7 @@
             <NuxtLink
               to="/orders"
               class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              aria-current="page"
               >Order List</NuxtLink
             >
           </li>
@@ -52,7 +53,6 @@
             <NuxtLink
               to="/orders/canceled"
               class="inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
-              aria-current="page"
               >Canceled</NuxtLink
             >
           </li>
@@ -761,12 +761,13 @@
 
 <script setup lang="ts">
 const { data: bookingOrders, error } = await useMyFetch<any>(
-  "booking-orders",
+  "booking-orders/complete",
   {}
 );
+console.log(bookingOrders);
 
 async function handleCheckOut() {
-  console.log("check out");
+  console.log("canceled");
   const { data, error } = await useMyFetch<any>("booking-orders/check-out", {});
 }
 
