@@ -36,7 +36,7 @@
                   {{ roomType.title }}
                 </h3>
                 <p class="mt-1 text-sm text-gray-500">
-                  We're here to help with any questions Meow Meow.
+                  {{ roomType.description }}
                 </p>
                 <!-- <div
                   class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800"

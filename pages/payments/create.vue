@@ -157,7 +157,7 @@
           <div class="mt-5 flex justify-end gap-x-2">
             <button
               type="button"
-              @click="navigateTo('/booked')"
+              @click="navigateTo('/booked/hotel')"
               class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
             >
               Later
