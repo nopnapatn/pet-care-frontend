@@ -66,6 +66,7 @@
                   id=""
                   min="1"
                   v-model="formData.petsAmount"
+                  v-on:input="handlePetsAmount"
                   class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="0"
                 />
@@ -167,8 +168,6 @@ import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { useAuthStore } from "~/stores/useAuthStore";
 const auth = useAuthStore();
-// const { data: dogRooms } = await useMyFetch<any>("room-types/dog-rooms", {});
-// const { data: catRooms } = await useMyFetch<any>("room-types/cat-rooms", {});
 type RoomType = {
   id: number;
   title: string;
@@ -184,7 +183,6 @@ type RoomType = {
 };
 
 const { data: roomTypes, error } = await useMyFetch<any>("room-types", {});
-console.log(roomTypes.value);
 const dogRooms = roomTypes.value.filter((roomType: RoomType) => {
   return roomType.pet_type === "DOG";
 });
@@ -192,12 +190,16 @@ const catRooms = roomTypes.value.filter((roomType: RoomType) => {
   return roomType.pet_type === "CAT";
 });
 
-const date = ref("");
+const currentDate = new Date();
+const today = `${currentDate.getFullYear()}/${currentDate.getMonth() + 1}/${
+  currentDate.getDate() + 1
+}`;
+const date = ref([today, today]);
 
 const formData = reactive({
-  startDate: "",
-  endDate: "",
-  petsAmount: 0,
+  startDate: today,
+  endDate: today,
+  petsAmount: 1,
 });
 
 const errorMessage = reactive({
@@ -205,10 +207,9 @@ const errorMessage = reactive({
 });
 
 async function getStart() {
-  if (!formData.startDate || !formData.endDate || !formData.petsAmount) {
-    return;
-  }
-  console.log("Updating...");
+  // if (!formData.startDate || !formData.endDate || !formData.petsAmount) {
+  //   return;
+  // }
   const { data: availableRooms, error } = await useMyFetch<any>(
     `room-types/get-available-types`,
     {
@@ -220,6 +221,9 @@ async function getStart() {
       },
     }
   );
+  console.log(formData.startDate);
+  console.log(formData.endDate);
+  console.log(formData.petsAmount);
   if (availableRooms) {
     console.log(availableRooms.value);
   }
@@ -232,11 +236,7 @@ async function getStart() {
   catRooms.length = 0; // Clear the array
   dogRooms.length = 0; // Clear the array
   availableRooms.value.forEach((roomType: RoomType) => {
-    if (
-      roomType.pet_type === "CAT" &&
-      roomType.available_amount > 0 &&
-      roomType.max_pets >= formData.petsAmount
-    ) {
+    if (roomType.pet_type === "CAT") {
       catRooms.push(roomType);
     }
     if (roomType.pet_type === "DOG") {
@@ -246,17 +246,37 @@ async function getStart() {
 }
 
 // Watch for petsAmount
-watch(
-  formData,
-  (newData) => {
-    const newPetsAmount = newData.petsAmount;
-    if (newPetsAmount !== null) {
-      errorMessage.petsAmount = "";
-      getStart();
-    }
-  },
-  { deep: true }
-);
+// watch(
+//   formData,
+//   (newData) => {
+//     const newPetsAmount = newData.petsAmount;
+//     if (
+//       newPetsAmount !== null &&
+//       newPetsAmount !== undefined &&
+//       newPetsAmount > 0
+//     ) {
+//       errorMessage.petsAmount = "";
+//       getStart();
+//     }
+//   },
+//   { deep: true }
+// );
+
+const handlePetsAmount = (e: any) => {
+  if (
+    e.target.value &&
+    !e.target.value.isNaN &&
+    e.target.value > 0 &&
+    e.target.value !== "" &&
+    e.target.value !== null &&
+    e.target.value !== undefined
+  ) {
+    const newPetsAmount = e.target.value;
+    errorMessage.petsAmount = "";
+    formData.petsAmount = newPetsAmount;
+    getStart();
+  }
+};
 
 // Watch for datepicker
 watch(date, (newDate) => {
@@ -288,9 +308,6 @@ async function navigateToRoomDetails(roomType: { id: any }) {
     errorMessage.petsAmount = "Please select date and pets amount";
     return;
   }
-
-  // Check if the following day is available
-
   await navigateTo(
     `/rooms/${roomType.id}?startDate=${formData.startDate}&endDate=${formData.endDate}&petsAmount=${formData.petsAmount}&type='BOOKING'}`
   );

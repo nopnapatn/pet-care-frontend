@@ -290,11 +290,8 @@ const serviceItem = await useMyFetch<any>(
   }
 );
 
-console.log(serviceItem.data.value);
-
 const serviceItems: ServiceItem[] = serviceItem.data.value;
 
-console.log(serviceItems);
 
 const packageItems: ServiceItem[] = serviceItems.filter(
   (item) => item.type === "package"
@@ -325,13 +322,20 @@ watchEffect(() => {
 });
 
 async function navigateToServiceReport() {
-  const alacarteIDs = selectedALaCarte.value.map((item) => item.id).join(",");
+
+  if (selectedPackage.value === 'None' && selectedALaCarte.value.length === 0) {
+    alert('Please select at least one service.');
+    return;
+  }
+
+  const alacarteIDs = selectedALaCarte.value.map(item => item.id).join(',');
+  console.log(alacarteIDs)
 
   const queryParams = {
-    service_date: date,
-    pet_type: selectedPet.value,
-    PackageID: selectedType.value.id, // Include the selectedType
-    AlacarteIDs: alacarteIDs, // Include the selectedAlacarte as a comma-separated string
+    serviceDate: date,
+    petType: selectedPet.value,
+    packageID: selectedType.value.id, // Include the selectedType
+    alacarteIDs: alacarteIDs, // Include the selectedAlacarte as a comma-separated string
   };
 
   await navigateTo({ path: "/others/report", query: queryParams });

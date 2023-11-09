@@ -110,7 +110,7 @@ watch(date, (newDate) => {
 const selectedSize = ref("Small");
 
 const handleSizeChange = () => {
-  console.log(selectedSize.value);
+  // console.log(selectedSize.value);
 };
 
 async function navigateToServiceForm() {
@@ -120,7 +120,7 @@ async function navigateToServiceForm() {
   }
 
   if (!formData.startDate) {
-    alert("Please select date and pets amount");
+    alert("Please select date.");
     return;
   }
 
