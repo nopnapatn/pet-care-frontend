@@ -321,33 +321,15 @@ watchEffect(() => {
   }
 });
 
-
-// To Use
-const selectedAlacarte = ref([]); // Default selected a la carte services
-
-const total = computed(() => {
-  let totalAmount = 0;
-
-  // Calculate total based on the selected package type
-  totalAmount += parseFloat(selectedType.value.price);
-  console.log(selectedType);
-
-  // Calculate total based on selected a la carte services
-  for (const item of selectedAlacarte.value) {
-    totalAmount += parseFloat(item.price);
-  }
-
-  return totalAmount;
-});
-
 async function navigateToServiceReport() {
 
-  if (selectedPackage.value === 'None' && selectedAlacarte.value.length === 0) {
+  if (selectedPackage.value === 'None' && selectedALaCarte.value.length === 0) {
     alert('Please select at least one service.');
     return;
   }
 
-  const alacarteIDs = selectedAlacarte.value.map(item => item.id).join(',');
+  const alacarteIDs = selectedALaCarte.value.map(item => item.id).join(',');
+  console.log(alacarteIDs)
 
   const queryParams = {
     serviceDate: date,

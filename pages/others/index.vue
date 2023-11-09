@@ -110,7 +110,7 @@ watch(date, (newDate) => {
 const selectedSize = ref("Small");
 
 const handleSizeChange = () => {
-  console.log(selectedSize.value);
+  // console.log(selectedSize.value);
 };
 
 async function navigateToServiceForm() {
