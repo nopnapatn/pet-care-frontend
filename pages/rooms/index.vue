@@ -1,20 +1,20 @@
 <template>
   <!-- Hero -->
   <section>
-    <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-20">
       <div class="relative mx-auto max-w-4xl grid space-y-5 sm:space-y-10">
         <!-- Title -->
         <div class="text-center">
           <p
             class="text-xs font-semibold text-gray-500 tracking-wide uppercase mb-3 dark:text-gray-200"
           >
-            Small business solutions
+            Easy, fast, and secure online booking.
           </p>
           <h1
             class="text-3xl text-gray-800 font-primary font-bold sm:text-5xl lg:text-6xl lg:leading-tight dark:text-gray-200"
           >
-            Turn online shoppers into
-            <span class="text-primary font-primary">lifetime customers</span>
+            Book a pet friendly place <br />
+            <span class="text-primary font-primary">for your bestfriend.</span>
           </h1>
         </div>
         <!-- End Title -->
@@ -74,8 +74,48 @@
           </div>
         </form>
         <!-- End Form -->
-        {{ petsAmount }}
-        <div class="p-0 text-red-600">{{ errorMessage.petsAmount }}</div>
+        <div
+          v-if="
+            errorMessage.petsAmount !== undefined &&
+            errorMessage.petsAmount !== null &&
+            errorMessage.petsAmount.length !== 0
+          "
+        >
+          <div
+            class="bg-red-100 border border-red-200 text-sm text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500"
+            role="alert"
+          >
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <svg
+                  class="flex-shrink-0 h-4 w-4 mt-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 16v-4" />
+                  <path d="M12 8h.01" />
+                </svg>
+              </div>
+              <div class="ms-3">
+                <h3 class="font-semibold">
+                  {{ errorMessage.petsAmount }}
+                </h3>
+                <!-- <p class="mt-2 text-sm text-gray-700 dark:text-gray-400">
+                  Chris Lynch published a new version of this page. Refresh to
+                  see the changes.
+                </p> -->
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -311,7 +351,7 @@ async function navigateToRoomDetails(roomType: { id: any }) {
     return;
   }
   if (!formData.startDate || !formData.endDate || !formData.petsAmount) {
-    alert("Please select date and pets amount");
+    // alert("Please select date and pets amount");
     errorMessage.petsAmount = "Please select date and pets amount";
     return;
   }
@@ -319,6 +359,8 @@ async function navigateToRoomDetails(roomType: { id: any }) {
     `/rooms/${roomType.id}?startDate=${formData.startDate}&endDate=${formData.endDate}&petsAmount=${formData.petsAmount}&type='BOOKING'}`
   );
 }
+
+console.log(errorMessage.petsAmount);
 </script>
 
 <style>

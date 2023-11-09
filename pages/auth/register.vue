@@ -42,7 +42,7 @@
           id="phoneNumber"
           v-model="formData.phoneNumber"
           label="Phone Number"
-          placeholder="Phone Number"
+          placeholder="xxx-xxx-xxxx"
           autocomplete="on"
           required
         >
