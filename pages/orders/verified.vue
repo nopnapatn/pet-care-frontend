@@ -218,15 +218,6 @@
                             <span
                               class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
                             >
-                              Room Number
-                            </span>
-                          </div>
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left">
-                          <div class="flex items-center gap-x-2">
-                            <span
-                              class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
-                            >
                               User ID
                             </span>
                           </div>
@@ -312,20 +303,7 @@
                             </div>
                           </a>
                         </td>
-                        <td class="h-px w-px whitespace-nowrap">
-                          <a
-                            class="block"
-                            href="javascript:;"
-                            data-hs-overlay="#hs-ai-invoice-modal"
-                          >
-                            <div class="px-6 py-2">
-                              <span
-                                class="text-sm text-gray-600 dark:text-gray-400"
-                                >{{ bookingOrder.room_number }}</span
-                              >
-                            </div>
-                          </a>
-                        </td>
+
                         <td class="h-px w-px whitespace-nowrap">
                           <a
                             class="block"

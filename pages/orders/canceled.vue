@@ -52,7 +52,7 @@
           <li class="mr-2">
             <NuxtLink
               to="/orders/canceled"
-              class="inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
+              class="inline-block p-4 text-red-600 border-b-2 border-red-600 rounded-t-lg active dark:text-red-500 dark:border-red-500"
               >Canceled</NuxtLink
             >
           </li>
@@ -218,15 +218,6 @@
                             <span
                               class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
                             >
-                              Room Number
-                            </span>
-                          </div>
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left">
-                          <div class="flex items-center gap-x-2">
-                            <span
-                              class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
-                            >
                               User ID
                             </span>
                           </div>
@@ -312,20 +303,7 @@
                             </div>
                           </a>
                         </td>
-                        <td class="h-px w-px whitespace-nowrap">
-                          <a
-                            class="block"
-                            href="javascript:;"
-                            data-hs-overlay="#hs-ai-invoice-modal"
-                          >
-                            <div class="px-6 py-2">
-                              <span
-                                class="text-sm text-gray-600 dark:text-gray-400"
-                                >{{ bookingOrder.room_number }}</span
-                              >
-                            </div>
-                          </a>
-                        </td>
+
                         <td class="h-px w-px whitespace-nowrap">
                           <a
                             class="block"
@@ -404,7 +382,7 @@
                           >
                             <div class="px-6 py-2">
                               <span
-                                class="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-800/30 dark:text-red-500"
                               >
                                 {{ bookingOrder.status }}
                               </span>
