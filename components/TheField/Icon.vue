@@ -23,11 +23,21 @@
         :value="value"
         :placeholder="placeholder"
         class="mt-1 w-full border-none p-0 focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+        @input="updateValue"
       />
     </label>
   </div>
 </template>
 
 <script setup lang="ts">
+import { defineProps, defineEmits } from 'vue';
+
 const props = defineProps(["title", "value", "placeholder", "id", "type"]);
+
+// emits option for v-model
+const emits = defineEmits(['update:value']);
+
+const updateValue = (event: Event) => {
+  emits('update:value', (event.target as HTMLInputElement).value);
+};
 </script>
