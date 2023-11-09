@@ -256,6 +256,9 @@ async function navigateToRoomDetails(roomType: { id: any }) {
     errorMessage.petsAmount = "Please select date and pets amount";
     return;
   }
+
+  // Check if the following day is available
+
   await navigateTo(
     `/rooms/${roomType.id}?startDate=${formData.startDate}&endDate=${formData.endDate}&petsAmount=${formData.petsAmount}&type='BOOKING'}`
   );

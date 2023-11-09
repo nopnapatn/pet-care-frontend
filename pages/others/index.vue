@@ -10,14 +10,11 @@
         </p>
       </div>
       <div class="flex items-center">
-        <select
-          name="pet-size"
-          id="pet-size"
-          class="select select-bordered bg-white focus:ring-primary focus:border-primary"
-        >
-          <option value="2">Small</option>
-          <option value="3">Medium</option>
-          <option value="4">Large</option>
+        <select v-model="selectedSize" name="pet-size" id="pet-size"
+          class="select select-bordered bg-white focus:ring-primary focus:border-primary" @change="handleSizeChange">
+          <option value="Small">Small</option>
+          <option value="Medium">Medium</option>
+          <option value="Large">Large</option>
         </select>
         <h1 class="ml-4">Weight Length : 1-20 pounds</h1>
       </div>
@@ -25,32 +22,60 @@
       <div class="flex">
         <!-- Start Date Picker -->
         <span
-          class="inline-flex items-center px-3 text-sm text-gray-900 bg-neutral-100 border border-r-0 border-gray-200 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
-        >
+          class="inline-flex items-center px-3 text-sm text-gray-900 bg-neutral-100 border border-r-0 border-gray-200 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
           Date
         </span>
-        <VueDatePicker
-          v-model="date"
-          range
-          format="dd/M/yyyy"
-          :enable-time-picker="false"
-          disable-year-select
-          auto-apply
-          placeholder="Select date"
-          :min-date="new Date(new Date().setDate(new Date().getDate() + 1))"
-          :max-date="new Date(new Date().setDate(new Date().getDate() + 30))"
-          required
-        ></VueDatePicker>
+        <VueDatePicker v-model="date" range format="dd/M/yyyy" :enable-time-picker="false" disable-year-select auto-apply
+          placeholder="Select date" :min-date="new Date(new Date().setDate(new Date().getDate() + 1))"
+          :max-date="new Date(new Date().setDate(new Date().getDate() + 30))" required></VueDatePicker>
         <!-- End Date Picker -->
       </div>
       <!-- </div> -->
-      <NuxtLink to="/others/form" class="btn btn-secondary text-white"
-        >Booking</NuxtLink
-      >
+      <a @click="navigateToServiceForm()" 
+      class="btn btn-secondary text-white">Booking</a>
+      <!-- <NuxtLink @click="navigateToServiceForm(selectedSize)" 
+       class="btn btn-secondary text-white">Booking</NuxtLink> -->
     </div>
     <div class="h-full overflow-y-auto py-10 justify-start">
       <div class="flex flex-col gap-y-8 shadow-inner ml-10 mr-28">
-        <TheTableSpaTable></TheTableSpaTable>
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <div class="flex justify-center px-6 py-3 bg-secondary text-md font-semibold text-white">
+            Spa Bath Package
+          </div>
+          <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-center bg-primary/20">
+                  Breed Size
+                </th>
+                <th scope="col" class="px-6 py-3 text-center bg-primary/20">
+                  Short Coat
+                </th>
+                <th scope="col" class="px-6 py-3 text-center bg-primary/20">
+                  Long Coat
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-gray-200 dark:border-gray-700">
+                <td class="px-6 py-4 text-center text-gray-500">Small</td>
+                <td class="px-6 py-4 text-center text-gray-500">$30</td>
+                <td class="px-6 py-4 text-center text-gray-500">$35</td>
+              </tr>
+              <tr class="border-b border-gray-200 dark:border-gray-700">
+                <td class="px-6 py-4 text-center text-gray-500">Medium</td>
+                <td class="px-6 py-4 text-center text-gray-500">$30</td>
+                <td class="px-6 py-4 text-center text-gray-500">$35</td>
+              </tr>
+              <tr class="border-b border-gray-200 dark:border-gray-700">
+                <td class="px-6 py-4 text-center text-gray-500">Large</td>
+                <td class="px-6 py-4 text-center text-gray-500">$30</td>
+                <td class="px-6 py-4 text-center text-gray-500">$35</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         <TheTableGroomTable></TheTableGroomTable>
         <TheTableALaCarte></TheTableALaCarte>
       </div>
@@ -61,6 +86,12 @@
 <script setup lang="ts">
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
+import { useAuthStore } from "~/stores/useAuthStore";
+const auth = useAuthStore();
+
+const errorMessage = reactive({
+  petsAmount: "",
+});
 
 const date = ref("");
 
@@ -86,4 +117,29 @@ watch(date, (newDate) => {
   // console.log(formData.endDate);
   console.log(date.value);
 });
+
+// Selecting Size
+const selectedSize = ref("Small");
+
+const handleSizeChange = () => {
+  console.log(selectedSize.value);
+
+};
+
+async function navigateToServiceForm() {
+  if (!auth.user.id) {
+    navigateTo("/auth/login");
+    return;
+  }
+
+  if (!formData.startDate) {
+    alert("Please select date and pets amount");
+    return;
+  }
+
+  await navigateTo(
+    `/others/form?startDate=${formData.startDate}&selectedSize=${selectedSize.value}`
+  );
+}
+
 </script>
