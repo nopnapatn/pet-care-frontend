@@ -40,6 +40,7 @@
                       placeholder="John Doe"
                       v-model="formData.name"
                       label="First Name"
+                      disabled
                     />
                     <div v-if="errorMessage.name" class="text-sm text-red-500">
                       {{ errorMessage.name }}
@@ -196,12 +197,12 @@
 import { useAuthStore } from "~/stores/useAuthStore";
 const route = useRoute();
 const auth = useAuthStore();
-
+console.log(route.query.price);
 const formData = reactive({
   user_id: auth.user.id,
   booking_order_id: route.query.bookingOrderId,
   name: "",
-  amount: "",
+  amount: route.query.price,
   time: "",
   date: "",
   type: route.query.type,
@@ -263,7 +264,7 @@ async function onSubmit() {
   );
   formDataToSend.append("user_id", formData.user_id);
   formDataToSend.append("name", formData.name);
-  formDataToSend.append("amount", formData.amount);
+  formDataToSend.append("amount", route.query.price as string);
   formDataToSend.append("time", formData.time);
   formDataToSend.append("date", formData.date);
   formDataToSend.append("type", route.query.type as string);
