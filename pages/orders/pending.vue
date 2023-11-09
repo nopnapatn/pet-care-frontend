@@ -416,7 +416,11 @@
                             type="button"
                             class="block"
                             data-hs-overlay="#hs-ai-invoice-modal"
-                            @click="navigateTo(`/payments/${bookingOrder.id}`)"
+                            @click="
+                              navigateTo(
+                                `/payments/${bookingOrder.id}?paymentId=${bookingOrder.payment.id}`
+                              )
+                            "
                           >
                             <span class="px-6 py-1.5">
                               <span
@@ -796,21 +800,6 @@ const { data: bookingOrders, error } = await useMyFetch<any>(
   {}
 );
 console.log(bookingOrders);
-
-async function handleCheckOut() {
-  console.log("check out");
-  const { data, error } = await useMyFetch<any>("booking-orders/check-out", {});
-}
-
-async function verifyBookingOrder() {
-  console.log("verify");
-  const { data, error } = await useMyFetch<any>("booking-orders/verify", {
-    method: "PUT",
-    body: {
-      id: 1,
-    },
-  });
-}
 
 const columns = [
   {

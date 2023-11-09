@@ -22,18 +22,18 @@
       <tbody>
         <tr class="border-b border-gray-200 dark:border-gray-700">
           <td class="px-6 py-4 text-center text-gray-500">Small</td>
-          <td class="px-6 py-4 text-center text-gray-500">$30</td>
-          <td class="px-6 py-4 text-center text-gray-500">$35</td>
+          <td class="px-6 py-4 text-center text-gray-500">฿1000</td>
+          <td class="px-6 py-4 text-center text-gray-500">฿1200</td>
         </tr>
         <tr class="border-b border-gray-200 dark:border-gray-700">
           <td class="px-6 py-4 text-center text-gray-500">Medium</td>
-          <td class="px-6 py-4 text-center text-gray-500">$30</td>
-          <td class="px-6 py-4 text-center text-gray-500">$35</td>
+          <td class="px-6 py-4 text-center text-gray-500">฿1500</td>
+          <td class="px-6 py-4 text-center text-gray-500">฿1800</td>
         </tr>
         <tr class="border-b border-gray-200 dark:border-gray-700">
           <td class="px-6 py-4 text-center text-gray-500">Large</td>
-          <td class="px-6 py-4 text-center text-gray-500">$30</td>
-          <td class="px-6 py-4 text-center text-gray-500">$35</td>
+          <td class="px-6 py-4 text-center text-gray-500">฿1800</td>
+          <td class="px-6 py-4 text-center text-gray-500">฿2200</td>
         </tr>
       </tbody>
     </table>

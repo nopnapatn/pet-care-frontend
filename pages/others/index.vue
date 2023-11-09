@@ -11,15 +11,25 @@
       </div>
       <div class="flex items-center">
         <select
+          v-model="selectedSize"
           name="pet-size"
           id="pet-size"
           class="select select-bordered bg-white focus:ring-primary focus:border-primary"
+          @change="handleSizeChange"
         >
-          <option value="2">Small</option>
-          <option value="3">Medium</option>
-          <option value="4">Large</option>
+          <option value="Small">Small</option>
+          <option value="Medium">Medium</option>
+          <option value="Large">Large</option>
         </select>
-        <h1 class="ml-4">Weight Length : 1-20 pounds</h1>
+        <h1 v-if="selectedSize === 'Small'" class="ml-4">
+          Weight Length : 0.45 - 10 kg.
+        </h1>
+        <h1 v-if="selectedSize === 'Medium'" class="ml-4">
+          Weight Length : 11-30 kg.
+        </h1>
+        <h1 v-if="selectedSize === 'Large'" class="ml-4">
+          Weight Length : 31+ kg.
+        </h1>
       </div>
       <!-- <div class="sm:pb-0 sm:flex-[1_0_0%] bg-black"> -->
       <div class="flex">
@@ -31,7 +41,7 @@
         </span>
         <VueDatePicker
           v-model="date"
-          range
+          date
           format="dd/M/yyyy"
           :enable-time-picker="false"
           disable-year-select
@@ -44,9 +54,11 @@
         <!-- End Date Picker -->
       </div>
       <!-- </div> -->
-      <NuxtLink to="/others/form" class="btn btn-secondary text-white"
-        >Booking</NuxtLink
+      <a @click="navigateToServiceForm()" class="btn btn-secondary text-white"
+        >Booking</a
       >
+      <!-- <NuxtLink @click="navigateToServiceForm(selectedSize)" 
+       class="btn btn-secondary text-white">Booking</NuxtLink> -->
     </div>
     <div class="h-full overflow-y-auto py-10 justify-start">
       <div class="flex flex-col gap-y-8 shadow-inner ml-10 mr-28">
@@ -61,6 +73,12 @@
 <script setup lang="ts">
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
+import { useAuthStore } from "~/stores/useAuthStore";
+const auth = useAuthStore();
+
+const errorMessage = reactive({
+  petsAmount: "",
+});
 
 const date = ref("");
 
@@ -80,10 +98,34 @@ function formatDate(date: string) {
 }
 
 watch(date, (newDate) => {
-  formData.startDate = formatDate(date.value[0]);
+  formData.startDate = formatDate(date.value);
   // formData.endDate = formatDate(date.value[1]);
+  console.log(date.value);
   console.log(formData.startDate);
   // console.log(formData.endDate);
   console.log(date.value);
 });
+
+// Selecting Size
+const selectedSize = ref("Small");
+
+const handleSizeChange = () => {
+  // console.log(selectedSize.value);
+};
+
+async function navigateToServiceForm() {
+  if (!auth.user.id) {
+    navigateTo("/auth/login");
+    return;
+  }
+
+  if (!formData.startDate) {
+    alert("Please select date.");
+    return;
+  }
+
+  await navigateTo(
+    `/others/form?startDate=${formData.startDate}&selectedSize=${selectedSize.value}`
+  );
+}
 </script>

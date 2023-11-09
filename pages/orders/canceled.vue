@@ -761,7 +761,7 @@
 
 <script setup lang="ts">
 const { data: bookingOrders, error } = await useMyFetch<any>(
-  "booking-orders/complete",
+  "booking-orders/canceled",
   {}
 );
 console.log(bookingOrders);

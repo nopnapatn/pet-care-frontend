@@ -47,12 +47,6 @@
             climb, jump, run around and sleep..
           </p>
         </div>
-        <!-- <div
-            class="space-y-8 mt-4 lg:grid lg:grid-cols-2 px-36 sm:gap-6 xl:gap-10 lg:space-y-0"
-          >
-            <TheCardAbout title="Hotel"></TheCardAbout>
-            <TheCardAbout title="Other Services"></TheCardAbout>
-          </div> -->
       </div>
     </div>
     <!-- Conditions -->
@@ -60,67 +54,14 @@
       <div class="flex flex-col py-16 px-40">
         <span class="headline-large text-my-black">Conditions</span>
         <TheCondition></TheCondition>
-        <!-- <div class="grid grid-cols-3">
-          <div class=" ">Age and vaccines</div>
-          <div>dfdsfs</div>
-          <div>dfdsfs</div>
-        </div> -->
       </div>
     </div>
     <!-- Shop banner -->
     <div class="min-h-fit bg-primary/20">
-      <div class="flex items-center justify-between pl-40 lg:flex-row-reverse">
-        <!-- <TheCarousal></TheCarousal>
-        <div>
-          <h1 class="text-5xl font-primary font-bold">Get Products!</h1>
-          <p class="text-base py-6">
-            Checkout thousands products for your pet.
-          </p>
-          <button class="btn btn-secondary text-white">SHOP NOW</button>
-        </div> -->
-      </div>
+      <div
+        class="flex items-center justify-between pl-40 lg:flex-row-reverse"
+      ></div>
     </div>
-    <!-- staff -->
-    <!-- <div class="bg-primary-white">
-        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-32 lg:px-6">
-          <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-16">
-            <div class="h-96 rounded-lg bg-gray-100"></div>
-            <div class="flex flex-col justify-center p-8 pr-20 items-center">
-              <div class="headline-large text-primary-orange-100">
-                <p class="">Staff you can trust</p>
-              </div>
-              <div class="flex items-center pt-10">
-                <img src="/images/radio-home.png" alt="" class="h-5 w-5 mr-4" />
-                <p class="text-primary-green-100 text-lg font-bold">
-                  All staff pass a background check
-                </p>
-              </div>
-              <div class="flex items-start py-8">
-                <img
-                  src="/images/radio-home.png"
-                  alt=""
-                  class="h-5 w-5 mt-1 mr-4"
-                />
-                <p class="text-primary-green-100 text-lg font-bold">
-                  All staff provide a deatailed profile <br />
-                  and personal infomation
-                </p>
-              </div>
-              <div class="flex items-start pb-4">
-                <img
-                  src="/images/radio-home.png"
-                  alt=""
-                  class="h-5 w-5 mt-1 mr-4"
-                />
-                <p class="text-primary-green-100 text-lg font-bold">
-                  All staff are approved by out team <br />
-                  of sitter specialists
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
     <!-- Location -->
     <div class="flex flex-col py-16 px-56 justify-center pb-36">
       <!-- <span class="headline-large text-center text-my-black">Location</span> -->

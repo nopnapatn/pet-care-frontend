@@ -153,6 +153,18 @@
                           </div>
                         </div>
                       </li>
+                      <li>
+                        <label for="ownerInstruction"
+                          >Any special request?</label
+                        >
+                        <textarea
+                          id="ownerInstruction"
+                          name="ownerInstruction"
+                          rows="3"
+                          class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
+                          v-model="formData.ownerInstruction"
+                        ></textarea>
+                      </li>
                     </ul>
                   </div>
                 </div>

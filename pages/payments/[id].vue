@@ -113,6 +113,7 @@
           <div class="mt-5 flex justify-end gap-x-2">
             <button
               type="button"
+              @click="rejectBookingOrder()"
               class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
             >
               Reject
@@ -121,6 +122,7 @@
           <div class="mt-5 flex justify-end gap-x-2">
             <button
               type="submit"
+              @click="verifyBookingOrder()"
               class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
             >
               Verify
@@ -139,11 +141,41 @@ import { useAuthStore } from "~/stores/useAuthStore";
 
 const route = useRoute();
 const auth = useAuthStore();
-
+console.log(route.query.paymentId);
 const { data: payment, error } = await useMyFetch<any>(
   `payments/+${route.params.id}`,
   {}
 );
+
+async function verifyBookingOrder() {
+  console.log("verify");
+  const { data: response, error } = await useMyFetch<any>(
+    `payments/${route.query.paymentId}/verify`,
+    {
+      method: "PUT",
+    }
+  );
+
+  if (response) {
+    console.log(response.value.message);
+    navigateTo("/orders/verified");
+  }
+}
+
+async function rejectBookingOrder() {
+  console.log("reject");
+  const { data: response, error } = await useMyFetch<any>(
+    `payments/${route.query.paymentId}/reject`,
+    {
+      method: "PUT",
+    }
+  );
+
+  if (response) {
+    console.log(response.value.message);
+    navigateTo("/orders/pending");
+  }
+}
 
 async function onSubmit() {}
 </script>

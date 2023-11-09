@@ -66,6 +66,7 @@
                   id=""
                   min="1"
                   v-model="formData.petsAmount"
+                  v-on:input="handlePetsAmount"
                   class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="0"
                 />
@@ -207,8 +208,6 @@ import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { useAuthStore } from "~/stores/useAuthStore";
 const auth = useAuthStore();
-// const { data: dogRooms } = await useMyFetch<any>("room-types/dog-rooms", {});
-// const { data: catRooms } = await useMyFetch<any>("room-types/cat-rooms", {});
 type RoomType = {
   id: number;
   title: string;
@@ -231,12 +230,16 @@ const catRooms = roomTypes.value.filter((roomType: RoomType) => {
   return roomType.pet_type === "CAT";
 });
 
-const date = ref("");
+const currentDate = new Date();
+const today = `${currentDate.getFullYear()}/${currentDate.getMonth() + 1}/${
+  currentDate.getDate() + 1
+}`;
+const date = ref([today, today]);
 
 const formData = reactive({
-  startDate: "",
-  endDate: "",
-  petsAmount: 0,
+  startDate: today,
+  endDate: today,
+  petsAmount: 1,
 });
 
 const errorMessage = reactive({
@@ -244,27 +247,85 @@ const errorMessage = reactive({
 });
 
 async function getStart() {
+  // if (!formData.startDate || !formData.endDate || !formData.petsAmount) {
+  //   return;
+  // }
   const { data: availableRooms, error } = await useMyFetch<any>(
     `room-types/get-available-types`,
     {
       method: "POST",
       body: {
-        startDate: formData.startDate,
-        endDate: formData.endDate,
-        petsAmount: formData.petsAmount,
+        start_date: formData.startDate,
+        end_date: formData.endDate,
+        pets_amount: formData.petsAmount,
       },
     }
   );
-  catRooms.value = availableRooms.value.filter((roomType: RoomType) => {
-    return roomType.pet_type === "CAT";
-  });
-  dogRooms.value = availableRooms.value.filter((roomType: RoomType) => {
-    return roomType.pet_type === "DOG";
-  });
-  if (error) {
-    console.log(error);
+  console.log(formData.startDate);
+  console.log(formData.endDate);
+  console.log(formData.petsAmount);
+  if (availableRooms) {
+    console.log(availableRooms.value);
   }
+  if (error.value) {
+    console.log(error.value);
+    console.log(error.value?.message);
+  }
+
+  // Update the values in a reactive way
+  catRooms.length = 0; // Clear the array
+  dogRooms.length = 0; // Clear the array
+  availableRooms.value.forEach((roomType: RoomType) => {
+    if (roomType.pet_type === "CAT") {
+      catRooms.push(roomType);
+    }
+    if (roomType.pet_type === "DOG") {
+      dogRooms.push(roomType);
+    }
+  });
 }
+
+// Watch for petsAmount
+// watch(
+//   formData,
+//   (newData) => {
+//     const newPetsAmount = newData.petsAmount;
+//     if (
+//       newPetsAmount !== null &&
+//       newPetsAmount !== undefined &&
+//       newPetsAmount > 0
+//     ) {
+//       errorMessage.petsAmount = "";
+//       getStart();
+//     }
+//   },
+//   { deep: true }
+// );
+
+const handlePetsAmount = (e: any) => {
+  if (
+    e.target.value &&
+    !e.target.value.isNaN &&
+    e.target.value > 0 &&
+    e.target.value !== "" &&
+    e.target.value !== null &&
+    e.target.value !== undefined
+  ) {
+    const newPetsAmount = e.target.value;
+    errorMessage.petsAmount = "";
+    formData.petsAmount = newPetsAmount;
+    getStart();
+  }
+};
+
+// Watch for datepicker
+watch(date, (newDate) => {
+  formData.startDate = formatDate(date.value[0]);
+  formData.endDate = formatDate(date.value[1]);
+  console.log(formData.startDate);
+  console.log(formData.endDate);
+  getStart();
+});
 
 // Format date to "YYYY-MM-DD"
 function formatDate(date: string) {
@@ -275,15 +336,6 @@ function formatDate(date: string) {
 
   return [year, month, day].join("-");
 }
-
-// Watch for datepicker
-watch(date, (newDate) => {
-  formData.startDate = formatDate(date.value[0]);
-  formData.endDate = formatDate(date.value[1]);
-  console.log(formData.startDate);
-  console.log(formData.endDate);
-  console.log(date.value);
-});
 
 async function navigateToRoomDetails(roomType: { id: any }) {
   console.log(auth.user.id);

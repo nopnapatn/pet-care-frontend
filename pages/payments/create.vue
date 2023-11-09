@@ -181,9 +181,9 @@
 
 <script setup lang="ts">
 import { useAuthStore } from "~/stores/useAuthStore";
-
 const route = useRoute();
 const auth = useAuthStore();
+
 const formData = reactive({
   user_id: auth.user.id,
   booking_order_id: route.query.bookingOrderId,
@@ -232,8 +232,18 @@ async function onSubmit() {
   if (formData.slip === null) {
     errorMessage.slip = "Slip is required";
   }
+  if (
+    formData.name === "" ||
+    formData.amount === "" ||
+    formData.time === "" ||
+    formData.date === "" ||
+    formData.slip === null
+  ) {
+    return;
+  }
 
   const formDataToSend = new FormData();
+
   formDataToSend.append(
     "booking_order_id",
     formData.booking_order_id!.toString()
@@ -256,9 +266,7 @@ async function onSubmit() {
   });
   if (response !== null) {
     // to mybooking
-    console.log(response.value);
-    console.log(response.value["message"]);
-    console.log(response.value["imagePath"]);
+    console.log(response.value.message);
     await navigateTo("/booked");
   }
 }
