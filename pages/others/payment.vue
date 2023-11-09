@@ -131,3 +131,23 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useAuthStore } from "~/stores/useAuthStore";
+const auth = useAuthStore();
+
+console.log(auth.user?.id);
+
+const fetchedCurrentOrder = await useMyFetch<any>(
+  "service-orders/get-user-current-order",
+  {
+    params: {
+      user_id: auth.user?.id,
+    },
+  }
+)
+
+const currentOrder = fetchedCurrentOrder.data.value;
+
+console.log(currentOrder); 
+</script>
