@@ -61,8 +61,8 @@
       </ol>
     </div>
     <div class="flex pt-8 px-10 gap-8">
-      <h1>Size: Small</h1>
-      <h1>Date: 10/12/2023</h1>
+      <h1>Size: {{ breedSize }}</h1>
+      <h1>Date: {{ date }}</h1>
     </div>
     <div class="grid grid-cols-3 pt-8">
       <!-- col 1 -->
@@ -217,7 +217,7 @@
           @click="navigateToServiceReport()"
           class="btn btn-primary text-white bg-secondary w-full"
         >
-          Proceed
+          Checkout
         </a>
       </div>
     </div>
@@ -255,13 +255,6 @@ watch(selectedType, (newDate) => {
   sum += Number(selectedType.value["price"]);
 });
 
-// const vm = Vue.createApp({
-//   data() {
-//     return {
-//       checked: true,
-//     };
-//   },
-// }).mount("#app");
 const auth = useAuthStore();
 
 type ServiceItem = {
@@ -330,25 +323,9 @@ watchEffect(() => {
     selectedType.value = { price: 0 };
   }
 });
-// To Use
-
-// const total = computed(() => {
-//   let totalAmount = 0;
-
-//   // Calculate total based on the selected package type
-//   totalAmount += parseFloat(selectedType.value.price);
-//   console.log(selectedType);
-
-//   // Calculate total based on selected a la carte services
-//   for (const item of selectedAlacarte.value) {
-//     totalAmount += parseFloat(item.price);
-//   }
-
-//   return totalAmount;
-// });
 
 async function navigateToServiceReport() {
-  const alacarteIDs = selectedAlacarte.value.map((item) => item.id).join(",");
+  const alacarteIDs = selectedALaCarte.value.map((item) => item.id).join(",");
 
   const queryParams = {
     service_date: date,
