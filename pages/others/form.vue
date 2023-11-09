@@ -73,20 +73,21 @@
           <div class="flex gap-4">
             <input
               type="radio"
-              name="radio-1"
+              name="dog_type"
+              value="DOG"
               id="dog"
-              value="dog"
+              v-model="selectedPet"
               class="text-secondary focus:ring-primary"
-              checked
             />
             <label for="dog">Dog</label>
           </div>
           <div class="flex gap-4">
             <input
               type="radio"
-              name="radio-1"
+              name="cat_type"
+              value="CAT"
               id="cat"
-              value="cat"
+              v-model="selectedPet"
               class="text-secondary focus:ring-primary"
             />
             <label for="cat">Cat</label>
@@ -98,11 +99,10 @@
           <div class="flex gap-4">
             <input
               type="radio"
-              name="radio-2"
+              name="spa"
+              value="Spa Bath Package"
               id="spa"
-              value="spa"
-              v-model="pack"
-              v-on:change="packSelected"
+              v-model="selectedPackage"
               class="text-secondary focus:ring-primary"
               checked
             />
@@ -111,28 +111,25 @@
           <div class="flex gap-4">
             <input
               type="radio"
-              name="radio-2"
+              name="groom"
+              value="All-Inclusive Groom Package"
               id="groom"
-              value="groom"
-              v-model="pack"
+              v-model="selectedPackage"
               class="text-secondary focus:ring-primary"
-              checked
             />
             <label for="groom">All-Inclusive Groom Package</label>
           </div>
           <div class="flex gap-4">
             <input
               type="radio"
-              name="radio-2"
+              name="none"
+              value="None"
+              v-model="selectedPackage"
               id="none"
-              value="none"
-              v-model="pack"
               class="text-secondary focus:ring-primary"
-              checked
             />
             <label for="none">None</label>
           </div>
-          {{ pack }}
         </div>
       </div>
       <!-- col 2 -->
@@ -140,163 +137,72 @@
         <div class="flex flex-col gap-y-4 items-start mb-4">
           <!-- select type -->
           <div class="flex flex-col gap-y-2 w-full">
-            <h1 class="text-lg">Select type</h1>
-            <div class="flex gap-4">
-              <input
-                type="radio"
-                name="radio-3"
-                id="radio3"
-                class="text-secondary focus:ring-primary"
-                value="45"
-                v-model="picked"
-              />
-              <div class="flex justify-between w-full">
-                <label for="radio3">Trim Only</label>
-                <h1 class="text-md">$45</h1>
+            <div v-if="selectedPackage !== 'None'">
+              <h1 class="text-lg">Select type</h1>
+            </div>
+            <div v-if="selectedPackage === 'Spa Bath Package'">
+              <!-- Render spa-related options dynamically based on spaItems -->
+              <div v-for="item in spaItems" :key="item.id">
+                <!-- Render item details here using item -->
+                <div class="flex gap-4">
+                  <input
+                    type="radio"
+                    name="radio-3"
+                    :value="item"
+                    v-model="selectedType"
+                    class="text-secondary focus:ring-primary"
+                  />
+                  <div class="flex justify-between w-full">
+                    <label for="radio3">{{ item.option }}</label>
+                    <h1 class="text-md">฿{{ item.price }}</h1>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="flex gap-4">
-              <input
-                type="radio"
-                name="radio-3"
-                id="radio4"
-                class="text-secondary focus:ring-primary"
-                value="60"
-                v-model="picked"
-              />
-              <div class="flex justify-between w-full">
-                <label for="radio4">Complete Cut</label>
-                <h1>$60</h1>
+
+            <div v-else-if="selectedPackage === 'All-Inclusive Groom Package'">
+              <!-- Render groom-related options dynamically based on groomItems -->
+              <div v-for="item in groomItems" :key="item.id">
+                <!-- Render item details here using item -->
+                <div class="flex gap-4">
+                  <input
+                    type="radio"
+                    name="radio-3"
+                    :value="item"
+                    :id="`${item.id}`"
+                    v-model="selectedType"
+                    class="text-secondary focus:ring-primary"
+                  />
+                  <div class="flex justify-between w-full">
+                    <label :for="`${item.id}`">{{ item.option }}</label>
+                    <h1 class="text-md">${{ item.price }}</h1>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           <!-- select a la carte -->
           <h1 class="text-lg">Select A La Carte Services</h1>
-          <!-- c1 -->
-          <div class="flex justify-between w-full">
+          <div
+            v-for="item in alacarteItems"
+            :key="item.id"
+            class="flex justify-between w-full"
+          >
             <div class="flex items-center">
               <input
-                id="checkbox-1"
+                :id="`checkbox-${item.id}`"
                 type="checkbox"
-                value="350"
-                v-model="checkedALaCarte"
+                :value="item"
+                v-model="selectedALaCarte"
                 class="w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-secondary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
               <label
-                for="checkbox-1"
+                :for="`checkbox-${item.id}`"
                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >Brush Out</label
+                >{{ item.option }}</label
               >
             </div>
-            <h1>+ ฿350</h1>
-          </div>
-          <!-- c2 -->
-          <div class="flex justify-between w-full">
-            <div class="flex items-center">
-              <input
-                id="checkbox-2"
-                type="checkbox"
-                value="290"
-                v-model="checkedALaCarte"
-                class="w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-secondary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              />
-              <label
-                for="checkbox-2"
-                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >Breath Freshening</label
-              >
-            </div>
-            <h1>+ ฿290</h1>
-          </div>
-          <!-- c3 -->
-          <div class="flex justify-between w-full">
-            <div class="flex items-center">
-              <input
-                id="checkbox-3"
-                type="checkbox"
-                value="550"
-                v-model="checkedALaCarte"
-                class="w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-secondary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              />
-              <label
-                for="checkbox-3"
-                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >Nail Trim & File</label
-              >
-            </div>
-            <h1>+ ฿550</h1>
-          </div>
-          <!-- c4 -->
-          <div class="flex justify-between w-full">
-            <div class="flex items-center">
-              <input
-                id="checkbox-4"
-                type="checkbox"
-                value="349"
-                v-model="checkedALaCarte"
-                class="w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-secondary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              />
-              <label
-                for="checkbox-4"
-                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >Medicated Ear Cleaning</label
-              >
-            </div>
-            <h1>+ ฿349</h1>
-          </div>
-          <!-- c5 -->
-          <div class="flex justify-between w-full">
-            <div class="flex items-center">
-              <input
-                id="checkbox-5"
-                type="checkbox"
-                value="359"
-                v-model="checkedALaCarte"
-                class="w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-secondary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              />
-              <label
-                for="checkbox-5"
-                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >Flea Bath</label
-              >
-            </div>
-            <h1>+ ฿359</h1>
-          </div>
-          <!-- c6 -->
-          <div class="flex justify-between w-full">
-            <div class="flex items-center">
-              <input
-                id="checkbox-6"
-                type="checkbox"
-                value="700"
-                v-model="checkedALaCarte"
-                class="w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-secondary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              />
-              <label
-                for="checkbox-6"
-                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >Shed Reducing Treatment</label
-              >
-            </div>
-            <h1>+ ฿700</h1>
-          </div>
-          <!-- c7 -->
-          <div class="flex justify-between w-full">
-            <div class="flex items-center">
-              <input
-                id="checkbox-7"
-                type="checkbox"
-                value="559"
-                v-model="checkedALaCarte"
-                class="w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-secondary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              />
-              <label
-                for="checkbox-7"
-                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >Paw Polish</label
-              >
-            </div>
-            <h1>+ ฿559</h1>
+            <h1>+ ฿{{ item.price }}</h1>
           </div>
         </div>
       </div>
@@ -305,20 +211,15 @@
         <div class="flex justify-between py-8">
           <h1>Total</h1>
           <h1>฿{{ sum }}</h1>
-          <h1>฿{{ picked }}</h1>
-          <h1>฿{{ checkedALaCarte }}</h1>
         </div>
-        <NuxtLink
-          to="/others/report"
+
+        <a
+          @click="navigateToServiceReport()"
           class="btn btn-primary text-white bg-secondary w-full"
         >
-          Checkout
-        </NuxtLink>
+          Proceed
+        </a>
       </div>
-      <!-- <div id="app">
-        <input type="checkbox" v-model="checked" />
-        <label for="checkbox">{{ checked }}</label>
-      </div> -->
     </div>
   </div>
 </template>
@@ -326,31 +227,32 @@
 <script setup lang="ts">
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
+import { useAuthStore } from "~/stores/useAuthStore";
 
-const checkedALaCarte = ref([]);
-const picked = ref([]);
+const selectedALaCarte = ref([]);
+const selectedType = ref({ price: 0 });
 const pack = ref([]);
 var sum: number = 0;
 var sum_checked: number = 0;
 
 function packSelected() {}
 
-watch(checkedALaCarte, (newDate) => {
+watch(selectedALaCarte, (newDate) => {
   sum = 0;
   sum_checked = 0;
-  for (var val of checkedALaCarte.value) {
-    sum += parseInt(val, 10);
-    sum_checked += parseInt(val, 10);
+  for (var val of selectedALaCarte.value) {
+    sum += parseInt(val["price"], 10);
+    sum_checked += parseInt(val["price"], 10);
   }
   if (sum_checked == 0) {
-    sum += Number(picked.value);
-  } else if (Number(picked.value) != 0) {
-    sum = Number(picked.value) + sum_checked;
+    sum += Number(selectedType.value["price"]);
+  } else if (Number(selectedType.value["price"]) != 0) {
+    sum = Number(selectedType.value["price"]) + sum_checked;
   }
 });
-watch(picked, (newDate) => {
+watch(selectedType, (newDate) => {
   sum = sum_checked;
-  sum += Number(picked.value);
+  sum += Number(selectedType.value["price"]);
 });
 
 // const vm = Vue.createApp({
@@ -360,4 +262,101 @@ watch(picked, (newDate) => {
 //     };
 //   },
 // }).mount("#app");
+const auth = useAuthStore();
+
+type ServiceItem = {
+  id: number;
+  service_name: string;
+  type: string;
+  option: string;
+  price: number;
+  breed_size: string;
+  created_at: string;
+  updated_at: string;
+};
+
+type SelectSeviceItem = {
+  id: number;
+  option: string;
+  price: number;
+};
+
+const selectedPet = ref("DOG");
+
+const route = useRoute();
+
+const breedSize = route.query.selectedSize;
+const date = route.query.startDate;
+
+const serviceItem = await useMyFetch<any>(
+  `service-items/get-service-items-by-size`,
+  {
+    params: {
+      breed_size: breedSize,
+    },
+  }
+);
+
+console.log(serviceItem.data.value);
+
+const serviceItems: ServiceItem[] = serviceItem.data.value;
+
+console.log(serviceItems);
+
+const packageItems: ServiceItem[] = serviceItems.filter(
+  (item) => item.type === "package"
+);
+const spaItems: ServiceItem[] = serviceItems.filter(
+  (item) => item.service_name === "Spa Bath Package"
+);
+const groomItems: ServiceItem[] = serviceItems.filter(
+  (item) => item.service_name === "All-Inclusive Groom Package"
+);
+
+const selectedPackage = ref("Spa Bath Package"); // Default selected package
+
+const alacarteItems: ServiceItem[] = serviceItems.filter(
+  (item) => item.type === "alacarte"
+);
+
+watchEffect(() => {
+  if (selectedPackage.value === "Spa Bath Package") {
+    selectedType.value = spaItems[0] || { price: 0 };
+  } else if (selectedPackage.value === "All-Inclusive Groom Package") {
+    selectedType.value = groomItems[0] || { price: 0 };
+  } else if (selectedPackage.value === "None") {
+    selectedType.value = { price: 0 };
+  } else {
+    selectedType.value = { price: 0 };
+  }
+});
+// To Use
+
+// const total = computed(() => {
+//   let totalAmount = 0;
+
+//   // Calculate total based on the selected package type
+//   totalAmount += parseFloat(selectedType.value.price);
+//   console.log(selectedType);
+
+//   // Calculate total based on selected a la carte services
+//   for (const item of selectedAlacarte.value) {
+//     totalAmount += parseFloat(item.price);
+//   }
+
+//   return totalAmount;
+// });
+
+async function navigateToServiceReport() {
+  const alacarteIDs = selectedAlacarte.value.map((item) => item.id).join(",");
+
+  const queryParams = {
+    service_date: date,
+    pet_type: selectedPet.value,
+    PackageID: selectedType.value.id, // Include the selectedType
+    AlacarteIDs: alacarteIDs, // Include the selectedAlacarte as a comma-separated string
+  };
+
+  await navigateTo({ path: "/others/report", query: queryParams });
+}
 </script>
