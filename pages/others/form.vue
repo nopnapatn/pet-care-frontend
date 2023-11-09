@@ -187,11 +187,7 @@ const serviceItem = await useMyFetch<any>
     }
   );
 
-console.log(serviceItem.data.value);
-
 const serviceItems: ServiceItem[] = serviceItem.data.value;
-
-console.log(serviceItems);
 
 const packageItems: ServiceItem[] = serviceItems.filter((item) => item.type === "package");
 const spaItems: ServiceItem[] = serviceItems.filter((item) => item.service_name === "Spa Bath Package");
@@ -202,13 +198,13 @@ const selectedPackage = ref('Spa Bath Package'); // Default selected package
 const alacarteItems: ServiceItem[] = serviceItems.filter((item) => item.type === "alacarte");
 
 // To Use
-const selectedType = ref({ price: 0 }); // Selected type of ... package
+const selectedType = ref({  }); // Selected type of ... package
 
 watchEffect(() => {
   if (selectedPackage.value === 'Spa Bath Package') {
-    selectedType.value = spaItems[0] || { price: 0 };
+    selectedType.value = spaItems[0];
   } else if (selectedPackage.value === 'All-Inclusive Groom Package') {
-    selectedType.value = groomItems[0] || { price: 0 };
+    selectedType.value = groomItems[0];
   } else if (selectedPackage.value === 'None') {
     selectedType.value = { price: 0 };
   } else {
@@ -225,7 +221,6 @@ const total = computed(() => {
 
   // Calculate total based on the selected package type
   totalAmount += parseFloat(selectedType.value.price);
-  console.log(selectedType);
 
   // Calculate total based on selected a la carte services
   for (const item of selectedAlacarte.value) {
@@ -237,13 +232,18 @@ const total = computed(() => {
 
 async function navigateToServiceReport() {
 
+  if (selectedPackage.value === 'None' && selectedAlacarte.value.length === 0) {
+    alert('Please select at least one service.');
+    return;
+  }
+
   const alacarteIDs = selectedAlacarte.value.map(item => item.id).join(',');
 
   const queryParams = {
-    service_date: date,
-    pet_type: selectedPet.value,
-    PackageID: selectedType.value.id, // Include the selectedType
-    AlacarteIDs: alacarteIDs, // Include the selectedAlacarte as a comma-separated string
+    serviceDate: date,
+    petType: selectedPet.value,
+    packageID: selectedType.value.id, // Include the selectedType
+    alacarteIDs: alacarteIDs, // Include the selectedAlacarte as a comma-separated string
   };
 
   await navigateTo(
