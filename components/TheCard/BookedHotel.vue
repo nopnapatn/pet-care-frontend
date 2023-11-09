@@ -37,7 +37,9 @@
             <div v-if="status === 'WAITING'">
               <button
                 @click="
-                  navigateTo(`/payments/create?bookingOrderId=${id}&type=HOTEL`)
+                  navigateTo(
+                    `/payments/create?bookingOrderId=${id}&price=${total}&type=HOTEL`
+                  )
                 "
                 type="button"
                 class="px-3 py-2 text-xs font-medium text-center text-white bg-primary rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
