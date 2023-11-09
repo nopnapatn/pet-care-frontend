@@ -83,8 +83,24 @@
 
 <script setup lang="ts">
 import { useAuthStore } from "~/stores/useAuthStore";
+
 const auth = useAuthStore();
+
+const formData = reactive({
+  email: "",
+  firstName: "",
+  lastName: "",
+  phoneNumber: "",
+  password: "",
+  confirmPassword: "",
+});
+
+const { data: response, error } = await useMyFetch<any>("auth/login", {
+  method: "POST",
+  body: formData,
+});
 </script>
+
 <!-- <script setup lang="ts">
 import { useAuthStore } from "~/stores/useAuthStore";
 import useMyFetch from "@/composables/useMyFetch";
