@@ -144,7 +144,7 @@ async function confirm() {
     serviceOrderId: fetchedCurrentOrder.data.value.id,
   }
 
-  await navigateTo({ path: "/booked/service", query: queryParams });
+  await navigateTo({ path: "/others/payment", query: queryParams });
 };
 
 </script>
