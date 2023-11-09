@@ -75,10 +75,10 @@
                     <h2
                       class="text-xl font-semibold text-gray-800 dark:text-gray-200"
                     >
-                      Booking Orders
+                      All Booking Orders
                     </h2>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
-                      Create invoices, edit, download and more.
+                      view all booking orders
                     </p>
                   </div>
                 </div>
@@ -318,10 +318,19 @@
                             href="javascript:;"
                             data-hs-overlay="#hs-ai-invoice-modal"
                           >
-                            <div class="px-6 py-2">
+                            <div
+                              class="px-6 py-2"
+                              v-if="bookingOrder.room_number !== null"
+                            >
                               <span
                                 class="text-sm text-gray-600 dark:text-gray-400"
                                 >{{ bookingOrder.room_number }}</span
+                              >
+                            </div>
+                            <div class="px-6 py-2" v-else>
+                              <span
+                                class="text-sm text-gray-600 dark:text-gray-400"
+                                >-</span
                               >
                             </div>
                           </a>

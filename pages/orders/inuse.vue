@@ -75,10 +75,10 @@
                     <h2
                       class="text-xl font-semibold text-gray-800 dark:text-gray-200"
                     >
-                      Booking Orders
+                      In Use Booking Orders
                     </h2>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
-                      Create invoices, edit, download and more.
+                      List of all booking orders that are currently in use.
                     </p>
                   </div>
                 </div>

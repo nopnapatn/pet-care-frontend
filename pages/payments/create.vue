@@ -40,7 +40,6 @@
                       placeholder="John Doe"
                       v-model="formData.name"
                       label="First Name"
-                      disabled
                     />
                     <div v-if="errorMessage.name" class="text-sm text-red-500">
                       {{ errorMessage.name }}
@@ -62,6 +61,7 @@
                       placeholder="500"
                       v-model="formData.amount"
                       label="First Name"
+                      disabled
                     />
                     <div
                       v-if="errorMessage.amount"
@@ -197,7 +197,6 @@
 import { useAuthStore } from "~/stores/useAuthStore";
 const route = useRoute();
 const auth = useAuthStore();
-console.log(route.query.price);
 const formData = reactive({
   user_id: auth.user.id,
   booking_order_id: route.query.bookingOrderId,
@@ -278,7 +277,7 @@ async function onSubmit() {
     method: "POST",
     body: formDataToSend,
   });
-  if (response !== null) {
+  if (response.value !== null) {
     // to mybooking
     console.log(response.value.message);
     await navigateTo("/booked/hotel");

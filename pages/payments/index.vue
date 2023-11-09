@@ -25,7 +25,7 @@
                       Payments
                     </h2>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
-                      waiting for verification
+                      Here you can see all the payments made by the users.
                     </p>
                   </div>
                 </div>
@@ -656,50 +656,5 @@
 </template>
 
 <script setup lang="ts">
-const { data: bookingOrders, error } = await useMyFetch<any>(
-  "booking-orders/waiting",
-  {}
-);
-
-const columns = [
-  {
-    key: "id",
-    label: "ID",
-  },
-  {
-    key: "roomNumber",
-    label: "Room Number",
-    sortable: true,
-  },
-  {
-    key: "userID",
-    label: "User ID",
-    sortable: true,
-  },
-  {
-    key: "checkIn",
-    label: "Check In",
-    sortable: true,
-    direction: "desc",
-  },
-  {
-    key: "checkOut",
-    label: "Check Out",
-    sortable: true,
-  },
-  {
-    key: "totalPrice",
-    label: "Total Price",
-    sortable: true,
-  },
-  {
-    key: "status",
-    label: "Status",
-    sortable: true,
-  },
-  {
-    key: "actions",
-    label: "Actions",
-  },
-];
+const { data: bookingOrders, error } = await useMyFetch<any>("payments", {});
 </script>

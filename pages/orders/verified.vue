@@ -75,10 +75,10 @@
                     <h2
                       class="text-xl font-semibold text-gray-800 dark:text-gray-200"
                     >
-                      Booking Orders
+                      Verified Booking Orders
                     </h2>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
-                      Create invoices, edit, download and more.
+                      List of verified booking orders waiting for check in.
                     </p>
                   </div>
                 </div>
@@ -789,46 +789,4 @@ async function handleCheckIn(bookingOrder: { id: any }) {
     navigateTo("/orders/inuse");
   }
 }
-
-const columns = [
-  {
-    key: "id",
-    label: "ID",
-  },
-  {
-    key: "roomNumber",
-    label: "Room Number",
-    sortable: true,
-  },
-  {
-    key: "userID",
-    label: "User ID",
-    sortable: true,
-  },
-  {
-    key: "checkIn",
-    label: "Check In",
-    sortable: true,
-    direction: "desc",
-  },
-  {
-    key: "checkOut",
-    label: "Check Out",
-    sortable: true,
-  },
-  {
-    key: "totalPrice",
-    label: "Total Price",
-    sortable: true,
-  },
-  {
-    key: "status",
-    label: "Status",
-    sortable: true,
-  },
-  {
-    key: "actions",
-    label: "Actions",
-  },
-];
 </script>
