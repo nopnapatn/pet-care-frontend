@@ -9,35 +9,35 @@
       <tbody>
         <tr class="border-b border-gray-200 dark:border-gray-700">
           <td class="px-6 py-4 text-center text-gray-500">Brush Out</td>
-          <td class="px-6 py-4 text-center text-gray-500">$10</td>
+          <td class="px-6 py-4 text-center text-gray-500">฿350</td>
         </tr>
         <tr class="border-b border-gray-200 dark:border-gray-700">
           <td class="px-6 py-4 text-center text-gray-500">Breath Freshening</td>
-          <td class="px-6 py-4 text-center text-gray-500">$8</td>
+          <td class="px-6 py-4 text-center text-gray-500">฿290</td>
         </tr>
         <tr class="border-b border-gray-200 dark:border-gray-700">
           <td class="px-6 py-4 text-center text-gray-500">Nail Trim & File</td>
-          <td class="px-6 py-4 text-center text-gray-500">$15</td>
+          <td class="px-6 py-4 text-center text-gray-500">฿500</td>
         </tr>
         <tr class="border-b border-gray-200 dark:border-gray-700">
           <td class="px-6 py-4 text-center text-gray-500">
             Medicated Ear Cleaning
           </td>
-          <td class="px-6 py-4 text-center text-gray-500">$10</td>
+          <td class="px-6 py-4 text-center text-gray-500">฿350</td>
         </tr>
         <tr class="border-b border-gray-200 dark:border-gray-700">
           <td class="px-6 py-4 text-center text-gray-500">Flea Bath</td>
-          <td class="px-6 py-4 text-center text-gray-500">$10</td>
+          <td class="px-6 py-4 text-center text-gray-500">฿350</td>
         </tr>
         <tr class="border-b border-gray-200 dark:border-gray-700">
           <td class="px-6 py-4 text-center text-gray-500">
             Shed Reducing Treatment
           </td>
-          <td class="px-6 py-4 text-center text-gray-500">$20</td>
+          <td class="px-6 py-4 text-center text-gray-500">฿700</td>
         </tr>
         <tr class="border-b border-gray-200 dark:border-gray-700">
           <td class="px-6 py-4 text-center text-gray-500">Paw Polish</td>
-          <td class="px-6 py-4 text-center text-gray-500">$15</td>
+          <td class="px-6 py-4 text-center text-gray-500">฿500</td>
         </tr>
       </tbody>
     </table>

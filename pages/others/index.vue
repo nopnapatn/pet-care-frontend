@@ -21,7 +21,15 @@
           <option value="Medium">Medium</option>
           <option value="Large">Large</option>
         </select>
-        <h1 class="ml-4">Weight Length : 1-20 pounds</h1>
+        <h1 v-if="selectedSize === 'Small'" class="ml-4">
+          Weight Length : 0.45 - 10 kg.
+        </h1>
+        <h1 v-if="selectedSize === 'Medium'" class="ml-4">
+          Weight Length : 11-30 kg.
+        </h1>
+        <h1 v-if="selectedSize === 'Large'" class="ml-4">
+          Weight Length : 31+ kg.
+        </h1>
       </div>
       <!-- <div class="sm:pb-0 sm:flex-[1_0_0%] bg-black"> -->
       <div class="flex">
@@ -54,48 +62,7 @@
     </div>
     <div class="h-full overflow-y-auto py-10 justify-start">
       <div class="flex flex-col gap-y-8 shadow-inner ml-10 mr-28">
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <div
-            class="flex justify-center px-6 py-3 bg-secondary text-md font-semibold text-white"
-          >
-            Spa Bath Package
-          </div>
-          <table
-            class="w-full text-sm text-left text-gray-700 dark:text-gray-400"
-          >
-            <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
-              <tr>
-                <th scope="col" class="px-6 py-3 text-center bg-primary/20">
-                  Breed Size
-                </th>
-                <th scope="col" class="px-6 py-3 text-center bg-primary/20">
-                  Short Coat
-                </th>
-                <th scope="col" class="px-6 py-3 text-center bg-primary/20">
-                  Long Coat
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b border-gray-200 dark:border-gray-700">
-                <td class="px-6 py-4 text-center text-gray-500">Small</td>
-                <td class="px-6 py-4 text-center text-gray-500">$30</td>
-                <td class="px-6 py-4 text-center text-gray-500">$35</td>
-              </tr>
-              <tr class="border-b border-gray-200 dark:border-gray-700">
-                <td class="px-6 py-4 text-center text-gray-500">Medium</td>
-                <td class="px-6 py-4 text-center text-gray-500">$30</td>
-                <td class="px-6 py-4 text-center text-gray-500">$35</td>
-              </tr>
-              <tr class="border-b border-gray-200 dark:border-gray-700">
-                <td class="px-6 py-4 text-center text-gray-500">Large</td>
-                <td class="px-6 py-4 text-center text-gray-500">$30</td>
-                <td class="px-6 py-4 text-center text-gray-500">$35</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
+        <TheTableSpaTable></TheTableSpaTable>
         <TheTableGroomTable></TheTableGroomTable>
         <TheTableALaCarte></TheTableALaCarte>
       </div>
