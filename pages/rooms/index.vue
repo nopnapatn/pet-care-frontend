@@ -65,10 +65,9 @@
                   type="number"
                   id=""
                   min="1"
-                  v-model="formData.petsAmount"
-                  v-on:input="handlePetsAmount"
                   class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="0"
+                  v-model="petsAmount"
+                  placeholder="1"
                 />
               </div>
             </div>
@@ -208,6 +207,9 @@ import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { useAuthStore } from "~/stores/useAuthStore";
 const auth = useAuthStore();
+
+const petsAmount = ref();
+
 type RoomType = {
   id: number;
   title: string;
@@ -317,6 +319,11 @@ const handlePetsAmount = (e: any) => {
     getStart();
   }
 };
+
+watch(petsAmount, (newDate) => {
+  formData.petsAmount = petsAmount.value;
+  getStart();
+});
 
 // Watch for datepicker
 watch(date, (newDate) => {

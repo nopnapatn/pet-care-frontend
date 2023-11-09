@@ -280,7 +280,7 @@ async function onSubmit() {
   if (response !== null) {
     // to mybooking
     console.log(response.value.message);
-    await navigateTo("/booked");
+    await navigateTo("/booked/hotel");
   }
 }
 </script>
