@@ -113,6 +113,8 @@ const handleSizeChange = () => {
   // console.log(selectedSize.value);
 };
 
+console.log(date.value);
+
 async function navigateToServiceForm() {
   if (!auth.user.id) {
     navigateTo("/auth/login");
@@ -124,8 +126,27 @@ async function navigateToServiceForm() {
     return;
   }
 
+  console.log(formData.startDate);
+
+  const isAvailable = await useMyFetch<any>(
+    "service-orders/is-available",
+    {
+      method: "GET",
+      params: {
+        service_date: formData.startDate.toString(),
+      },
+    }
+  );
+
+  console.log(isAvailable.data.value);
+
+  if (!isAvailable.data.value) {
+    alert("This date is not available.");
+    return;
+  }
+
   await navigateTo(
-    `/others/form?startDate=${formData.startDate}&selectedSize=${selectedSize.value}`
+    `/others/form?date=${formData.startDate}&selectedSize=${selectedSize.value}`
   );
 }
 </script>

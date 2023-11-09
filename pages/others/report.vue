@@ -66,11 +66,24 @@
       </div>
     </div>
     <div class="flex mt-8 mx-48 mr-68 justify-between">
-      <h1>Total</h1>
-      <h1></h1>
+      <h1>Booked Date</h1>
+      <h1>{{ date }}</h1>
     </div>
+
+    <div class="flex mt-8 mx-48 mr-68 justify-between">
+      <h1>Pet Type</h1>
+      <h1>{{ typeof petType === 'string' ? petType.toLowerCase() : petType }}</h1>
+    </div>
+
+    <div class="flex mt-8 mx-48 mr-68 justify-between">
+      <h1>Total</h1>
+      <h1>{{ total }} ฿</h1>
+    </div>
+
     <div class="flex justify-center mt-12">
-      <nuxt-link to="/others/payment" class="btn btn-primary text-white">Confirm</nuxt-link>
+      <a @click="confirm()" class="btn btn-primary text-white">
+        Confirm
+      </a>
     </div>
   </div>
 </template>
@@ -82,11 +95,10 @@ const auth = useAuthStore();
 const route = useRoute();
 
 const date = route.query.serviceDate;
-const petType = route.query.petTye;
+const petType = route.query.petType;
+const total = route.query.total;
 const packageID = route.query.packageID;
-const alacarteIDs = route.query.alacarteIDs.split(',').map(id => parseInt(id, 10));
-
-console.log(alacarteIDs)
+const alacarteIDs = (route.query.alacarteIDs as string).split(',').map(id => parseInt(id, 10));
 
 const fetchedServiceItems = await useMyFetch<any>(
   "service-items",
@@ -100,23 +112,26 @@ const serviceItems = fetchedServiceItems.data.value;
 const packageItem = serviceItems.find((item: any) => item.id === Number(packageID));
 
 const alacarteItems = serviceItems.filter((item: any) => alacarteIDs.includes(item.id));
-// const packageItem = serviceItems.find((item :any) => item.id === packageID);
-
-console.log(alacarteItems);
 
 async function confirm() {
-  const { data: availableRooms, error } = await useMyFetch<any>(
-    `room-types/get-available-types`,
+  const { data: response, error } = await useMyFetch<any>(
+    `service-orders/init-service-order`,
     {
       method: "POST",
       body: {
         user_id: auth.user.id,
-        
-        // startDate: formData.startDate,
-        // endDate: formData.endDate,
-        // petsAmount: formData.petsAmount,
+        service_date: date,
+        total_price: total,
+        pet_type: petType,
+        package_id: packageID,
+        alacarte_ids: alacarteIDs,
       },
     }
-)};
+  )
+
+  console.log(response.value);
+
+  await navigateTo({ path: "/others/payment",  });
+};
 
 </script>

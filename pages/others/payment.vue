@@ -349,4 +349,21 @@ async function onSubmit() {
     await navigateTo("/booked/service");
   }
 }
+
+// const auth = useAuthStore();
+
+// console.log(auth.user?.id);
+
+// const fetchedCurrentOrder = await useMyFetch<any>(
+//   "service-orders/get-user-current-order",
+//   {
+//     params: {
+//       user_id: auth.user?.id,
+//     },
+//   }
+// )
+
+// const currentOrder = fetchedCurrentOrder.data.value;
+
+// console.log(currentOrder);
 </script>
