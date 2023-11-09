@@ -239,8 +239,6 @@ async function navigateToServiceReport() {
 
   const alacarteIDs = selectedAlacarte.value.map(item => item.id).join(',');
 
-
-
   const queryParams = {
     service_date: date,
     pet_type: selectedPet.value,
