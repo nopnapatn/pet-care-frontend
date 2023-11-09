@@ -18,7 +18,7 @@
       <span class="text-xs font-medium text-gray-700">{{ title }}</span>
 
       <input
-        type="email"
+        :type="type"
         :id="id"
         :value="value"
         :placeholder="placeholder"
@@ -29,5 +29,5 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["title", "value", "placeholder", "id"]);
+const props = defineProps(["title", "value", "placeholder", "id", "type"]);
 </script>

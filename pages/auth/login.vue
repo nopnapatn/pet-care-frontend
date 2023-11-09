@@ -17,7 +17,7 @@
           id="password"
           v-model="formData.password"
           label="Password"
-          placeholder="********"
+          placeholder="***********"
           required
           type="password"
         ></TheFieldText>
@@ -28,7 +28,8 @@
         <div v-if="statusMessage" class="text-sm text-red-500">
           {{ statusMessage }}
         </div>
-        <div class="flex items-start">
+
+        <!-- <div class="flex items-start">
           <div class="flex items-center">
             <input
               id="remember"
@@ -48,7 +49,8 @@
             class="ml-auto text-sm font-medium text-my-black mb-6 hover:text-gray-600"
             >Forget Password?</NuxtLink
           >
-        </div>
+        </div> -->
+        <div class="h-2"></div>
         <TheButtonAuth class="w-full" colort="bg-primary" colorb="bg-secondary"
           >Login to your account</TheButtonAuth
         >
