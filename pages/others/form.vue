@@ -212,9 +212,9 @@ const serviceItem = await useMyFetch<any>(
 const serviceItems: ServiceItem[] = serviceItem.data.value;
 
 
-const packageItems: ServiceItem[] = serviceItems.filter(
-  (item) => item.type === "package"
-);
+// const packageItems: ServiceItem[] = serviceItems.filter(
+//   (item) => item.type === "package"
+// );
 const spaItems: ServiceItem[] = serviceItems.filter(
   (item) => item.service_name === "Spa Bath Package"
 );

@@ -764,11 +764,7 @@ const { data: bookingOrders, error } = await useMyFetch<any>(
   "booking-orders",
   {}
 );
-
-async function handleCheckOut() {
-  console.log("check out");
-  const { data, error } = await useMyFetch<any>("booking-orders/check-out", {});
-}
+console.log(bookingOrders);
 
 const columns = [
   {
