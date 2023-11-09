@@ -395,9 +395,7 @@
                             class="block"
                             data-hs-overlay="#hs-ai-invoice-modal"
                             @click="
-                              navigateTo(
-                                `/payments/${bookingOrder.id}?paymentId=${bookingOrder.payment.id}`
-                              )
+                              navigateTo(`/payments/${bookingOrder.payment.id}`)
                             "
                           >
                             <span class="px-6 py-1.5">
@@ -783,11 +781,6 @@ const columns = [
   {
     key: "id",
     label: "ID",
-  },
-  {
-    key: "roomNumber",
-    label: "Room Number",
-    sortable: true,
   },
   {
     key: "userID",

@@ -141,7 +141,7 @@ import { useAuthStore } from "~/stores/useAuthStore";
 
 const route = useRoute();
 const auth = useAuthStore();
-console.log(route.query.paymentId);
+// console.log(route.query.paymentId);
 const { data: payment, error } = await useMyFetch<any>(
   `payments/+${route.params.id}`,
   {}
@@ -149,14 +149,16 @@ const { data: payment, error } = await useMyFetch<any>(
 
 async function verifyBookingOrder() {
   console.log("verify");
+  console.log(route.params.id);
   const { data: response, error } = await useMyFetch<any>(
-    `payments/${route.query.paymentId}/verify`,
+    `payments/${route.params.id}/verify`,
     {
       method: "PUT",
     }
   );
 
   if (response) {
+    console.log(response);
     console.log(response.value.message);
     navigateTo("/orders/verified");
   }
@@ -165,7 +167,7 @@ async function verifyBookingOrder() {
 async function rejectBookingOrder() {
   console.log("reject");
   const { data: response, error } = await useMyFetch<any>(
-    `payments/${route.query.paymentId}/reject`,
+    `payments/${route.params.id}/reject`,
     {
       method: "PUT",
     }
