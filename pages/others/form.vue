@@ -290,11 +290,8 @@ const serviceItem = await useMyFetch<any>(
   }
 );
 
-console.log(serviceItem.data.value);
-
 const serviceItems: ServiceItem[] = serviceItem.data.value;
 
-console.log(serviceItems);
 
 const packageItems: ServiceItem[] = serviceItems.filter(
   (item) => item.type === "package"
@@ -324,14 +321,39 @@ watchEffect(() => {
   }
 });
 
+
+// To Use
+const selectedAlacarte = ref([]); // Default selected a la carte services
+
+const total = computed(() => {
+  let totalAmount = 0;
+
+  // Calculate total based on the selected package type
+  totalAmount += parseFloat(selectedType.value.price);
+  console.log(selectedType);
+
+  // Calculate total based on selected a la carte services
+  for (const item of selectedAlacarte.value) {
+    totalAmount += parseFloat(item.price);
+  }
+
+  return totalAmount;
+});
+
 async function navigateToServiceReport() {
-  const alacarteIDs = selectedALaCarte.value.map((item) => item.id).join(",");
+
+  if (selectedPackage.value === 'None' && selectedAlacarte.value.length === 0) {
+    alert('Please select at least one service.');
+    return;
+  }
+
+  const alacarteIDs = selectedAlacarte.value.map(item => item.id).join(',');
 
   const queryParams = {
-    service_date: date,
-    pet_type: selectedPet.value,
-    PackageID: selectedType.value.id, // Include the selectedType
-    AlacarteIDs: alacarteIDs, // Include the selectedAlacarte as a comma-separated string
+    serviceDate: date,
+    petType: selectedPet.value,
+    packageID: selectedType.value.id, // Include the selectedType
+    alacarteIDs: alacarteIDs, // Include the selectedAlacarte as a comma-separated string
   };
 
   await navigateTo({ path: "/others/report", query: queryParams });

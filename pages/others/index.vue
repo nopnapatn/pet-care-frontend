@@ -120,7 +120,7 @@ async function navigateToServiceForm() {
   }
 
   if (!formData.startDate) {
-    alert("Please select date and pets amount");
+    alert("Please select date.");
     return;
   }
 
