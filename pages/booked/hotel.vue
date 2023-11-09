@@ -3,7 +3,7 @@
     <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
       <div class="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
         <h2
-          class="mb-4 text-4xl text-primary font-primary tracking-tight font-extrabold dark:text-white"
+          class="mb-4 text-6xl text-primary font-primary tracking-tight font-extrabold dark:text-white"
         >
           My Booking
         </h2>
