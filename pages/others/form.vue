@@ -230,8 +230,7 @@ import "@vuepic/vue-datepicker/dist/main.css";
 import { useAuthStore } from "~/stores/useAuthStore";
 
 const selectedALaCarte = ref([]);
-const selectedType = ref({ price: 0 });
-const pack = ref([]);
+const selectedType = ref();
 var sum: number = 0;
 var sum_checked: number = 0;
 
@@ -292,7 +291,6 @@ const serviceItem = await useMyFetch<any>(
 
 const serviceItems: ServiceItem[] = serviceItem.data.value;
 
-
 const packageItems: ServiceItem[] = serviceItems.filter(
   (item) => item.type === "package"
 );
@@ -322,14 +320,13 @@ watchEffect(() => {
 });
 
 async function navigateToServiceReport() {
-
-  if (selectedPackage.value === 'None' && selectedALaCarte.value.length === 0) {
-    alert('Please select at least one service.');
+  if (selectedPackage.value === "None" && selectedALaCarte.value.length === 0) {
+    alert("Please select at least one service.");
     return;
   }
 
-  const alacarteIDs = selectedALaCarte.value.map(item => item.id).join(',');
-  console.log(alacarteIDs)
+  const alacarteIDs = selectedALaCarte.value.map((item) => item.id).join(",");
+  console.log(alacarteIDs);
 
   const queryParams = {
     serviceDate: date,
