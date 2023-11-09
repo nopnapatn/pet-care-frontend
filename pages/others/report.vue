@@ -131,7 +131,20 @@ async function confirm() {
 
   console.log(response.value);
 
-  await navigateTo({ path: "/others/payment",  });
+  const fetchedCurrentOrder = await useMyFetch<any>(
+    "service-orders/get-user-current-order",
+    {
+      params: {
+        user_id: auth.user?.id,
+      },
+    }
+  )
+
+  const queryParams = {
+    serviceOrderId: fetchedCurrentOrder.data.value.id,
+  }
+
+  await navigateTo({ path: "/booked/service", query: queryParams });
 };
 
 </script>

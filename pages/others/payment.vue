@@ -265,12 +265,12 @@ const auth = useAuthStore();
 
 const formData = reactive({
   user_id: auth.user.id,
-  booking_order_id: route.query.bookingOrderId,
+  service_order_id: route.query.serviceOrderId,
   name: "",
   amount: "",
   time: "",
   date: "",
-  type: route.query.type,
+  type: "SERVICE",
   slip: null,
 });
 
@@ -281,6 +281,7 @@ const errorMessage = reactive({
   date: "",
   slip: "",
 });
+
 const previewImage = ref<string | null>(null);
 
 async function onSlipChange(event: any) {
@@ -324,29 +325,29 @@ async function onSubmit() {
   const formDataToSend = new FormData();
 
   formDataToSend.append(
-    "booking_order_id",
-    formData.booking_order_id!.toString()
+    "service_order_id",
+    formData.service_order_id!.toString()
   );
   formDataToSend.append("user_id", formData.user_id);
   formDataToSend.append("name", formData.name);
   formDataToSend.append("amount", formData.amount);
   formDataToSend.append("time", formData.time);
   formDataToSend.append("date", formData.date);
-  formDataToSend.append("type", route.query.type as string);
+  formDataToSend.append("type", "SERVICE");
 
   if (formData.slip !== null) {
     formDataToSend.append("slip", formData.slip);
   }
 
   console.log(formData);
-  const { data: response, error } = await useMyFetch<any>(`payments/store`, {
+  const { data: response, error } = await useMyFetch<any>(`payments/service/store`, {
     method: "POST",
     body: formDataToSend,
   });
   if (response !== null) {
     // to mybooking
-    console.log(response.value.message);
-    await navigateTo("/booked/service");
+    console.log(response);
+    // await navigateTo("/");
   }
 }
 
@@ -354,14 +355,7 @@ async function onSubmit() {
 
 // console.log(auth.user?.id);
 
-// const fetchedCurrentOrder = await useMyFetch<any>(
-//   "service-orders/get-user-current-order",
-//   {
-//     params: {
-//       user_id: auth.user?.id,
-//     },
-//   }
-// )
+
 
 // const currentOrder = fetchedCurrentOrder.data.value;
 
