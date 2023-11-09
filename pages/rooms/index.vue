@@ -205,6 +205,9 @@ const errorMessage = reactive({
 });
 
 async function getStart() {
+  if (!formData.startDate || !formData.endDate || !formData.petsAmount) {
+    return;
+  }
   console.log("Updating...");
   const { data: availableRooms, error } = await useMyFetch<any>(
     `room-types/get-available-types`,
@@ -218,10 +221,9 @@ async function getStart() {
     }
   );
   if (availableRooms) {
-    console.log(availableRooms);
     console.log(availableRooms.value);
   }
-  if (error) {
+  if (error.value) {
     console.log(error.value);
     console.log(error.value?.message);
   }
@@ -243,18 +245,27 @@ async function getStart() {
   });
 }
 
+// Watch for petsAmount
 watch(
   formData,
   (newData) => {
     const newPetsAmount = newData.petsAmount;
-    // Ensure that the value is valid (e.g., not empty)
     if (newPetsAmount !== null) {
-      // Call the function to update room types
+      errorMessage.petsAmount = "";
       getStart();
     }
   },
   { deep: true }
 );
+
+// Watch for datepicker
+watch(date, (newDate) => {
+  formData.startDate = formatDate(date.value[0]);
+  formData.endDate = formatDate(date.value[1]);
+  console.log(formData.startDate);
+  console.log(formData.endDate);
+  getStart();
+});
 
 // Format date to "YYYY-MM-DD"
 function formatDate(date: string) {
@@ -265,15 +276,6 @@ function formatDate(date: string) {
 
   return [year, month, day].join("-");
 }
-
-// Watch for datepicker
-watch(date, (newDate) => {
-  formData.startDate = formatDate(date.value[0]);
-  formData.endDate = formatDate(date.value[1]);
-  console.log(formData.startDate);
-  console.log(formData.endDate);
-  console.log(date.value);
-});
 
 async function navigateToRoomDetails(roomType: { id: any }) {
   console.log(auth.user.id);
