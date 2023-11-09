@@ -347,7 +347,7 @@ async function onSubmit() {
   if (response !== null) {
     // to mybooking
     console.log(response);
-    // await navigateTo("/");
+    await navigateTo("/booked/service");
   }
 }
 
