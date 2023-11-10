@@ -26,11 +26,11 @@
           >
         </li>
         <li class="mr-2">
-          <NuxtLink
+          <NuxtLinkx
             to="/booked/service"
             aria-current="page"
             class="inline-block p-4 text-white bg-primary rounded-t-lg active"
-            >Service</NuxtLink
+            >Service</NuxtLinkx
           >
         </li>
       </ul>
@@ -42,7 +42,8 @@
             :title="bookingOrder.total_price"
             :status="bookingOrder.status"
             :image="'/images/icons/icons8-cat-64.png'"
-            :date="'2022-12-03'"
+            :date="bookingOrder.service_date"
+            :total="bookingOrder.total_price"
           />
         </div>
       </div>
