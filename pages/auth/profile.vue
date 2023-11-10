@@ -47,6 +47,24 @@
   </section>
 </template>
 
+<!-- <template>
+  <div>
+    <h1>Edit Profile</h1>
+    <form @submit.prevent="onSubmit">
+      <label for="firstName">First Name:</label>
+      <input v-model="profileFormData.firstName" type="text" id="firstName" />
+
+      <label for="lastName">Last Name:</label>
+      <input v-model="profileFormData.lastName" type="text" id="lastName" />
+
+      <label for="phone">Phone:</label>
+      <input v-model="profileFormData.phone" type="text" id="phone" />
+
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</template> -->
+
 <script setup lang="ts">
 import { useAuthStore } from "~/stores/useAuthStore";
 const auth = useAuthStore();
@@ -54,23 +72,35 @@ const auth = useAuthStore();
 const fetchedUserData = await useMyFetch<any>(`profile/${auth.user.id}`, {});
 const userData = fetchedUserData.data.value;
 
+const form = ref({
+  firstName: '',
+  lastName: '',
+  phone: '',
+});
+
+const submitForm = () => {
+  // Handle form submission, e.g., send data to the server
+  console.log('Form submitted:', form.value);
+};
+
 // validate var name
-const profileFormData = reactive({
-  firstName: userData.firstName || '', // Set a default value or handle null appropriately
-  lastName: userData.lastName || '', // Set a default value or handle null appropriately
-  phone: userData.phone || '', // Set a default value or handle null appropriately
+const profileFormData = ref({
+  firstName: '', // Set a default value or handle null appropriately
+  lastName: '', // Set a default value or handle null appropriately
+  phone: '', // Set a default value or handle null appropriately
 });
 
 console.log(profileFormData)
 
 const onSubmit = async () => {
+  console.log('Profile form submitted:', profileFormData.value)
   try {
     const response = await useMyFetch(`/profile/${auth.user.id}`, {
       method: 'PUT',
       body: {
-        first_name: profileFormData.firstName || '', // Set a default value or handle null appropriately
-        last_name: profileFormData.lastName || '', // Set a default value or handle null appropriately
-        phone_number: profileFormData.phone || '', // Set a default value or handle null appropriately
+        first_name: profileFormData.firstName, 
+        last_name: profileFormData.lastName , 
+        phone_number: profileFormData.phone,
       },
     });
 
