@@ -1,5 +1,18 @@
 <template>
-  <div>
-    <NuxtWelcome />
-  </div>
+  <head>
+    <title>Pet Care</title>
+  </head>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
+
+<script setup>
+import { initFlowbite } from "flowbite";
+import { onMounted } from "vue";
+
+// initialize components based on data attribute selectors
+onMounted(() => {
+  initFlowbite();
+});
+</script>
