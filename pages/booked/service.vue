@@ -44,6 +44,26 @@ const { data: bookingOrders, error } = await useMyFetch<any>(
   {}
 );
 
-// console.log(bookingOrders);
-// console.log(error);
+const fetchedUserServiceOrder = await useMyFetch<any>(
+  `service-orders/${auth.user.id}/get-users-order`,
+  {}
+);
+
+const userServiceOrder = fetchedUserServiceOrder.data.value;
+
+console.log(userServiceOrder);
+
+async function navigateToEachOrder() {
+  
+}
+
+// const fetchedServiceItem = await useMyFetch<any>(
+//   `service-orders/get-order-item`,
+//   {
+//     paras: {
+//       order_id: userServiceOrder.id,
+//     }, 
+//   }
+// );
+
 </script>
