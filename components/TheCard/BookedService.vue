@@ -72,6 +72,7 @@
                   @click="
                     navigateTo(
                       `/payments/create?bookingOrderId=${id}&type=HOTEL`
+                      `others/payment`
                     )
                   "
                   type="button"
@@ -299,4 +300,26 @@ const props = defineProps([
   "description",
   "date",
 ]);
+
+// async function navigateToServicePayment() {
+  
+//   if (selectedPackage.value === "None" && selectedALaCarte.value.length === 0) {
+//     alert("Please select at least one service.");
+//     return;
+//   }
+
+//   const alacarteIDs = selectedALaCarte.value.map((item) => item.id).join(",");
+//   console.log(alacarteIDs);
+
+//   const queryParams = {
+//     serviceDate: date,
+//     petType: selectedPet.value,
+//     total: sum,
+//     packageID: selectedType.value.id, // Include the selectedType
+//     alacarteIDs: alacarteIDs, // Include the selectedAlacarte as a comma-separated string
+//   };
+
+//   await navigateTo({ path: "/others/report", query: queryParams });
+// }
+
 </script>
