@@ -140,8 +140,10 @@ async function confirm() {
     }
   )
 
+  console.log(fetchedCurrentOrder.data.value);
+
   const queryParams = {
-    serviceOrderId: fetchedCurrentOrder.data.value.id,
+    serviceOrderId: fetchedCurrentOrder.data.value[0].id,
   }
 
   await navigateTo({ path: "/others/payment", query: queryParams });

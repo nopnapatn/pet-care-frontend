@@ -75,10 +75,10 @@
                     <h2
                       class="text-xl font-semibold text-gray-800 dark:text-gray-200"
                     >
-                      Booking Orders
+                      Pending Booking Orders
                     </h2>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
-                      Create invoices, edit, download and more.
+                      List of booking orders that are pending for verification.
                     </p>
                   </div>
                 </div>
@@ -395,9 +395,7 @@
                             class="block"
                             data-hs-overlay="#hs-ai-invoice-modal"
                             @click="
-                              navigateTo(
-                                `/payments/${bookingOrder.id}?paymentId=${bookingOrder.payment.id}`
-                              )
+                              navigateTo(`/payments/${bookingOrder.payment.id}`)
                             "
                           >
                             <span class="px-6 py-1.5">
@@ -783,11 +781,6 @@ const columns = [
   {
     key: "id",
     label: "ID",
-  },
-  {
-    key: "roomNumber",
-    label: "Room Number",
-    sortable: true,
   },
   {
     key: "userID",
