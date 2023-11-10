@@ -71,8 +71,7 @@
                 <button
                   @click="
                     navigateTo(
-                      `/payments/create?bookingOrderId=${id}&type=HOTEL`
-                      `others/payment`
+                      `/others/payment?serviceOrderId=${id}`
                     )
                   "
                   type="button"
@@ -291,6 +290,10 @@
 </template>
 
 <script setup lang="ts">
+
+import { useAuthStore } from "~/stores/useAuthStore";
+const auth = useAuthStore();
+
 const props = defineProps([
   "id",
   "title",
@@ -301,25 +304,24 @@ const props = defineProps([
   "date",
 ]);
 
-// async function navigateToServicePayment() {
-  
-//   if (selectedPackage.value === "None" && selectedALaCarte.value.length === 0) {
-//     alert("Please select at least one service.");
-//     return;
-//   }
+async function navigateToServicePayment() {
 
-//   const alacarteIDs = selectedALaCarte.value.map((item) => item.id).join(",");
-//   console.log(alacarteIDs);
+  const fetchedCurrentOrder = await useMyFetch<any>(
+    `service-orders/${auth.user?.id}/get-user-current-order`,
+    {
+      params: {
+        user_id: auth.user?.id,
+      },
+    }
+  );
 
-//   const queryParams = {
-//     serviceDate: date,
-//     petType: selectedPet.value,
-//     total: sum,
-//     packageID: selectedType.value.id, // Include the selectedType
-//     alacarteIDs: alacarteIDs, // Include the selectedAlacarte as a comma-separated string
-//   };
+  const queryParams = {
+    serviceOrderId: fetchedCurrentOrder.data.value[0].id,
+  };
 
-//   await navigateTo({ path: "/others/report", query: queryParams });
-// }
+  await navigateTo({ path: "/others/payment", query: queryParams });
+}
+
+// console.log(id)
 
 </script>
