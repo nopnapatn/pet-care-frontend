@@ -41,7 +41,7 @@
             :id="bookingOrder.id"
             :title="bookingOrder.total_price"
             :status="bookingOrder.status"
-            :image="'/images/icons/icons8-cat-64.png'"
+            :pet_type="bookingOrders.pet_type"
             :date="bookingOrder.service_date"
             :total="bookingOrder.total_price"
           />
