@@ -8,7 +8,7 @@
             <span
               class="inline-flex justify-center items-center my-4 w-[64px] h-[64px] rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
             >
-              <!-- <img
+              <img
                 v-if="pet_type === 'CAT'"
                 width="36"
                 height="36"
@@ -21,8 +21,7 @@
                 height="36"
                 src="/images/icons/icons8-dog-96.png"
                 alt="cat--v1"
-              /> -->
-              {{ pet_type }}
+              />
             </span>
           </div>
         </a>
@@ -83,11 +82,7 @@
             <div class="flex space-x-2 mb-4 sm:mt-0">
               <div v-if="status === 'WAITING'">
                 <button
-                  @click="
-                    navigateTo(
-                      `/payments/create?bookingOrderId=${id}&type=HOTEL`
-                    )
-                  "
+                  @click="navigateTo(`/others/payment?serviceOrderId=${id}`)"
                   type="button"
                   class="px-3 py-2 text-xs font-medium text-center text-white bg-accent rounded-lg hover:bg-accent-focus focus:ring-4 focus:outline-none focus:ring-accent dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
@@ -214,6 +209,9 @@
 </template>
 
 <script setup lang="ts">
+import { useAuthStore } from "~/stores/useAuthStore";
+const auth = useAuthStore();
+
 const props = defineProps([
   "id",
   "title",
@@ -223,4 +221,23 @@ const props = defineProps([
   "description",
   "date",
 ]);
+
+async function navigateToServicePayment() {
+  const fetchedCurrentOrder = await useMyFetch<any>(
+    `service-orders/${auth.user?.id}/get-user-current-order`,
+    {
+      params: {
+        user_id: auth.user?.id,
+      },
+    }
+  );
+
+  const queryParams = {
+    serviceOrderId: fetchedCurrentOrder.data.value[0].id,
+  };
+
+  await navigateTo({ path: "/others/payment", query: queryParams });
+}
+
+// console.log(id)
 </script>

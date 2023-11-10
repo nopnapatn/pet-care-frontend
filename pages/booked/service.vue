@@ -36,14 +36,14 @@
       </ul>
       <div class="py-4"></div>
       <div class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
-        <div v-for="bookingOrder in bookingOrders" :key="bookingOrder.id">
+        <div v-for="serviceOrder in userServiceOrders" :key="serviceOrder.id">
           <TheCardBookedService
-            :id="bookingOrder.id"
-            :title="bookingOrder.total_price"
-            :status="bookingOrder.status"
-            :pet_type="bookingOrders.pet_type"
-            :date="bookingOrder.service_date"
-            :total="bookingOrder.total_price"
+            :id="serviceOrder.id"
+            :title="serviceOrder.total_price"
+            :status="serviceOrder.status"
+            :pet_type="serviceOrder.pet_type"
+            :date="serviceOrder.service_date"
+            :total="serviceOrder.total_price"
           />
         </div>
       </div>
@@ -54,12 +54,65 @@
 import { useAuthStore } from "~/stores/useAuthStore";
 
 const auth = useAuthStore();
-const { data: bookingOrders, error } = await useMyFetch<any>(
-  `service-orders/${auth.user.id}/get-user-current-order`,
+// const { data: bookingOrders, error } = await useMyFetch<any>(
+//   `service-orders/${auth.user.id}/get-user-current-order`,
+//   {}
+// );
+
+const fetchedUserServiceOrders = await useMyFetch<any>(
+  `service-orders/${auth.user.id}/get-users-order`,
   {}
 );
 
+const userServiceOrders = fetchedUserServiceOrders.data.value;
+
+console.log(userServiceOrders);
+
+async function navigateToEachOrder() {}
+
 console.log(auth.user.id);
-console.log(bookingOrders);
+// console.log(bookingOrders);
+
+// const fetchedServiceItem = await useMyFetch<any>(
+//   `service-orders/get-order-item`,
+//   {
+//     paras: {
+//       order_id: userServiceOrder.id,
+//     },
+//   }
+// );
 // console.log(error);
 </script>
+
+<!-- <script setup lang="ts">
+import { useAuthStore } from "~/stores/useAuthStore";
+
+const auth = useAuthStore();
+const { data: bookingOrders, error } = await useMyFetch<any>(
+  `booking-orders/${auth.user.id}/my-bookings`,
+  {}
+);
+
+const fetchedUserServiceOrder = await useMyFetch<any>(
+  `service-orders/${auth.user.id}/get-users-order`,
+  {}
+);
+
+const userServiceOrder = fetchedUserServiceOrder.data.value;
+
+console.log(userServiceOrder);
+
+async function navigateToEachOrder() {
+  
+}
+
+// const fetchedServiceItem = await useMyFetch<any>(
+//   `service-orders/get-order-item`,
+//   {
+//     paras: {
+//       order_id: userServiceOrder.id,
+//     }, 
+//   }
+// );
+
+</script> -->
