@@ -396,6 +396,7 @@
                             type="button"
                             class="block"
                             data-hs-overlay="#hs-ai-invoice-modal"
+                            @click="handleCheckIn(bookingOrder)"
                           >
                             <span class="px-6 py-1.5">
                               <span
@@ -456,22 +457,15 @@
                                   <h3
                                     class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"
                                   >
-                                    {{ bookingOrder.room_number }}
+                                    Room Number: {{ roomNumber }}
                                   </h3>
                                   <button
-                                    @click="handleCheckIn(bookingOrder)"
                                     data-modal-hide="popup-modal"
+                                    @click="handleNavigate"
                                     type="button"
                                     class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                                   >
-                                    Check In
-                                  </button>
-                                  <button
-                                    data-modal-hide="popup-modal"
-                                    type="button"
-                                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                                  >
-                                    No, cancel
+                                    Okay
                                   </button>
                                 </div>
                               </div>
@@ -832,7 +826,7 @@ const { data: bookingOrders, error } = await useMyFetch<any>(
   {}
 );
 console.log(bookingOrders);
-
+const roomNumber = ref("");
 async function handleCheckIn(bookingOrder: { id: any }) {
   console.log("check in");
   const { data: response, error } = await useMyFetch<any>(
@@ -845,7 +839,12 @@ async function handleCheckIn(bookingOrder: { id: any }) {
   if (response) {
     console.log(response.value.message);
     console.log(response.value["booking_order"]);
-    navigateTo("/orders/inuse");
+    roomNumber.value = response.value["booking_order"]["room_number"];
+    console.log(response.value["booking_order"]["room_number"]);
   }
+}
+
+function handleNavigate() {
+  navigateTo("/orders/inuse");
 }
 </script>
