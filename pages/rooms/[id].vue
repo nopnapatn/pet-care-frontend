@@ -153,8 +153,10 @@
                           </div>
                         </div>
                       </li>
-                      <li>
-                        <label for="ownerInstruction"
+                      <li class="py-3 sm:py-4">
+                        <label
+                          for="ownerInstruction"
+                          class="text-sm text-gray-900 truncate"
                           >Any special request?</label
                         >
                         <textarea
@@ -163,6 +165,7 @@
                           rows="3"
                           class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
                           v-model="formData.ownerInstruction"
+                          placeholder="write something.."
                         ></textarea>
                       </li>
                     </ul>
@@ -171,7 +174,7 @@
                 <div class="py-2"></div>
                 <button
                   type="submit"
-                  class="inline-flex justify-center items-center gap-x-3 text-center bg-primary hover:bg-blue-700 border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800"
+                  class="inline-flex justify-center items-center gap-x-3 text-center bg-primary hover:bg-primary-focus border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800"
                 >
                   Booking
                 </button>
@@ -255,7 +258,7 @@ async function onSubmit() {
 
     const bookingOrderId = response.value["booking_order"]["id"];
     await navigateTo(
-      `/payments/create?bookingOrderId=${bookingOrderId}&type=HOTEL`
+      `/payments/create?bookingOrderId=${bookingOrderId}&price=${totalPrice.value}&type=HOTEL`
     );
     // console.log(response.value);
   } else {

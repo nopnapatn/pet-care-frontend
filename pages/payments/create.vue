@@ -1,22 +1,26 @@
 <template>
-  <div class="px-16 py-8 h-screen">
-    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8">
-      <div class="flex justify-center items-center">
-        <div class="max-w-sm rounded-lg shadow">
+  <div class="px-16 py-10">
+    <div class="grid grid-cols-2 gap-2">
+      <div class="flex justify-center ml-10 items-start">
+        <div class="max-w-sm rounded-lg shadow mt-6">
           <img class="rounded-xl" src="/images/QR.JPG" alt="" />
         </div>
       </div>
-      <div class="">
-        <div class="bg-white rounded-2xl shadow p-4 sm:p-7">
-          <div class="text-center mb-8">
+      <div class="px-6 mr-32 overflow-auto h-screen">
+        <div class="bg-white rounded-2xl overflow-y-auto shadow p-4 sm:p-7">
+          <div class="text-center">
             <h2
-              class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200"
+              class="text-2xl pb-2 md:text-3xl font-bold text-gray-800 dark:text-gray-200"
             >
               Payment
             </h2>
-            <p class="text-sm text-gray-600 dark:text-gray-400">
+            <p class="text-sm mb-4 text-gray-600 dark:text-gray-400">
               Submit your billing information
             </p>
+          </div>
+          <div class="flex gap-2 py-4 pr-2 justify-between">
+            <h1>Total:</h1>
+            <h1>฿{{ formData.amount }}</h1>
           </div>
 
           <form @submit.prevent="onSubmit()">
@@ -24,8 +28,8 @@
             <div
               class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-gray-700"
             >
-              <div class="flex gap-10">
-                <div>
+              <div class="flex gap-10 w-full grid-cols-2">
+                <div class="w-full">
                   <label
                     for="firstName"
                     class="inline-block text-sm font-medium dark:text-white"
@@ -37,7 +41,7 @@
                       id="firstName"
                       type="text"
                       class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                      placeholder="John Doe"
+                      placeholder="Full Name"
                       v-model="formData.name"
                       label="First Name"
                     />
@@ -46,7 +50,7 @@
                     </div>
                   </div>
                 </div>
-                <div>
+                <div class="w-full">
                   <label
                     for="amount"
                     class="inline-block text-sm font-medium dark:text-white"
@@ -58,9 +62,9 @@
                       id="amount"
                       type="number"
                       class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                      placeholder="500"
                       v-model="formData.amount"
                       label="First Name"
+                      disabled
                     />
                     <div
                       v-if="errorMessage.amount"
@@ -73,48 +77,55 @@
               </div>
             </div>
 
-            <label
-              for="time"
-              class="inline-block text-sm font-medium dark:text-white"
-            >
-              Time
-            </label>
-            <div class="mt-2 space-y-3">
-              <input
-                id="time"
-                type="time"
-                class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                placeholder="Enter your time"
-                v-model="formData.time"
-                label="First Name"
-              />
-              <div v-if="errorMessage.time" class="text-sm text-red-500">
-                {{ errorMessage.time }}
+            <div class="flex gap-10 w-full grid-cols-2">
+              <!-- date -->
+              <div class="w-full">
+                <label
+                  for="date"
+                  class="inline-block text-sm font-medium dark:text-white"
+                >
+                  Date
+                </label>
+
+                <div class="mt-2 space-y-3">
+                  <input
+                    id="date"
+                    type="date"
+                    class="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                    placeholder="Enter your date"
+                    v-model="formData.date"
+                    label="First Name"
+                  />
+                  <div v-if="errorMessage.date" class="text-sm text-red-500">
+                    {{ errorMessage.date }}
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <label
-              for="date"
-              class="inline-block text-sm font-medium dark:text-white"
-            >
-              Date
-            </label>
-
-            <div class="mt-2 space-y-3">
-              <input
-                id="date"
-                type="date"
-                class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                placeholder="Enter your date"
-                v-model="formData.date"
-                label="First Name"
-              />
-              <div v-if="errorMessage.date" class="text-sm text-red-500">
-                {{ errorMessage.date }}
+              <!-- time -->
+              <div class="w-full">
+                <label
+                  for="time"
+                  class="inline-block text-sm font-medium dark:text-white"
+                >
+                  Time
+                </label>
+                <div class="mt-2 space-y-3">
+                  <input
+                    id="time"
+                    type="time"
+                    class="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                    placeholder="Enter your time"
+                    v-model="formData.time"
+                    label="First Name"
+                  />
+                  <div v-if="errorMessage.time" class="text-sm text-red-500">
+                    {{ errorMessage.time }}
+                  </div>
+                </div>
               </div>
             </div>
             <!-- Start Image -->
-            <div class="space-y-2">
+            <div class="space-y-2 mt-6">
               <label
                 for="af-submit-app-upload-images"
                 class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200"
@@ -165,24 +176,30 @@
             </div>
             <!-- End Image -->
             <div class="flex">
-              <div class="mt-5 flex justify-end gap-x-2">
+              <div class="mt-5 flex w-full justify-end">
                 <button
                   type="submit"
-                  class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                  class="py-2 px-3 w-full inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
                 >
                   Save
                 </button>
               </div>
-              <div class="px-2"></div>
-              <div class="mt-5 flex justify-end gap-x-2">
-                <button
-                  type="button"
-                  @click="navigateTo('/booked/hotel')"
-                  class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-gray-300 text-white hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-                >
-                  Later
-                </button>
-              </div>
+            </div>
+            <!-- <div class="flex items-center">
+              <h1>or Pay</h1>
+              <button class="btn btn-ghost normal-case btn-accent">Later</button>
+            </div> -->
+            <div class="flex py-2 text-gray-500 items-center justify-center">
+              or
+            </div>
+            <div class="flex w-full justify-end gap-x-2">
+              <button
+                type="button"
+                @click="navigateTo('/booked/hotel')"
+                class="py-2 px-3 w-full inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-accent text-white hover:bg-accent-focus focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+              >
+                Pay Later
+              </button>
             </div>
             <!-- End Section -->
           </form>
@@ -196,12 +213,11 @@
 import { useAuthStore } from "~/stores/useAuthStore";
 const route = useRoute();
 const auth = useAuthStore();
-
 const formData = reactive({
   user_id: auth.user.id,
   booking_order_id: route.query.bookingOrderId,
   name: "",
-  amount: "",
+  amount: route.query.price,
   time: "",
   date: "",
   type: route.query.type,
@@ -263,7 +279,7 @@ async function onSubmit() {
   );
   formDataToSend.append("user_id", formData.user_id);
   formDataToSend.append("name", formData.name);
-  formDataToSend.append("amount", formData.amount);
+  formDataToSend.append("amount", route.query.price as string);
   formDataToSend.append("time", formData.time);
   formDataToSend.append("date", formData.date);
   formDataToSend.append("type", route.query.type as string);
@@ -277,7 +293,7 @@ async function onSubmit() {
     method: "POST",
     body: formDataToSend,
   });
-  if (response !== null) {
+  if (response.value !== null) {
     // to mybooking
     console.log(response.value.message);
     await navigateTo("/booked/hotel");

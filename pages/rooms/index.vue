@@ -127,18 +127,12 @@
         <span
           class="inline-flex justify-center items-center my-4 w-[46px] h-[46px] rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
         >
-          <svg
-            class="w-5 h-5"
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"
-            />
-          </svg>
+          <img
+            width="36"
+            height="36"
+            src="/images/icons/icons8-cat-64.png"
+            alt="cat--v1"
+          />
         </span>
         <span class="pl-4">Cat</span>
       </div>
@@ -165,18 +159,12 @@
         <span
           class="inline-flex justify-center items-center my-4 w-[46px] h-[46px] rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
         >
-          <svg
-            class="w-5 h-5"
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"
-            />
-          </svg>
+          <img
+            width="32"
+            height="32"
+            src="https://img.icons8.com/sf-regular/96/year-of-dog.png"
+            alt="year-of-dog"
+          />
         </span>
         <span class="pl-4">Dog</span>
       </div>

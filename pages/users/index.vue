@@ -1,12 +1,9 @@
 <template>
   <section>
     <TheAsider />
-    <div class="p-4 sm:ml-64">
-      <div
-        class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700"
-      ></div>
+    <div class="p-4 pt-20 sm:ml-64">
       <!-- Table Section -->
-      <div class="max-w-[85rem] py-10 sm:px-6 lg:px-8 mx-auto">
+      <div class="h-screen sm:px-6 lg:px-8 mx-auto">
         <!-- Card -->
         <div class="flex flex-col">
           <div class="-m-1.5 overflow-x-auto">
@@ -22,7 +19,7 @@
                     <h2
                       class="text-xl font-semibold text-gray-800 dark:text-gray-200"
                     >
-                      Booking Orders
+                      User
                     </h2>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
                       Create invoices, edit, download and more.
@@ -30,7 +27,7 @@
                   </div>
                 </div>
                 <!-- End Header -->
-                <div v-if="!bookingOrders">
+                <div v-if="!users">
                   <!-- Body -->
                   <div
                     class="max-w-sm w-full min-h-[400px] flex flex-col justify-center mx-auto px-6 py-4"
@@ -165,7 +162,7 @@
                             <span
                               class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
                             >
-                              Room Number
+                              First Name
                             </span>
                           </div>
                         </th>
@@ -174,7 +171,7 @@
                             <span
                               class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
                             >
-                              User ID
+                              Last Name
                             </span>
                           </div>
                         </th>
@@ -183,7 +180,7 @@
                             <span
                               class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
                             >
-                              Check In
+                              Phone Number
                             </span>
                           </div>
                         </th>
@@ -192,7 +189,7 @@
                             <span
                               class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
                             >
-                              Check Out
+                              Email
                             </span>
                           </div>
                         </th>
@@ -201,26 +198,7 @@
                             <span
                               class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
                             >
-                              Pets Amount
-                            </span>
-                          </div>
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left">
-                          <div class="flex items-center gap-x-2">
-                            <span
-                              class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
-                            >
-                              Total Price
-                            </span>
-                          </div>
-                        </th>
-
-                        <th scope="col" class="px-6 py-3 text-left">
-                          <div class="flex items-center gap-x-2">
-                            <span
-                              class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
-                            >
-                              Status
+                              Total Spent
                             </span>
                           </div>
                         </th>
@@ -234,16 +212,8 @@
                     >
                       <tr
                         class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800"
-                        v-for="bookingOrder in bookingOrders"
-                        :key="bookingOrder.id"
-                        data-id="{{bookingOrder.id}}"
-                        data-room-number="{{bookingOrder.room_number}}"
-                        data-user-id="{{bookingOrder.user_id}}"
-                        data-check-in="{{bookingOrder.check_in}}"
-                        data-check-out="{{bookingOrder.check_out}}"
-                        data-pets-amount="{{bookingOrder.pets_amount}}"
-                        data-total-price="{{bookingOrder.total_price}}"
-                        data-owner-instruction="{{bookingOrder.owner_instruction}}"
+                        v-for="user in users"
+                        :key="user.id"
                       >
                         <td class="h-px w-px whitespace-nowrap">
                           <a
@@ -254,7 +224,7 @@
                             <div class="px-6 py-2">
                               <span
                                 class="font-mono text-sm text-blue-600 dark:text-blue-500"
-                                >#{{ bookingOrder.id }}</span
+                                >#{{ user.id }}</span
                               >
                             </div>
                           </a>
@@ -268,7 +238,7 @@
                             <div class="px-6 py-2">
                               <span
                                 class="text-sm text-gray-600 dark:text-gray-400"
-                                >{{ bookingOrder.room_number }}</span
+                                >{{ user.first_name }}</span
                               >
                             </div>
                           </a>
@@ -282,7 +252,7 @@
                             <div class="px-6 py-2">
                               <span
                                 class="text-sm text-gray-600 dark:text-gray-400"
-                                >{{ bookingOrder.user_id }}</span
+                                >{{ user.last_name }}</span
                               >
                             </div>
                           </a>
@@ -296,7 +266,7 @@
                             <div class="px-6 py-2">
                               <span
                                 class="text-sm text-gray-600 dark:text-gray-400"
-                                >{{ bookingOrder.check_in }}</span
+                                >{{ user.phone_number }}</span
                               >
                             </div>
                           </a>
@@ -310,51 +280,8 @@
                             <div class="px-6 py-2">
                               <span
                                 class="text-sm text-gray-600 dark:text-gray-400"
-                                >{{ bookingOrder.check_out }}</span
+                                >{{ user.email }}</span
                               >
-                            </div>
-                          </a>
-                        </td>
-                        <td class="h-px w-px whitespace-nowrap">
-                          <a
-                            class="block"
-                            href="javascript:;"
-                            data-hs-overlay="#hs-ai-invoice-modal"
-                          >
-                            <div class="px-6 py-2">
-                              <span
-                                class="text-sm text-gray-600 dark:text-gray-400"
-                                >{{ bookingOrder.pets_amount }}</span
-                              >
-                            </div>
-                          </a>
-                        </td>
-                        <td class="h-px w-px whitespace-nowrap">
-                          <a
-                            class="block"
-                            href="javascript:;"
-                            data-hs-overlay="#hs-ai-invoice-modal"
-                          >
-                            <div class="px-6 py-2">
-                              <span
-                                class="text-sm text-gray-600 dark:text-gray-400"
-                                >{{ bookingOrder.total_price }}</span
-                              >
-                            </div>
-                          </a>
-                        </td>
-                        <td class="h-px w-px whitespace-nowrap">
-                          <a
-                            class="block"
-                            href="javascript:;"
-                            data-hs-overlay="#hs-ai-invoice-modal"
-                          >
-                            <div class="px-6 py-2">
-                              <span
-                                class="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                              >
-                                {{ bookingOrder.status }}
-                              </span>
                             </div>
                           </a>
                         </td>
@@ -370,14 +297,14 @@
                   <div>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
                       <span
-                        v-if="!bookingOrders"
+                        v-if="!users"
                         class="font-semibold text-gray-800 dark:text-gray-200"
                         >0</span
                       >
                       <span
                         v-else
                         class="font-semibold text-gray-800 dark:text-gray-200"
-                        >{{ bookingOrders.length }}</span
+                        >{{ users.length }}</span
                       >
                       results
                     </p>
@@ -707,55 +634,5 @@
 </template>
 
 <script setup lang="ts">
-const { data: bookingOrders, error } = await useMyFetch<any>(
-  "booking-orders",
-  {}
-);
-
-async function handleCheckOut() {
-  console.log("check out");
-  const { data, error } = await useMyFetch<any>("booking-orders/check-out", {});
-}
-
-const columns = [
-  {
-    key: "id",
-    label: "ID",
-  },
-  {
-    key: "roomNumber",
-    label: "Room Number",
-    sortable: true,
-  },
-  {
-    key: "userID",
-    label: "User ID",
-    sortable: true,
-  },
-  {
-    key: "checkIn",
-    label: "Check In",
-    sortable: true,
-    direction: "desc",
-  },
-  {
-    key: "checkOut",
-    label: "Check Out",
-    sortable: true,
-  },
-  {
-    key: "totalPrice",
-    label: "Total Price",
-    sortable: true,
-  },
-  {
-    key: "status",
-    label: "Status",
-    sortable: true,
-  },
-  {
-    key: "actions",
-    label: "Actions",
-  },
-];
+const { data: users, error } = await useMyFetch<any>("users", {});
 </script>

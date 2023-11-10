@@ -3,7 +3,7 @@
     <TheAsider />
     <div class="p-4 sm:ml-64">
       <div
-        class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700"
+        class="text-sm px-8 font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700"
       >
         <ul class="flex flex-wrap -mb-px">
           <li class="mr-2">
@@ -59,7 +59,7 @@
         </ul>
       </div>
       <!-- Table Section -->
-      <div class="max-w-[85rem] py-10 sm:px-6 lg:px-8 mx-auto">
+      <div class="h-screen py-2 sm:px-6 lg:px-8 mx-auto">
         <!-- Card -->
         <div class="flex flex-col">
           <div class="-m-1.5 overflow-x-auto">
@@ -75,10 +75,10 @@
                     <h2
                       class="text-xl font-semibold text-gray-800 dark:text-gray-200"
                     >
-                      Booking Orders
+                      Pending Booking Orders
                     </h2>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
-                      Create invoices, edit, download and more.
+                      List of booking orders that are pending for verification.
                     </p>
                   </div>
                 </div>
@@ -382,10 +382,10 @@
                           >
                             <div class="px-6 py-2">
                               <span
-                                class="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                                v-if="bookingOrder.status === `PENDING`"
+                                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-800/30 dark:text-yellow-500"
+                                >{{ bookingOrder.status }}</span
                               >
-                                {{ bookingOrder.status }}
-                              </span>
                             </div>
                           </a>
                         </td>
@@ -395,9 +395,7 @@
                             class="block"
                             data-hs-overlay="#hs-ai-invoice-modal"
                             @click="
-                              navigateTo(
-                                `/payments/${bookingOrder.id}?paymentId=${bookingOrder.payment.id}`
-                              )
+                              navigateTo(`/payments/${bookingOrder.payment.id}`)
                             "
                           >
                             <span class="px-6 py-1.5">
@@ -783,11 +781,6 @@ const columns = [
   {
     key: "id",
     label: "ID",
-  },
-  {
-    key: "roomNumber",
-    label: "Room Number",
-    sortable: true,
   },
   {
     key: "userID",

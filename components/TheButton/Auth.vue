@@ -1,6 +1,6 @@
 <template>
   <button
-    class="group relative inline-block rounded-lg shadow-lg focus:outline-none focus:ring"
+    class="group relative inline-block rounded-lg shadow-lg focus:outline-none focus:ring-primary"
     :to="to"
     :class="colorb"
   >

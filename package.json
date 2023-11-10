@@ -28,6 +28,7 @@
     "@pinia/nuxt": "^0.4.11",
     "@popperjs/core": "^2.11.8",
     "@vuepic/vue-datepicker": "^7.0.0",
+    "apexcharts": "^3.44.0",
     "class-variance-authority": "^0.7.0",
     "datatables.net": "^1.13.7",
     "datatables.net-bs5": "^1.13.7",

@@ -80,7 +80,7 @@ module.exports = {
     utils: true,
   },
   plugins: [
-    require("flowbite/plugin"),
+    require("flowbite/plugin")({ charts: true }),
     require("daisyui"),
     require("preline/plugin"),
   ],
