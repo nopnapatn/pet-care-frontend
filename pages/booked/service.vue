@@ -1,36 +1,53 @@
 <template>
-  <section>
-    <div class="px-16 py-8">
-      <h1
-        class="mb-4 text-4xl text-primary font-extrabold font-primary tracking-tight leading-none md:text-5xl lg:text-6xl dark:text-white"
+  <section class="bg-white h-screen dark:bg-gray-900">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+      <div class="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
+        <h2
+          class="mb-4 text-6xl text-primary font-primary tracking-tight font-extrabold dark:text-white"
+        >
+          My Booking
+        </h2>
+        <p
+          class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400"
+        >
+          Loving pet care in your neighborhood™ Book our services for your pet
+        </p>
+      </div>
+
+      <ul
+        class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400"
       >
-        My Booking
-      </h1>
-      <p
-        class="mb-8 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400"
-      >
-        This page displays your booking order, including hotel reservations and
-        other services.
-      </p>
-      <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
-        <div class="">
-          <li class="mr-2">
-            <NuxtLink
-              to="/booked/hotel"
-              class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-              >Hotel</NuxtLink
-            >
-          </li>
-          <li class="mr-2">
-            <NuxtLink
-              to="/booked/service"
-              class="inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
-              aria-current="page"
-              >Service</NuxtLink
-            >
-          </li>
+        <li class="mr-2">
+          <NuxtLink
+            href="/booked/hotel"
+            aria-current="page"
+            class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50"
+            >Hotel</NuxtLink
+          >
+        </li>
+        <li class="mr-2">
+          <NuxtLink
+            to="/booked/service"
+            aria-current="page"
+            class="inline-block p-4 text-white bg-primary rounded-t-lg active"
+            >Service</NuxtLink
+          >
+        </li>
+      </ul>
+      <div class="py-4"></div>
+      <div class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
+        <div v-for="bookingOrder in bookingOrders" :key="bookingOrder.id">
+          <TheCardBookedService
+            :id="bookingOrder.id"
+            :title="bookingOrder.room_type.title"
+            :status="bookingOrder.status"
+            :total="bookingOrder.total_price"
+            :image="bookingOrder.room_type.image_url"
+            :description="bookingOrder.room_type.description"
+            :checkin="bookingOrder.check_in"
+            :checkout="bookingOrder.check_out"
+          />
         </div>
-        <div class="lg:col-span-2"></div>
       </div>
     </div>
   </section>
@@ -40,10 +57,11 @@ import { useAuthStore } from "~/stores/useAuthStore";
 
 const auth = useAuthStore();
 const { data: bookingOrders, error } = await useMyFetch<any>(
-  `booking-orders/${auth.user.id}/my-bookings`,
+  `service-orders/${auth.user.id}/get-user-current-order`,
   {}
 );
 
-// console.log(bookingOrders);
+console.log(auth.user.id);
+console.log(bookingOrders);
 // console.log(error);
 </script>
