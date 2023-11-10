@@ -1,7 +1,37 @@
 <template>
-  <div class="max-w-2xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+  <div class="max-w-2xl px-4 sm:px-6 lg:px-8 mx-auto">
     <!-- Card -->
     <div class="bg-white rounded-2xl shadow p-4 sm:p-7 dark:bg-slate-900">
+      <div
+        class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700"
+      >
+        <h3 class="font-bold text-gray-800 dark:text-gray-200">Payment</h3>
+        <NuxtLink to="/orders/pending">
+          <button
+            type="button"
+            class="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            data-hs-overlay="#hs-bg-gray-on-hover-cards"
+          >
+            <span class="sr-only">Close</span>
+            <svg
+              class="flex-shrink-0 w-4 h-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </NuxtLink>
+      </div>
+      <div class="py-4"></div>
       <div class="text-center mb-8">
         <h2
           class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200"
@@ -57,39 +87,41 @@
             </div>
           </div>
         </div>
-
-        <label
-          for="time"
-          class="inline-block text-sm font-medium dark:text-white"
-        >
-          Time
-        </label>
-        <div class="mt-2 space-y-3">
-          <input
-            id="time"
-            class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-            :placeholder="payment.time"
-            disabled
-          />
-        </div>
-
-        <label
-          for="date"
-          class="inline-block text-sm font-medium dark:text-white"
-        >
-          Date
-        </label>
-
-        <div class="mt-2 space-y-3">
-          <input
-            id="date"
-            type="date"
-            class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-            placeholder="Enter your date"
-            label="First Name"
-            disabled
-          />
-          {{ payment.date }}
+        <div class="flex gap-10">
+          <div>
+            <label
+              for="date"
+              class="inline-block text-sm font-medium dark:text-white"
+            >
+              Date
+            </label>
+            <div class="mt-2 space-y-3">
+              <input
+                id="date"
+                type="text"
+                class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                :placeholder="payment.date"
+                disabled
+              />
+            </div>
+          </div>
+          <div>
+            <label
+              for="time"
+              class="inline-block text-sm font-medium dark:text-white"
+            >
+              Time
+            </label>
+            <div class="mt-2 space-y-3">
+              <input
+                id="time"
+                type="number"
+                class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-primary focus:ring-primary dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                :placeholder="payment.time"
+                disabled
+              />
+            </div>
+          </div>
         </div>
         <!-- Start Image -->
         <div class="space-y-2">
@@ -112,20 +144,21 @@
         <div class="flex">
           <div class="mt-5 flex justify-end gap-x-2">
             <button
-              type="button"
-              @click="rejectBookingOrder()"
-              class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-            >
-              Reject
-            </button>
-          </div>
-          <div class="mt-5 flex justify-end gap-x-2">
-            <button
               type="submit"
               @click="verifyBookingOrder()"
-              class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+              class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
             >
               Verify
+            </button>
+          </div>
+          <div class="px-2"></div>
+          <div class="mt-5 flex justify-end gap-x-2">
+            <button
+              type="button"
+              @click="rejectBookingOrder()"
+              class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+            >
+              Reject
             </button>
           </div>
         </div>

@@ -3,7 +3,7 @@
     <TheAsider />
     <div class="p-4 sm:ml-64">
       <div
-        class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700"
+        class="text-sm px-8 font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700"
       >
         <ul class="flex flex-wrap -mb-px">
           <li class="mr-2">
@@ -59,7 +59,7 @@
         </ul>
       </div>
       <!-- Table Section -->
-      <div class="max-w-[85rem] py-10 sm:px-6 lg:px-8 mx-auto">
+      <div class="h-screen py-2 sm:px-6 lg:px-8 mx-auto">
         <!-- Card -->
         <div class="flex flex-col">
           <div class="-m-1.5 overflow-x-auto">
