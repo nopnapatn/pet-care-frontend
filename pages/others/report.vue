@@ -132,13 +132,14 @@ async function confirm() {
   console.log(response.value);
 
   const fetchedCurrentOrder = await useMyFetch<any>(
-    "service-orders/get-user-current-order",
+    `service-orders/${auth.user?.id}/get-user-current-order`,
     {
       params: {
         user_id: auth.user?.id,
       },
     }
-  )
+  );
+
 
   console.log(fetchedCurrentOrder.data.value);
 
