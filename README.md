@@ -73,6 +73,22 @@ yarn preview
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
+# Testing
+
+เช็คว่า status เป็น 200 หรือไม่
+  
+```
+pm.test("Status code is 200", function(){
+    pm.response.to.have.status(200);
+})
+```
+เช็คว่า response ต้องไม่มี error
+```
+pm.test("Response should be okay to process", function(){
+    pm.response.to.not.be.error;
+    pm.response.to.not.have.jsonBody("error");
+});
+```
 
 # User Persona
 คนแรก
