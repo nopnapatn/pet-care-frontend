@@ -8,36 +8,28 @@
         <ul class="flex flex-wrap -mb-px">
           <li class="mr-2">
             <NuxtLink
-              to="/orders"
-              class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-              aria-current="page"
-              >Order List</NuxtLink
-            >
-          </li>
-          <li class="mr-2">
-            <NuxtLink
-              to="/orders/waiting"
+              to="/orders/services/waiting"
               class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
               >Waiting</NuxtLink
             >
           </li>
           <li class="mr-2">
             <NuxtLink
-              to="/orders/pending"
+              to="/orders/services/pending"
               class="inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
               >Pending</NuxtLink
             >
           </li>
           <li class="mr-2">
             <NuxtLink
-              to="/orders/verified"
+              to="/orders/services/verified"
               class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
               >Verified</NuxtLink
             >
           </li>
           <li class="mr-2">
             <NuxtLink
-              to="/orders/canceled"
+              to="/orders/services/canceled"
               class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
               >Canceled</NuxtLink
             >
