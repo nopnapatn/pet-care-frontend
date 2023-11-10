@@ -3,7 +3,7 @@
     <TheAsider />
     <div class="p-4 sm:ml-64">
       <div
-        class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700"
+        class="text-sm px-8 font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700"
       >
         <ul class="flex flex-wrap -mb-px">
           <li class="mr-2">
@@ -59,7 +59,7 @@
         </ul>
       </div>
       <!-- Table Section -->
-      <div class="max-w-[85rem] py-10 sm:px-6 lg:px-8 mx-auto">
+      <div class="h-screen pt-2 sm:px-6 lg:px-8 mx-auto">
         <!-- Card -->
         <div class="flex flex-col">
           <div class="-m-1.5 overflow-x-auto">
@@ -413,10 +413,35 @@
                           >
                             <div class="px-6 py-2">
                               <span
-                                class="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                                v-if="bookingOrder.status === `WAITING`"
+                                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-white/10 dark:text-white"
+                                >{{ bookingOrder.status }}</span
                               >
-                                {{ bookingOrder.status }}
-                              </span>
+                              <span
+                                v-if="bookingOrder.status === `PENDING`"
+                                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-800/30 dark:text-yellow-500"
+                                >{{ bookingOrder.status }}</span
+                              >
+                              <span
+                                v-if="bookingOrder.status === `VERIFIED`"
+                                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-800/30 dark:text-blue-500"
+                                >{{ bookingOrder.status }}</span
+                              >
+                              <span
+                                v-if="bookingOrder.status === `IN_USE`"
+                                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-teal-100 text-teal-800 dark:bg-teal-800/30 dark:text-teal-500"
+                                >IN USE</span
+                              >
+                              <span
+                                v-if="bookingOrder.status === `COMPLETED`"
+                                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-50 text-gray-500 dark:bg-white/[.05] dark:text-white"
+                                >{{ bookingOrder.status }}</span
+                              >
+                              <span
+                                v-if="bookingOrder.status === `CANCELED`"
+                                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-800/30 dark:text-red-500"
+                                >{{ bookingOrder.status }}</span
+                              >
                             </div>
                           </a>
                         </td>

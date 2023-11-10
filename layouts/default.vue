@@ -1,6 +1,6 @@
 <template>
-  <TheHeader v-if="auth.user.role != 'STAFF'" />
-  <div class="bg-white pt-20">
+  <TheHeader v-if="auth.user.role != 'STAFF'" class="pb-20" />
+  <div class="bg-white">
     <slot />
   </div>
 </template>
