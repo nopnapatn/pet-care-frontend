@@ -1,12 +1,9 @@
 <template>
   <section>
     <TheAsider />
-    <div class="p-4 sm:ml-64">
-      <div
-        class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700"
-      ></div>
+    <div class="p-4 pt-20 sm:ml-64">
       <!-- Table Section -->
-      <div class="max-w-[85rem] py-10 sm:px-6 lg:px-8 mx-auto">
+      <div class="h-screen sm:px-6 lg:px-8 mx-auto">
         <!-- Card -->
         <div class="flex flex-col">
           <div class="-m-1.5 overflow-x-auto">
@@ -22,7 +19,7 @@
                     <h2
                       class="text-xl font-semibold text-gray-800 dark:text-gray-200"
                     >
-                      Booking Orders
+                      User
                     </h2>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
                       Create invoices, edit, download and more.
