@@ -59,7 +59,7 @@
         </ul>
       </div>
       <!-- Table Section -->
-      <div class="h-screen py-2 sm:px-6 lg:px-8 mx-auto">
+      <div class="min-h-screen py-2 sm:px-6 lg:px-8 mx-auto">
         <!-- Card -->
         <div class="flex flex-col">
           <div class="-m-1.5 overflow-x-auto">

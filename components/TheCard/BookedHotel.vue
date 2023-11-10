@@ -20,7 +20,7 @@
           > -->
           <div class="pb-2">
             <span
-              v-if="status === 'COMPLETE'"
+              v-if="status === 'COMPLETED'"
               class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
               >Complete</span
             >
@@ -53,11 +53,11 @@
           <h3
             class="text-xl font-bold tracking-tight text-gray-900 dark:text-white"
           >
-            {{ title }} ({{ total }} Baht.)
+            {{ title }}
           </h3>
-          <span class="text-gray-500 dark:text-gray-400">{{
-            description
-          }}</span>
+          <span class="text-gray-500 dark:text-gray-400"
+            >{{ total }} Baht.</span
+          >
           <div class="flex items-end justify-between">
             <div>
               <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">

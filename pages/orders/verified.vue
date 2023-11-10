@@ -59,7 +59,7 @@
         </ul>
       </div>
       <!-- Table Section -->
-      <div class="h-screen py-2 sm:px-6 lg:px-8 mx-auto">
+      <div class="min-h-screen py-2 sm:px-6 lg:px-8 mx-auto">
         <!-- Card -->
         <div class="flex flex-col">
           <div class="-m-1.5 overflow-x-auto">
@@ -391,10 +391,11 @@
                         </td>
                         <td class="h-px w-px whitespace-nowrap">
                           <button
+                            data-modal-target="popup-modal"
+                            data-modal-toggle="popup-modal"
                             type="button"
                             class="block"
                             data-hs-overlay="#hs-ai-invoice-modal"
-                            @click="handleCheckIn(bookingOrder)"
                           >
                             <span class="px-6 py-1.5">
                               <span
@@ -419,6 +420,63 @@
                               </span>
                             </span>
                           </button>
+
+                          <div
+                            id="popup-modal"
+                            tabindex="-1"
+                            class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+                          >
+                            <div class="relative w-full max-w-md max-h-full">
+                              <div
+                                class="relative bg-white rounded-lg shadow dark:bg-gray-700"
+                              >
+                                <button
+                                  type="button"
+                                  class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                  data-modal-hide="popup-modal"
+                                >
+                                  <svg
+                                    class="w-3 h-3"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 14 14"
+                                  >
+                                    <path
+                                      stroke="currentColor"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                                    />
+                                  </svg>
+                                  <span class="sr-only">Close modal</span>
+                                </button>
+                                <div class="p-6 text-center">
+                                  <h3
+                                    class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"
+                                  >
+                                    {{ bookingOrder.room_number }}
+                                  </h3>
+                                  <button
+                                    @click="handleCheckIn(bookingOrder)"
+                                    data-modal-hide="popup-modal"
+                                    type="button"
+                                    class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                                  >
+                                    Check In
+                                  </button>
+                                  <button
+                                    data-modal-hide="popup-modal"
+                                    type="button"
+                                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                                  >
+                                    No, cancel
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </td>
                       </tr>
                     </tbody>
@@ -786,6 +844,7 @@ async function handleCheckIn(bookingOrder: { id: any }) {
 
   if (response) {
     console.log(response.value.message);
+    console.log(response.value["booking_order"]);
     navigateTo("/orders/inuse");
   }
 }

@@ -204,7 +204,6 @@ console.log(route.query.petsAmount);
 const totalPrice = computed(() => {
   if (route.query.startDate && route.query.endDate && route.query.petsAmount) {
     return (
-      Number(route.query.petsAmount) *
       roomType.value.price *
       calculateDays(
         route.query.startDate as string,
