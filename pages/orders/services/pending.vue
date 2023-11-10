@@ -1,9 +1,51 @@
 <template>
   <section>
     <TheAsider />
-    <div class="p-4 pt-20 sm:ml-64">
+    <div class="p-4 sm:ml-64">
+      <div
+        class="text-sm px-8 font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700"
+      >
+        <ul class="flex flex-wrap -mb-px">
+          <li class="mr-2">
+            <NuxtLink
+              to="/orders"
+              class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              aria-current="page"
+              >Order List</NuxtLink
+            >
+          </li>
+          <li class="mr-2">
+            <NuxtLink
+              to="/orders/waiting"
+              class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              >Waiting</NuxtLink
+            >
+          </li>
+          <li class="mr-2">
+            <NuxtLink
+              to="/orders/pending"
+              class="inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
+              >Pending</NuxtLink
+            >
+          </li>
+          <li class="mr-2">
+            <NuxtLink
+              to="/orders/verified"
+              class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              >Verified</NuxtLink
+            >
+          </li>
+          <li class="mr-2">
+            <NuxtLink
+              to="/orders/canceled"
+              class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              >Canceled</NuxtLink
+            >
+          </li>
+        </ul>
+      </div>
       <!-- Table Section -->
-      <div class="h-screen sm:px-6 lg:px-8 mx-auto">
+      <div class="h-screen py-2 sm:px-6 lg:px-8 mx-auto">
         <!-- Card -->
         <div class="flex flex-col">
           <div class="-m-1.5 overflow-x-auto">
@@ -19,15 +61,16 @@
                     <h2
                       class="text-xl font-semibold text-gray-800 dark:text-gray-200"
                     >
-                      User
+                      Pending Service Booking Orders
                     </h2>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
-                      Create invoices, edit, download and more.
+                      List of service booking orders that are waiting for
+                      verification.
                     </p>
                   </div>
                 </div>
                 <!-- End Header -->
-                <div v-if="!users">
+                <div v-if="!serviceOrders">
                   <!-- Body -->
                   <div
                     class="max-w-sm w-full min-h-[400px] flex flex-col justify-center mx-auto px-6 py-4"
@@ -162,7 +205,7 @@
                             <span
                               class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
                             >
-                              First Name
+                              Room Number
                             </span>
                           </div>
                         </th>
@@ -171,7 +214,7 @@
                             <span
                               class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
                             >
-                              Last Name
+                              User ID
                             </span>
                           </div>
                         </th>
@@ -180,7 +223,7 @@
                             <span
                               class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
                             >
-                              Phone Number
+                              Check In
                             </span>
                           </div>
                         </th>
@@ -189,7 +232,7 @@
                             <span
                               class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
                             >
-                              Email
+                              Check Out
                             </span>
                           </div>
                         </th>
@@ -198,7 +241,26 @@
                             <span
                               class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
                             >
-                              Total Spent
+                              Pets Amount
+                            </span>
+                          </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left">
+                          <div class="flex items-center gap-x-2">
+                            <span
+                              class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
+                            >
+                              Total Price
+                            </span>
+                          </div>
+                        </th>
+
+                        <th scope="col" class="px-6 py-3 text-left">
+                          <div class="flex items-center gap-x-2">
+                            <span
+                              class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
+                            >
+                              Status
                             </span>
                           </div>
                         </th>
@@ -212,8 +274,16 @@
                     >
                       <tr
                         class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800"
-                        v-for="user in users"
-                        :key="user.id"
+                        v-for="serviceOrder in serviceOrders"
+                        :key="serviceOrder.id"
+                        data-id="{{serviceOrder.id}}"
+                        data-room-number="{{serviceOrder.room_number}}"
+                        data-user-id="{{serviceOrder.user_id}}"
+                        data-check-in="{{serviceOrder.check_in}}"
+                        data-check-out="{{serviceOrder.check_out}}"
+                        data-pets-amount="{{serviceOrder.pets_amount}}"
+                        data-total-price="{{serviceOrder.total_price}}"
+                        data-owner-instruction="{{serviceOrder.owner_instruction}}"
                       >
                         <td class="h-px w-px whitespace-nowrap">
                           <a
@@ -224,7 +294,7 @@
                             <div class="px-6 py-2">
                               <span
                                 class="font-mono text-sm text-blue-600 dark:text-blue-500"
-                                >#{{ user.id }}</span
+                                >#{{ serviceOrder.id }}</span
                               >
                             </div>
                           </a>
@@ -238,7 +308,7 @@
                             <div class="px-6 py-2">
                               <span
                                 class="text-sm text-gray-600 dark:text-gray-400"
-                                >{{ user.first_name }}</span
+                                >{{ serviceOrder.user_id }}</span
                               >
                             </div>
                           </a>
@@ -252,7 +322,7 @@
                             <div class="px-6 py-2">
                               <span
                                 class="text-sm text-gray-600 dark:text-gray-400"
-                                >{{ user.last_name }}</span
+                                >{{ serviceOrder.service_date }}</span
                               >
                             </div>
                           </a>
@@ -266,7 +336,7 @@
                             <div class="px-6 py-2">
                               <span
                                 class="text-sm text-gray-600 dark:text-gray-400"
-                                >{{ user.phone_number }}</span
+                                >{{ serviceOrder.total_price }}</span
                               >
                             </div>
                           </a>
@@ -280,21 +350,7 @@
                             <div class="px-6 py-2">
                               <span
                                 class="text-sm text-gray-600 dark:text-gray-400"
-                                >{{ user.email }}</span
-                              >
-                            </div>
-                          </a>
-                        </td>
-                        <td class="h-px w-px whitespace-nowrap">
-                          <a
-                            class="block"
-                            href="javascript:;"
-                            data-hs-overlay="#hs-ai-invoice-modal"
-                          >
-                            <div class="px-6 py-2">
-                              <span
-                                class="text-sm text-gray-600 dark:text-gray-400"
-                                >{{ user.totalSpent }}</span
+                                >{{ serviceOrder.pet_type }}</span
                               >
                             </div>
                           </a>
@@ -311,14 +367,14 @@
                   <div>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
                       <span
-                        v-if="!users"
+                        v-if="!serviceOrders"
                         class="font-semibold text-gray-800 dark:text-gray-200"
                         >0</span
                       >
                       <span
                         v-else
                         class="font-semibold text-gray-800 dark:text-gray-200"
-                        >{{ users.length }}</span
+                        >{{ serviceOrders.length }}</span
                       >
                       results
                     </p>
@@ -648,5 +704,14 @@
 </template>
 
 <script setup lang="ts">
-const { data: users, error } = await useMyFetch<any>("users", {});
+const { data: serviceOrders, error } = await useMyFetch<any>(
+  "service-orders/get-pending-orders",
+  {}
+);
+console.log(serviceOrders);
+
+async function handleCheckOut() {
+  console.log("check out");
+  const { data, error } = await useMyFetch<any>("booking-orders/check-out", {});
+}
 </script>

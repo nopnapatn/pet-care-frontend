@@ -844,6 +844,7 @@ async function handleCheckIn(bookingOrder: { id: any }) {
 
   if (response) {
     console.log(response.value.message);
+    console.log(response.value["booking_order"]);
     navigateTo("/orders/inuse");
   }
 }
