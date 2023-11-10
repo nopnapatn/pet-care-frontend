@@ -197,15 +197,6 @@
                             <span
                               class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
                             >
-                              Room Number
-                            </span>
-                          </div>
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left">
-                          <div class="flex items-center gap-x-2">
-                            <span
-                              class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
-                            >
                               User ID
                             </span>
                           </div>
@@ -215,25 +206,7 @@
                             <span
                               class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
                             >
-                              Check In
-                            </span>
-                          </div>
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left">
-                          <div class="flex items-center gap-x-2">
-                            <span
-                              class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
-                            >
-                              Check Out
-                            </span>
-                          </div>
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left">
-                          <div class="flex items-center gap-x-2">
-                            <span
-                              class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
-                            >
-                              Pets Amount
+                              Date
                             </span>
                           </div>
                         </th>
@@ -246,18 +219,15 @@
                             </span>
                           </div>
                         </th>
-
                         <th scope="col" class="px-6 py-3 text-left">
                           <div class="flex items-center gap-x-2">
                             <span
                               class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"
                             >
-                              Status
+                              Pet Type
                             </span>
                           </div>
                         </th>
-
-                        <th scope="col" class="px-6 py-3 text-right"></th>
                       </tr>
                     </thead>
 
