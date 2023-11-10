@@ -53,6 +53,9 @@
         ></VueDatePicker>
         <!-- End Date Picker -->
       </div>
+      <div v-if="statusMessage" class="text-sm text-red-500">
+        {{ statusMessage }}
+      </div>
       <!-- </div> -->
       <a @click="navigateToServiceForm()" class="btn btn-secondary text-white"
         >Booking</a
@@ -81,6 +84,7 @@ const errorMessage = reactive({
 });
 
 const date = ref("");
+const statusMessage = ref("");
 
 const formData = reactive({
   startDate: "",
@@ -128,15 +132,12 @@ async function navigateToServiceForm() {
 
   console.log(formData.startDate);
 
-  const isAvailable = await useMyFetch<any>(
-    "service-orders/is-available",
-    {
-      method: "GET",
-      params: {
-        service_date: formData.startDate.toString(),
-      },
-    }
-  );
+  const isAvailable = await useMyFetch<any>("service-orders/is-available", {
+    method: "GET",
+    params: {
+      service_date: formData.startDate.toString(),
+    },
+  });
 
   console.log(isAvailable.data.value);
 

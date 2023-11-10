@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-white h-screen dark:bg-gray-900">
+  <section class="bg-white min-h-screen dark:bg-gray-900">
     <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
       <div class="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
         <h2
@@ -39,13 +39,10 @@
         <div v-for="bookingOrder in bookingOrders" :key="bookingOrder.id">
           <TheCardBookedService
             :id="bookingOrder.id"
-            :title="bookingOrder.room_type.title"
+            :title="bookingOrder.total_price"
             :status="bookingOrder.status"
-            :total="bookingOrder.total_price"
-            :image="bookingOrder.room_type.image_url"
-            :description="bookingOrder.room_type.description"
-            :checkin="bookingOrder.check_in"
-            :checkout="bookingOrder.check_out"
+            :image="'/images/icons/icons8-cat-64.png'"
+            :date="'2022-12-03'"
           />
         </div>
       </div>

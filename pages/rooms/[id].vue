@@ -171,7 +171,7 @@
                 <div class="py-2"></div>
                 <button
                   type="submit"
-                  class="inline-flex justify-center items-center gap-x-3 text-center bg-primary hover:bg-blue-700 border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800"
+                  class="inline-flex justify-center items-center gap-x-3 text-center bg-primary hover:bg-primary-focus border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800"
                 >
                   Booking
                 </button>
